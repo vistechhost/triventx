@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import {
-  Zap,
   Phone,
   Mail,
   MapPin,
@@ -12,6 +11,7 @@ import {
   Twitter,
   ArrowRight,
 } from "lucide-react";
+import { Logo } from "@/components/ui/Logo";
 
 const footerServices = [
   { label: "Solar Permit Design", href: "/services/solar-permit-design" },
@@ -38,22 +38,8 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
           {/* Column 1: About */}
           <div>
-            <Link
-              href="/"
-              className="flex items-center gap-2.5 mb-6 group"
-              aria-label="TriventX Energy Home"
-            >
-              <div className="w-9 h-9 bg-primary rounded-lg flex items-center justify-center">
-                <Zap className="w-5 h-5 text-white" fill="currentColor" />
-              </div>
-              <div>
-                <span className="font-heading font-bold text-lg text-white leading-none block">
-                  TriventX
-                </span>
-                <span className="text-[10px] font-semibold text-primary tracking-wider uppercase leading-none">
-                  Energy LLP
-                </span>
-              </div>
+            <Link href="/" className="mb-6 block">
+              <Logo variant="white" />
             </Link>
             <p className="text-slate-400 text-sm leading-relaxed mb-6">
               Powering the clean energy transition through precision solar

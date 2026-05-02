@@ -6,11 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "deploy": "next build && firebase deploy --only hosting:triventx"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
     "clsx": "^2.1.1",
+    "dotenv": "^17.4.2",
     "firebase": "^11.10.0",
     "firebase-admin": "^12.7.0",
     "framer-motion": "^11.18.2",
@@ -30,7 +32,9 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.4",
+    "firebase-tools": "^15.16.0",
     "tailwindcss": "^4",
+    "ts-node": "^10.9.2",
     "typescript": "^5"
   }
 }

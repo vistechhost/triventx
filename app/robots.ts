@@ -1,16 +1,19 @@
-import type { MetadataRoute } from 'next'
+import type { MetadataRoute } from "next";
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://triventxenergy.com'
+const baseUrl =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://triventxenergy.com";
+
+export const dynamic = "force-static";
 
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {
-        userAgent: '*',
-        allow: '/',
-        disallow: ['/admin/', '/api/'],
+        userAgent: "*",
+        allow: "/",
+        disallow: ["/admin/", "/api/"],
       },
     ],
     sitemap: `${baseUrl}/sitemap.xml`,
-  }
+  };
 }

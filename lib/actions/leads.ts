@@ -1,65 +1,83 @@
-'use server'
-
-import { getAdminDb } from '@/lib/firebase/admin'
-import { revalidatePath } from 'next/cache'
-import type { Lead } from '@/lib/types'
+import { db } from "@/lib/firebase/client";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  query,
+  orderBy,
+  limit,
+  doc,
+  updateDoc,
+  Timestamp,
+} from "firebase/firestore";
+import { toPlainObject } from "@/lib/utils/serialization";
+import type { Lead } from "@/lib/types";
 
 interface CreateLeadData {
-  name: string
-  email: string
-  phone: string
-  company?: string
-  serviceInterest: string
-  projectSize?: string
-  message: string
+  name: string;
+  email: string;
+  phone: string;
+  company?: string;
+  serviceInterest: string;
+  projectSize?: string;
+  message: string;
 }
 
-export async function submitLead(data: CreateLeadData): Promise<{ id: string }> {
-  const db = getAdminDb()
-
-  const leadData: Omit<Lead, 'id'> = {
+export async function submitLead(
+  data: CreateLeadData,
+): Promise<{ id: string }> {
+  const leadData = {
     ...data,
-    status: 'new',
-    createdAt: new Date() as unknown as Lead['createdAt'],
-  }
+    status: "new",
+    createdAt: Timestamp.now(),
+  };
 
-  const ref = await db.collection('leads').add(leadData)
-  revalidatePath('/admin/leads')
-  revalidatePath('/admin')
-
-  return { id: ref.id }
+  const docRef = await addDoc(collection(db, "leads"), leadData);
+  return { id: docRef.id };
 }
 
-export async function updateLeadStatus(id: string, status: Lead['status']): Promise<void> {
-  const db = getAdminDb()
-  await db.collection('leads').doc(id).update({ status })
-  revalidatePath('/admin/leads')
+export async function updateLeadStatus(
+  id: string,
+  status: Lead["status"],
+): Promise<void> {
+  const docRef = doc(db, "leads", id);
+  await updateDoc(docRef, { status });
 }
 
 export async function getLeadsAction(): Promise<Lead[]> {
-  const db = getAdminDb()
-  const snapshot = await db
-    .collection('leads')
-    .orderBy('createdAt', 'desc')
-    .limit(100)
-    .get()
+  const q = query(
+    collection(db, "leads"),
+    orderBy("createdAt", "desc"),
+    limit(100),
+  );
+  const snapshot = await getDocs(q);
 
-  return snapshot.docs.map((doc) => ({
-    id: doc.id,
-    ...doc.data(),
-  } as Lead))
+  const leads = snapshot.docs.map(
+    (doc) =>
+      ({
+        id: doc.id,
+        ...doc.data(),
+      }) as Lead,
+  );
+
+  return toPlainObject(leads);
 }
 
 export async function getRecentLeadsAction(limitCount = 5): Promise<Lead[]> {
-  const db = getAdminDb()
-  const snapshot = await db
-    .collection('leads')
-    .orderBy('createdAt', 'desc')
-    .limit(limitCount)
-    .get()
+  const q = query(
+    collection(db, "leads"),
+    orderBy("createdAt", "desc"),
+    limit(limitCount),
+  );
+  const snapshot = await getDocs(q);
 
-  return snapshot.docs.map((doc) => ({
-    id: doc.id,
-    ...doc.data(),
-  } as Lead))
+  const leads = snapshot.docs.map(
+    (doc) =>
+      ({
+        id: doc.id,
+        ...doc.data(),
+      }) as Lead,
+  );
+
+  return toPlainObject(leads);
 }

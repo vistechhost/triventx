@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "vistechsolutions-92fa2"
+  },
+  "targets": {
+    "vistechsolutions-92fa2": {
+      "hosting": {
+        "triventx": [
+          "triventx"
+        ]
+      }
+    }
+  }
+}

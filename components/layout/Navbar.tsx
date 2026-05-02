@@ -1,69 +1,63 @@
-'use client'
+"use client";
 
-import { useState, useEffect } from 'react'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, ChevronDown, Zap, Phone } from 'lucide-react'
-import { Button } from '@/components/ui/Button'
-import { cn } from '@/lib/utils/cn'
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X, ChevronDown, Phone } from "lucide-react";
+import { Button } from "@/components/ui/Button";
+import { Logo } from "@/components/ui/Logo";
+import { cn } from "@/lib/utils/cn";
 
 const services = [
-  { label: 'Solar Permit Design', href: '/services/solar-permit-design' },
-  { label: 'Solar Sales Proposals', href: '/services/solar-sales-proposals' },
-  { label: 'Preliminary Designs', href: '/services/solar-preliminary-designs' },
-  { label: 'Engineering Stamps', href: '/services/engineering-stamps' },
-  { label: 'As-Built Drawings', href: '/services/as-built-drawings' },
-  { label: 'CAD Conversion', href: '/services/cad-conversion' },
-]
+  { label: "Solar Permit Design", href: "/services/solar-permit-design" },
+  { label: "Solar Sales Proposals", href: "/services/solar-sales-proposals" },
+  { label: "Preliminary Designs", href: "/services/solar-preliminary-designs" },
+  { label: "Engineering Stamps", href: "/services/engineering-stamps" },
+  { label: "As-Built Drawings", href: "/services/as-built-drawings" },
+  { label: "CAD Conversion", href: "/services/cad-conversion" },
+];
 
 const navLinks = [
-  { label: 'Home', href: '/' },
-  { label: 'Services', href: '/services', hasDropdown: true },
-  { label: 'About', href: '/about' },
-  { label: 'Contact', href: '/contact' },
-]
+  { label: "Home", href: "/" },
+  { label: "Services", href: "/services", hasDropdown: true },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
+];
 
 export function Navbar() {
-  const [scrolled, setScrolled] = useState(false)
-  const [mobileOpen, setMobileOpen] = useState(false)
-  const [servicesOpen, setServicesOpen] = useState(false)
-  const pathname = usePathname()
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20)
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
-    setMobileOpen(false)
-  }, [pathname])
+    setMobileOpen(false);
+  }, [pathname]);
 
   return (
     <header
       className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         scrolled || mobileOpen
-          ? 'bg-white/95 backdrop-blur-md border-b border-border shadow-sm'
-          : 'bg-transparent'
+          ? "bg-white/95 backdrop-blur-md border-b border-border shadow-sm"
+          : "bg-transparent",
       )}
     >
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Main navigation">
+      <nav
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+        aria-label="Main navigation"
+      >
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2.5 group" aria-label="TriventX Energy — Home">
-            <div className="w-9 h-9 bg-primary rounded-lg flex items-center justify-center shadow-sm group-hover:shadow-glow-primary transition-shadow">
-              <Zap className="w-5 h-5 text-white" fill="currentColor" />
-            </div>
-            <div>
-              <span className="font-heading font-bold text-lg text-text-primary leading-none block">
-                TriventX
-              </span>
-              <span className="text-[10px] font-semibold text-primary tracking-wider uppercase leading-none">
-                Energy LLP
-              </span>
-            </div>
+          <Link href="/" className="flex items-center">
+            <Logo />
           </Link>
 
           {/* Desktop Nav */}
@@ -73,9 +67,11 @@ export function Navbar() {
                 <div key={link.href} className="relative">
                   <button
                     className={cn(
-                      'flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-semibold transition-colors',
-                      'hover:text-primary hover:bg-primary/5',
-                      pathname.startsWith('/services') ? 'text-primary' : 'text-text-secondary'
+                      "flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-semibold transition-colors",
+                      "hover:text-primary hover:bg-primary/5",
+                      pathname.startsWith("/services")
+                        ? "text-primary"
+                        : "text-text-secondary",
                     )}
                     onMouseEnter={() => setServicesOpen(true)}
                     onMouseLeave={() => setServicesOpen(false)}
@@ -85,7 +81,10 @@ export function Navbar() {
                   >
                     {link.label}
                     <ChevronDown
-                      className={cn('w-4 h-4 transition-transform', servicesOpen && 'rotate-180')}
+                      className={cn(
+                        "w-4 h-4 transition-transform",
+                        servicesOpen && "rotate-180",
+                      )}
                     />
                   </button>
                   <AnimatePresence>
@@ -127,14 +126,16 @@ export function Navbar() {
                   key={link.href}
                   href={link.href}
                   className={cn(
-                    'px-4 py-2 rounded-lg text-sm font-semibold transition-colors',
-                    'hover:text-primary hover:bg-primary/5',
-                    pathname === link.href ? 'text-primary' : 'text-text-secondary'
+                    "px-4 py-2 rounded-lg text-sm font-semibold transition-colors",
+                    "hover:text-primary hover:bg-primary/5",
+                    pathname === link.href
+                      ? "text-primary"
+                      : "text-text-secondary",
                   )}
                 >
                   {link.label}
                 </Link>
-              )
+              ),
             )}
           </div>
 
@@ -161,9 +162,13 @@ export function Navbar() {
             className="md:hidden p-2 rounded-lg text-text-secondary hover:text-text-primary hover:bg-background-subtle transition-colors"
             onClick={() => setMobileOpen((v) => !v)}
             aria-expanded={mobileOpen}
-            aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
           >
-            {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {mobileOpen ? (
+              <X className="w-6 h-6" />
+            ) : (
+              <Menu className="w-6 h-6" />
+            )}
           </button>
         </div>
       </nav>
@@ -173,13 +178,16 @@ export function Navbar() {
         {mobileOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
+            animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2 }}
             className="md:hidden bg-white border-t border-border overflow-hidden"
           >
             <div className="px-4 py-6 space-y-1">
-              <Link href="/" className="block px-4 py-3 rounded-xl text-sm font-semibold text-text-primary hover:bg-primary/5 hover:text-primary transition-colors">
+              <Link
+                href="/"
+                className="block px-4 py-3 rounded-xl text-sm font-semibold text-text-primary hover:bg-primary/5 hover:text-primary transition-colors"
+              >
                 Home
               </Link>
               <div>
@@ -196,10 +204,16 @@ export function Navbar() {
                   </Link>
                 ))}
               </div>
-              <Link href="/about" className="block px-4 py-3 rounded-xl text-sm font-semibold text-text-primary hover:bg-primary/5 hover:text-primary transition-colors">
+              <Link
+                href="/about"
+                className="block px-4 py-3 rounded-xl text-sm font-semibold text-text-primary hover:bg-primary/5 hover:text-primary transition-colors"
+              >
                 About
               </Link>
-              <Link href="/contact" className="block px-4 py-3 rounded-xl text-sm font-semibold text-text-primary hover:bg-primary/5 hover:text-primary transition-colors">
+              <Link
+                href="/contact"
+                className="block px-4 py-3 rounded-xl text-sm font-semibold text-text-primary hover:bg-primary/5 hover:text-primary transition-colors"
+              >
                 Contact
               </Link>
               <div className="pt-4 border-t border-border">
@@ -222,5 +236,5 @@ export function Navbar() {
         )}
       </AnimatePresence>
     </header>
-  )
+  );
 }
