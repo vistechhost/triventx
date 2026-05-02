@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(npx tsc *)",
+      "Bash(npm run *)",
+      "Bash(npm info *)",
+      "Bash(python3 -c \"import sys, json; versions = json.load\\(sys.stdin\\); print\\([v for v in versions if v.startswith\\('9'\\)][-3:]\\)\")"
+    ]
+  }
+}
