@@ -23,12 +23,14 @@ type FormData = z.infer<typeof schema>
 
 const serviceOptions = [
   { value: '', label: 'Select a service...' },
-  { value: 'solar-permit-design', label: 'Solar Permit Design' },
   { value: 'solar-sales-proposals', label: 'Solar Sales Proposals' },
-  { value: 'solar-preliminary-designs', label: 'Preliminary Designs' },
-  { value: 'engineering-stamps', label: 'Engineering Stamps' },
+  { value: 'site-surveys-remote-assessments', label: 'Site Surveys & Remote Assessments' },
+  { value: 'solar-permit-design', label: 'Solar Permit Design' },
+  { value: 'engineering-stamps', label: 'PE Review & Stamping' },
+  { value: 'solar-permitting-services', label: 'Solar Permitting Services' },
+  { value: 'interconnection-services', label: 'Interconnection Services' },
   { value: 'as-built-drawings', label: 'As-Built Drawings' },
-  { value: 'cad-conversion', label: 'CAD Conversion' },
+  { value: 'pto-support', label: 'PTO Support' },
   { value: 'multiple', label: 'Multiple Services' },
 ]
 

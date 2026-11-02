@@ -7,19 +7,17 @@ const ProposalPreview = dynamic(() => import('./ProposalPreview').then(m => m.Pr
 const AuroraMockup = dynamic(() => import('./AuroraMockup').then(m => m.AuroraMockup), { ssr: false })
 const PEStampBadge = dynamic(() => import('./PEStampBadge').then(m => m.PEStampBadge), { ssr: false })
 const BeforeAfterSlider = dynamic(() => import('./BeforeAfterSlider').then(m => m.BeforeAfterSlider), { ssr: false })
-const CADWireframe = dynamic(() => import('./CADWireframe').then(m => m.CADWireframe), { ssr: false })
 
 const componentMap: Record<string, React.ComponentType> = {
   'solar-permit-design': BlueprintHover,
   'solar-sales-proposals': ProposalPreview,
-  'solar-preliminary-designs': AuroraMockup,
+  'site-surveys-remote-assessments': AuroraMockup,
   'engineering-stamps': PEStampBadge,
   'as-built-drawings': BeforeAfterSlider,
-  'cad-conversion': CADWireframe,
 }
 
-export function ServiceInteractive({ slug }: { slug: string }) {
+export function ServiceInteractive({ slug, fallback = null }: { slug: string; fallback?: React.ReactNode }) {
   const Component = componentMap[slug]
-  if (!Component) return null
+  if (!Component) return <>{fallback}</>
   return <Component />
 }

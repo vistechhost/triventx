@@ -118,8 +118,8 @@ export default async function Image() {
             lineHeight: 1.4,
           }}
         >
-          Precision solar permit designs, engineering stamps, and project
-          documentation — delivered in hours, not days.
+          Engineering smarter. Delivering faster. Helping solar businesses
+          scale.
         </div>
       </div>
     </div>,

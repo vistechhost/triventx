@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -12,9 +13,9 @@ import {
 } from "lucide-react";
 
 const trustPoints = [
-  { icon: CheckCircle, text: "AHJ-Compliant on First Submission" },
-  { icon: ShieldCheck, text: "Licensed P.E. Stamps All 50 States" },
-  { icon: Clock, text: "24-Hour Delivery Guaranteed" },
+  { icon: ShieldCheck, text: "AHJ & NEC-Compliant Designs" },
+  { icon: Clock, text: "Fast Turnaround Times" },
+  { icon: CheckCircle, text: "Built to Minimize Revisions" },
 ];
 
 export function Hero() {
@@ -126,7 +127,7 @@ export function Hero() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
               </span>
-              Trusted by 500+ Solar Installers Nationwide
+              Solar PV Design & Engineering Drawing Services
             </span>
           </motion.div>
 
@@ -137,7 +138,7 @@ export function Hero() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-text-primary leading-[1.05] tracking-tight mb-8"
           >
-            Engineering the{" "}
+            Engineering Smarter.{" "}
             <span
               className="relative inline-block"
               style={{
@@ -147,7 +148,7 @@ export function Hero() {
                 backgroundClip: "text",
               }}
             >
-              Solar Revolution
+              Delivering Faster.
             </span>
           </motion.h1>
 
@@ -157,9 +158,10 @@ export function Hero() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-xl md:text-2xl text-text-secondary leading-relaxed mb-12 max-w-3xl mx-auto font-medium"
           >
-            Precision solar permit designs, engineering stamps, and project
-            documentation — delivered in hours, not days. Backed by licensed
-            P.E.s covering all 50 US states.
+            Accurate, efficient, and code-compliant design solutions for solar
+            installers, EPC companies, and contractors — from sales proposals
+            and permit-ready plan sets to interconnection, PTO, and as-built
+            drawings.
           </motion.p>
 
           {/* Trust points grid */}
@@ -208,6 +210,37 @@ export function Hero() {
               <PlayCircle className="w-6 h-6 text-primary" />
               View Our Services
             </Link>
+          </motion.div>
+
+          {/* Hero image */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.5 }}
+            className="relative mt-16 max-w-5xl mx-auto"
+          >
+            <div className="relative aspect-[16/9] rounded-3xl overflow-hidden border border-slate-200 shadow-2xl">
+              <Image
+                src="/images/modern-home-rooftop-solar.jpg"
+                alt="Modern residential home with a rooftop solar PV array"
+                fill
+                preload
+                sizes="(min-width: 1024px) 1024px, 100vw"
+                className="object-cover"
+              />
+            </div>
+            <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 flex flex-wrap justify-center gap-3 w-max max-w-[calc(100%-2rem)]">
+              {["AHJ-Ready Permit Plan Sets", "NEC 2020/2023", "US · Canada · Europe"].map(
+                (chip) => (
+                  <span
+                    key={chip}
+                    className="px-4 py-2 rounded-full bg-white border border-slate-200 shadow-md text-xs sm:text-sm font-bold text-slate-700"
+                  >
+                    {chip}
+                  </span>
+                ),
+              )}
+            </div>
           </motion.div>
         </div>
       </div>

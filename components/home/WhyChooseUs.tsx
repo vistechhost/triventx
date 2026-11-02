@@ -1,54 +1,53 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Zap, ShieldCheck, Target, BookOpen, Headphones, Cpu } from 'lucide-react'
+import { Zap, ShieldCheck, TrendingUp, Users, Building2, Target } from 'lucide-react'
 
 const pillars = [
   {
     icon: Zap,
-    title: 'Unmatched Speed',
-    description:
-      'Industry-leading turnaround times — permit designs in 6 hours, proposals in 2 hours. Your projects never stall waiting for documentation.',
+    title: 'Fast Turnaround Times',
+    description: 'Accelerate project workflows and keep installations on schedule.',
     color: 'text-primary',
     bg: 'bg-primary/10',
   },
   {
     icon: ShieldCheck,
-    title: 'Code Compliance',
+    title: 'AHJ & NEC-Compliant Designs',
     description:
-      'Every deliverable is cross-referenced against current NEC, NESC, ASCE 7, IBC, and local AHJ requirements. Zero re-submission penalty.',
+      'Documentation aligned with applicable codes, standards, and jurisdictional requirements.',
     color: 'text-secondary',
     bg: 'bg-secondary/10',
   },
   {
-    icon: Target,
-    title: 'Engineering Accuracy',
+    icon: TrendingUp,
+    title: 'Scalable Back-Office Support',
     description:
-      'Triple-stage QA process by licensed engineers. 99.2% first-submission approval rate across 10,000+ completed projects.',
+      'Expand your project capacity without the overhead of building a larger internal engineering team.',
     color: 'text-accent',
     bg: 'bg-accent/10',
   },
   {
-    icon: BookOpen,
-    title: 'Deep Experience',
+    icon: Users,
+    title: 'Dedicated Engineering Teams',
     description:
-      'Over a decade specializing exclusively in solar engineering documentation. We\'ve seen every AHJ nuance, code update, and edge case.',
+      'Work with experienced professionals aligned with your processes, standards, and project requirements.',
     color: 'text-purple-600',
     bg: 'bg-purple-50',
   },
   {
-    icon: Headphones,
-    title: '24/7 Support',
+    icon: Building2,
+    title: 'Residential & Commercial Expertise',
     description:
-      'Dedicated account managers and round-the-clock support ensure your urgent projects are handled with the attention they deserve.',
+      'Support for projects across a broad range of solar applications and system configurations.',
     color: 'text-rose-600',
     bg: 'bg-rose-50',
   },
   {
-    icon: Cpu,
-    title: 'Advanced Technology',
+    icon: Target,
+    title: 'Consistent Quality & Technical Accuracy',
     description:
-      'AuroraSolar, Helioscope, Scanifly, AutoCAD, PVsyst — we leverage the best tools in the industry to maximize design precision and speed.',
+      'Dependable deliverables through structured workflows, quality-control procedures, and expert review.',
     color: 'text-teal-600',
     bg: 'bg-teal-50',
   },
@@ -66,11 +65,12 @@ export function WhyChooseUs() {
             Why TriventX
           </span>
           <h2 id="why-heading" className="font-heading text-3xl md:text-4xl font-bold text-text-primary mb-4">
-            The Standard Other Firms Measure Against
+            Why Choose TriventX?
           </h2>
           <p className="text-text-secondary max-w-2xl mx-auto text-lg">
-            We built TriventX specifically for solar installers who need engineering services that
-            keep pace with their growth — not slow it down.
+            We combine technical expertise, regulatory knowledge, streamlined workflows, and a
+            commitment to quality — helping you accelerate approvals, minimize design revisions,
+            and install with confidence.
           </p>
         </div>
 

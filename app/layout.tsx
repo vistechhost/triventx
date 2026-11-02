@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     template: "%s | TriventX Energy LLP",
   },
   description:
-    "Precision solar permit designs, engineering stamps, sales proposals, and as-built drawings. AHJ-compliant documentation delivered in hours. Licensed P.E. stamps all 50 US states.",
+    "Accurate, efficient, and code-compliant solar PV design and engineering — sales proposals, site assessments, AHJ-ready permit plan sets, PE review & stamping, interconnection, PTO support, and as-built drawings.",
   icons: {
     icon: "/icon.svg",
     apple: "/logo.svg",
@@ -36,8 +36,10 @@ export const metadata: Metadata = {
     "solar as-built drawings",
     "solar sales proposals",
     "AHJ compliant solar drawings",
-    "solar preliminary design",
-    "CAD conversion solar",
+    "solar site survey",
+    "solar permitting services",
+    "solar interconnection services",
+    "solar PTO support",
   ],
   authors: [{ name: "TriventX Energy LLP" }],
   creator: "TriventX Energy LLP",
@@ -48,13 +50,13 @@ export const metadata: Metadata = {
     siteName: "TriventX Energy LLP",
     title: "TriventX Energy LLP — Solar Engineering Services",
     description:
-      "Precision solar permit designs, engineering stamps, and project documentation — delivered in hours, not days.",
+      "Engineering smarter. Delivering faster. Helping solar businesses scale.",
   },
   twitter: {
     card: "summary_large_image",
     title: "TriventX Energy LLP — Solar Engineering Services",
     description:
-      "Precision solar engineering services. 6-hour TAT. Licensed P.E. stamps all 50 states.",
+      "Engineering smarter. Delivering faster. Helping solar businesses scale.",
   },
   robots: {
     index: true,

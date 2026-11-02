@@ -11,6 +11,8 @@ export type Service = {
   heroImageUrl: string
   iconName: string
   order: number
+  planIncludes?: string[]
+  gallery?: { src: string; caption: string }[]
   updatedAt: Timestamp
 }
 

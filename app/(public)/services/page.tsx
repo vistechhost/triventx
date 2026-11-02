@@ -6,7 +6,7 @@ import { SERVICES_DATA } from '@/lib/data/services'
 export const metadata: Metadata = {
   title: 'Solar Engineering Services',
   description:
-    'Complete solar engineering services: permit design, PE stamps, sales proposals, preliminary designs, as-built drawings, and CAD conversion. AHJ-compliant. All 50 states.',
+    'End-to-end solar engineering services: sales proposals, site assessments, AHJ-ready permit plan sets, PE review & stamping, permitting, interconnection, as-built drawings, and PTO support.',
 }
 
 export default function ServicesPage() {
@@ -23,11 +23,17 @@ export default function ServicesPage() {
             Our Services
           </span>
           <h1 className="font-heading text-4xl md:text-5xl font-bold text-text-primary mb-6">
-            Every Document Your Solar Project Needs
+            Our Core Solar Engineering Services
           </h1>
-          <p className="text-lg text-text-secondary max-w-2xl mx-auto leading-relaxed">
-            From the first sales call to final AHJ closeout — TriventX produces every engineering
-            and design document your solar installation requires, with unmatched speed and accuracy.
+          <p className="text-lg text-text-secondary max-w-3xl mx-auto leading-relaxed mb-4">
+            At TriventX, we deliver comprehensive, end-to-end solar engineering, design, permitting,
+            and back-office support solutions tailored to the needs of solar installers, EPC
+            companies, contractors, and homeowners.
+          </p>
+          <p className="text-lg text-text-secondary max-w-3xl mx-auto leading-relaxed">
+            From the initial customer proposal through system design, permitting, interconnection,
+            installation documentation, and final utility approval, our experienced engineering
+            team provides reliable support across the entire solar project lifecycle.
           </p>
         </div>
       </section>
@@ -50,13 +56,15 @@ export default function ServicesPage() {
                       <span className="font-heading font-bold text-text-secondary text-2xl">
                         {String(i + 1).padStart(2, '0')}
                       </span>
-                      <span
-                        className="flex items-center gap-1.5 text-xs font-bold text-accent px-3 py-1 rounded-full"
-                        style={{ backgroundColor: 'rgba(0,200,150,0.1)', border: '1px solid rgba(0,200,150,0.2)' }}
-                      >
-                        <Clock className="w-3.5 h-3.5" />
-                        {service.tat} TAT
-                      </span>
+                      {service.tat && (
+                        <span
+                          className="flex items-center gap-1.5 text-xs font-bold text-accent px-3 py-1 rounded-full"
+                          style={{ backgroundColor: 'rgba(0,200,150,0.1)', border: '1px solid rgba(0,200,150,0.2)' }}
+                        >
+                          <Clock className="w-3.5 h-3.5" />
+                          {service.tat} TAT
+                        </span>
+                      )}
                     </div>
                     <h3 className="font-heading font-bold text-2xl text-text-primary mb-3 group-hover:text-primary transition-colors">
                       {service.title}
@@ -71,7 +79,7 @@ export default function ServicesPage() {
                           className="flex items-center gap-1.5 text-xs font-medium text-text-secondary bg-background-subtle border border-border px-3 py-1.5 rounded-full"
                         >
                           <Check className="w-3 h-3 text-accent" />
-                          {f}
+                          {f.split(' – ')[0]}
                         </span>
                       ))}
                       {service.features.length > 4 && (

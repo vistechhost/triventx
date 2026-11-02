@@ -10,12 +10,14 @@ import { Logo } from "@/components/ui/Logo";
 import { cn } from "@/lib/utils/cn";
 
 const services = [
-  { label: "Solar Permit Design", href: "/services/solar-permit-design" },
   { label: "Solar Sales Proposals", href: "/services/solar-sales-proposals" },
-  { label: "Preliminary Designs", href: "/services/solar-preliminary-designs" },
-  { label: "Engineering Stamps", href: "/services/engineering-stamps" },
+  { label: "Site Surveys & Assessments", href: "/services/site-surveys-remote-assessments" },
+  { label: "Solar Permit Design", href: "/services/solar-permit-design" },
+  { label: "PE Review & Stamping", href: "/services/engineering-stamps" },
+  { label: "Solar Permitting Services", href: "/services/solar-permitting-services" },
+  { label: "Interconnection Services", href: "/services/interconnection-services" },
   { label: "As-Built Drawings", href: "/services/as-built-drawings" },
-  { label: "CAD Conversion", href: "/services/cad-conversion" },
+  { label: "PTO Support", href: "/services/pto-support" },
 ];
 
 const navLinks = [

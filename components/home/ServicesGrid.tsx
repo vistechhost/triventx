@@ -5,97 +5,38 @@ import { motion } from 'framer-motion'
 import {
   FileText,
   BarChart3,
-  Sun,
+  Satellite,
   Award,
+  ClipboardCheck,
+  PlugZap,
   PenTool,
-  Layers,
+  BadgeCheck,
   ArrowRight,
   Clock,
 } from 'lucide-react'
+import { SERVICES_DATA } from '@/lib/data/services'
 
-const iconMap = {
+const iconMap: Record<string, typeof FileText> = {
   FileText,
   BarChart3,
-  Sun,
+  Satellite,
   Award,
+  ClipboardCheck,
+  PlugZap,
   PenTool,
-  Layers,
+  BadgeCheck,
 }
 
-const services = [
-  {
-    slug: 'solar-permit-design',
-    icon: 'FileText' as keyof typeof iconMap,
-    title: 'Solar Permit Design',
-    description:
-      'AHJ-compliant permit packages with site plans, SLDs, and NEC-stamped drawings. First-submission approval guaranteed.',
-    tat: '6 Hours',
-    color: 'from-orange-500 to-amber-500',
-    bg: 'bg-orange-50',
-    iconColor: 'text-orange-500',
-    highlight: 'Most Popular',
-  },
-  {
-    slug: 'solar-sales-proposals',
-    icon: 'BarChart3' as keyof typeof iconMap,
-    title: 'Solar Sales Proposals',
-    description:
-      'Data-rich proposals with production estimates, 25-year ROI, and incentive breakdowns that close deals faster.',
-    tat: '2 Hours',
-    color: 'from-blue-500 to-indigo-500',
-    bg: 'bg-blue-50',
-    iconColor: 'text-blue-500',
-    highlight: 'Fastest TAT',
-  },
-  {
-    slug: 'solar-preliminary-designs',
-    icon: 'Sun' as keyof typeof iconMap,
-    title: 'Preliminary Designs',
-    description:
-      'LiDAR-precision shading analysis and production estimates using Aurora, Helioscope & Scanifly.',
-    tat: '2 Hours',
-    color: 'from-yellow-400 to-orange-400',
-    bg: 'bg-yellow-50',
-    iconColor: 'text-yellow-600',
-    highlight: null,
-  },
-  {
-    slug: 'engineering-stamps',
-    icon: 'Award' as keyof typeof iconMap,
-    title: 'Engineering Stamps',
-    description:
-      'Licensed P.E. stamps for all 50 states. Structural, electrical, and power system studies with full code compliance.',
-    tat: '18-24 Hours',
-    color: 'from-purple-500 to-violet-500',
-    bg: 'bg-purple-50',
-    iconColor: 'text-purple-500',
-    highlight: null,
-  },
-  {
-    slug: 'as-built-drawings',
-    icon: 'PenTool' as keyof typeof iconMap,
-    title: 'As-Built Drawings',
-    description:
-      'Post-installation documentation capturing field deviations for AHJ closeout and utility interconnection.',
-    tat: '6 Hours',
-    color: 'from-teal-500 to-emerald-500',
-    bg: 'bg-teal-50',
-    iconColor: 'text-teal-500',
-    highlight: null,
-  },
-  {
-    slug: 'cad-conversion',
-    icon: 'Layers' as keyof typeof iconMap,
-    title: 'CAD Conversion',
-    description:
-      'Convert sketches, PDFs, or legacy drawings to professional DWG, DXF, or RVT format with full layer organization.',
-    tat: '6 Hours',
-    color: 'from-rose-500 to-pink-500',
-    bg: 'bg-rose-50',
-    iconColor: 'text-rose-500',
-    highlight: null,
-  },
-]
+const styleMap: Record<string, { bg: string; iconColor: string; highlight?: string }> = {
+  'solar-sales-proposals': { bg: 'bg-blue-50', iconColor: 'text-blue-500', highlight: 'Fastest TAT' },
+  'site-surveys-remote-assessments': { bg: 'bg-yellow-50', iconColor: 'text-yellow-600' },
+  'solar-permit-design': { bg: 'bg-orange-50', iconColor: 'text-orange-500', highlight: 'Most Popular' },
+  'engineering-stamps': { bg: 'bg-purple-50', iconColor: 'text-purple-500' },
+  'solar-permitting-services': { bg: 'bg-sky-50', iconColor: 'text-sky-600' },
+  'interconnection-services': { bg: 'bg-emerald-50', iconColor: 'text-emerald-600' },
+  'as-built-drawings': { bg: 'bg-teal-50', iconColor: 'text-teal-500' },
+  'pto-support': { bg: 'bg-rose-50', iconColor: 'text-rose-500' },
+}
 
 export function ServicesGrid() {
   return (
@@ -109,17 +50,19 @@ export function ServicesGrid() {
             What We Do
           </span>
           <h2 id="services-heading" className="font-heading text-3xl md:text-4xl font-bold text-text-primary mb-4">
-            Complete Solar Engineering Services
+            Our Core Solar Engineering Services
           </h2>
-          <p className="text-text-secondary max-w-2xl mx-auto text-lg">
-            From the initial sales proposal through permit approval to final closeout — we handle
-            every document in your solar project pipeline.
+          <p className="text-text-secondary max-w-3xl mx-auto text-lg">
+            From the initial customer proposal through system design, permitting, interconnection,
+            installation documentation, and final utility approval — reliable support across the
+            entire solar project lifecycle.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((svc, i) => {
-            const Icon = iconMap[svc.icon]
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {SERVICES_DATA.map((svc, i) => {
+            const Icon = iconMap[svc.iconName] ?? FileText
+            const style = styleMap[svc.slug] ?? { bg: 'bg-orange-50', iconColor: 'text-orange-500' }
             return (
               <motion.div
                 key={svc.slug}
@@ -134,29 +77,31 @@ export function ServicesGrid() {
                   aria-label={`Learn more about ${svc.title}`}
                 >
                   <div className="flex items-start justify-between mb-5">
-                    <div className={`w-12 h-12 ${svc.bg} rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform`}>
-                      <Icon className={`w-6 h-6 ${svc.iconColor}`} />
+                    <div className={`w-12 h-12 ${style.bg} rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform`}>
+                      <Icon className={`w-6 h-6 ${style.iconColor}`} />
                     </div>
                     <div className="flex flex-col items-end gap-1.5">
-                      {svc.highlight && (
+                      {style.highlight && (
                         <span
                           className="text-xs font-bold text-primary px-2.5 py-1 rounded-full"
                           style={{ backgroundColor: 'rgba(255, 138, 0, 0.1)' }}
                         >
-                          {svc.highlight}
+                          {style.highlight}
                         </span>
                       )}
-                      <span className="flex items-center gap-1 text-xs font-semibold text-accent">
-                        <Clock className="w-3.5 h-3.5" />
-                        {svc.tat}
-                      </span>
+                      {svc.tat && (
+                        <span className="flex items-center gap-1 text-xs font-semibold text-accent">
+                          <Clock className="w-3.5 h-3.5" />
+                          {svc.tat}
+                        </span>
+                      )}
                     </div>
                   </div>
 
                   <h3 className="font-heading font-bold text-xl text-text-primary mb-3 group-hover:text-primary transition-colors">
                     {svc.title}
                   </h3>
-                  <p className="text-text-secondary text-sm leading-relaxed mb-5">{svc.description}</p>
+                  <p className="text-text-secondary text-sm leading-relaxed mb-5">{svc.shortDescription}</p>
 
                   <div className="flex items-center gap-2 text-sm font-semibold text-primary opacity-0 group-hover:opacity-100 translate-x-[-8px] group-hover:translate-x-0 transition-all duration-200">
                     Learn More <ArrowRight className="w-4 h-4" />

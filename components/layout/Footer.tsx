@@ -14,12 +14,14 @@ import {
 import { Logo } from "@/components/ui/Logo";
 
 const footerServices = [
-  { label: "Solar Permit Design", href: "/services/solar-permit-design" },
   { label: "Solar Sales Proposals", href: "/services/solar-sales-proposals" },
-  { label: "Preliminary Designs", href: "/services/solar-preliminary-designs" },
-  { label: "Engineering Stamps", href: "/services/engineering-stamps" },
+  { label: "Site Surveys & Assessments", href: "/services/site-surveys-remote-assessments" },
+  { label: "Solar Permit Design", href: "/services/solar-permit-design" },
+  { label: "PE Review & Stamping", href: "/services/engineering-stamps" },
+  { label: "Solar Permitting Services", href: "/services/solar-permitting-services" },
+  { label: "Interconnection Services", href: "/services/interconnection-services" },
   { label: "As-Built Drawings", href: "/services/as-built-drawings" },
-  { label: "CAD Conversion", href: "/services/cad-conversion" },
+  { label: "PTO Support", href: "/services/pto-support" },
 ];
 
 const footerResources = [
@@ -42,9 +44,9 @@ export function Footer() {
               <Logo variant="white" />
             </Link>
             <p className="text-slate-400 text-sm leading-relaxed mb-6">
-              Powering the clean energy transition through precision solar
-              engineering. AHJ-compliant designs delivered with industry-leading
-              turnaround times.
+              Engineering smarter. Delivering faster. Helping solar businesses
+              scale with accurate, AHJ- and NEC-compliant solar design and
+              engineering.
             </p>
             {/* Social */}
             <div className="flex items-center gap-3">

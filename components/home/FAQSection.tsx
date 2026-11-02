@@ -8,7 +8,7 @@ const faqs = [
   {
     question: 'What is your typical turnaround time for permit designs?',
     answer:
-      'Our standard turnaround for solar permit design packages is 6 hours from confirmed receipt of all required project information. Rush orders can be completed in as little as 3 hours. Sales proposals and preliminary designs are typically delivered within 2 hours. Engineering stamps require 18–24 hours to allow proper engineering review.',
+      'Our standard turnaround for solar permit design packages is 6 hours from confirmed receipt of all required project information. Rush orders can be completed in as little as 3 hours. Sales proposals are typically delivered within 2 hours. Engineering stamps require 18–24 hours to allow proper engineering review.',
   },
   {
     question: 'Which NEC edition do your designs comply with?',
@@ -28,12 +28,22 @@ const faqs = [
   {
     question: 'What file formats do you deliver?',
     answer:
-      'Standard deliverables are provided in PDF format, print-ready at 24"×36" or 11"×17" as required by the AHJ. We also provide native CAD files (AutoCAD DWG/DXF) upon request at no extra charge. Preliminary designs can be delivered in Aurora Solar, Helioscope, or Scanifly native formats in addition to PDF exports.',
+      'Standard deliverables are provided in PDF format, print-ready at 24"×36" or 11"×17" as required by the AHJ. We also provide native CAD files (AutoCAD DWG/DXF) upon request at no extra charge.',
   },
   {
     question: 'Do you provide PE stamps for all 50 states?',
     answer:
       'Yes. We maintain a network of licensed Professional Engineers covering all 50 states. For electrical stamps, we use PE-licensed electrical engineers in the required state. For structural stamps, we use state-licensed structural or civil PEs. All stamp engineers carry current E&O insurance. Proof of licensure can be provided upon request.',
+  },
+  {
+    question: 'Do you handle utility interconnection and PTO?',
+    answer:
+      'Yes. Beyond design and permitting, we provide end-to-end utility interconnection support — application preparation, technical documentation, system information, and coordination throughout the approval process. Our PTO support covers utility submissions, required closeout documentation, compliance verification, and coordination of final approval requirements.',
+  },
+  {
+    question: 'Do you work with clients outside the United States?',
+    answer:
+      'Yes. Our core focus is supporting solar installers, EPC companies, and contractors across the United States, and we also deliver engineering documentation to clients and industry partners in Canada and Europe.',
   },
   {
     question: 'How do I submit a new project?',

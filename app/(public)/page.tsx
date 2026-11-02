@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Hero } from '@/components/home/Hero'
 import { TrustBar } from '@/components/home/TrustBar'
+import { WhoWeAre } from '@/components/home/WhoWeAre'
 import { StatsCounter } from '@/components/home/StatsCounter'
 import { ServicesGrid } from '@/components/home/ServicesGrid'
 import { WhyChooseUs } from '@/components/home/WhyChooseUs'
@@ -15,7 +16,7 @@ import { CTASection } from '@/components/home/CTASection'
 export const metadata: Metadata = {
   title: 'Solar Engineering Services | TriventX Energy LLP',
   description:
-    'TriventX Energy LLP delivers AHJ-compliant solar permit designs, engineering stamps, sales proposals, and as-built drawings. 6-hour TAT. All 50 US states.',
+    'TriventX delivers accurate, code-compliant solar PV design and engineering — sales proposals, site assessments, AHJ-ready permit plan sets, PE review & stamping, interconnection, PTO support, and as-built drawings.',
   alternates: {
     canonical: '/',
   },
@@ -33,7 +34,7 @@ export default function HomePage() {
             '@context': 'https://schema.org',
             '@type': 'LocalBusiness',
             name: 'TriventX Energy LLP',
-            description: 'Solar engineering services including permit design, PE stamps, proposals, and as-built drawings.',
+            description: 'Solar PV design and engineering services including sales proposals, permit plan sets, PE review & stamping, interconnection, PTO support, and as-built drawings.',
             url: 'https://triventxenergy.com',
             telephone: '+1-888-247-6535',
             email: 'hello@triventxenergy.com',
@@ -56,6 +57,7 @@ export default function HomePage() {
       />
       <Hero />
       <TrustBar />
+      <WhoWeAre />
       <StatsCounter />
       <ServicesGrid />
       <WhyChooseUs />

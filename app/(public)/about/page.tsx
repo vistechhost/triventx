@@ -1,11 +1,12 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import { CheckCircle, Award, Globe, Users, Target, Zap, Shield, Handshake } from 'lucide-react'
 import { CTASection } from '@/components/home/CTASection'
 
 export const metadata: Metadata = {
   title: 'About Us',
   description:
-    'TriventX Energy LLP is a leading solar engineering firm with 10+ years of experience, 10,000+ projects, and licensed PE coverage in all 50 US states.',
+    'TriventX provides Solar PV Installation Design and Engineering Drawing Services for solar installers, EPC companies, and contractors across the United States, Canada, and Europe.',
 }
 
 const values = [
@@ -93,7 +94,7 @@ export default function AboutPage() {
               className="inline-flex items-center gap-2 text-sm font-semibold text-primary rounded-full px-4 py-1.5 mb-4"
               style={{ backgroundColor: 'rgba(255, 138, 0, 0.1)' }}
             >
-              Our Story
+              About TriventX
             </span>
             <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-text-primary mb-6 leading-tight">
               Built by Engineers,{' '}
@@ -109,41 +110,75 @@ export default function AboutPage() {
               </span>
             </h1>
             <p className="text-xl text-text-secondary leading-relaxed">
-              TriventX Energy LLP was founded by solar engineers who spent years watching great
-              installations get delayed by documentation bottlenecks. We decided to fix it.
+              TriventX is a leading provider of Solar PV Installation Design and Engineering Drawing
+              Services, specializing in supporting solar installers, EPC companies, and contractors
+              across the United States with accurate, efficient, and code-compliant design solutions.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Story */}
+      {/* Who We Are */}
       <section className="section-padding bg-background-subtle" aria-labelledby="story-heading">
-        <div className="container-xl max-w-3xl">
-          <h2 id="story-heading" className="font-heading text-3xl font-bold text-text-primary mb-8">
-            How TriventX Came to Be
-          </h2>
-          <div className="space-y-6 text-text-secondary leading-relaxed text-lg">
-            <p>
-              In 2014, our founding team was running the engineering department of a regional solar
-              EPC contractor in Texas. Every week, we watched the same pattern play out: installation
-              crews ready, equipment on-site, but permits stuck in a 10-day queue at an outside
-              engineering firm that treated solar as an afterthought to their municipal infrastructure
-              practice.
-            </p>
-            <p>
-              We built TriventX to solve this problem with radical focus. Every engineer we hire,
-              every process we design, every tool we invest in is optimized for one thing: producing
-              accurate, AHJ-compliant solar engineering documentation faster than anyone else in the
-              industry. We don't do bridges, buildings, or mechanical systems. We do solar, and we
-              do it better than anyone.
-            </p>
-            <p>
-              Since our launch in 2016, we've grown to serve over 500 active solar installers
-              across all 50 states, processing more than 10,000 projects annually. Our clients range
-              from one-person residential installation shops to Fortune 500 EPCs managing multi-state
-              utility portfolios. What they all have in common is a demand for engineering that keeps
-              pace with their business — and a trust in TriventX to deliver it.
-            </p>
+        <div className="container-xl">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+            <div>
+              <h2 id="story-heading" className="font-heading text-3xl font-bold text-text-primary mb-8">
+                Who We Are
+              </h2>
+              <div className="space-y-6 text-text-secondary leading-relaxed text-lg">
+                <p>
+                  With extensive experience in the engineering and design industry, TriventX has
+                  established a strong track record of delivering high-quality, technically precise,
+                  and reliable engineering documentation to clients and industry partners across the
+                  United States, Canada, and Europe. Our services are designed to optimize project
+                  efficiency while maintaining competitive pricing and rapid turnaround times.
+                </p>
+                <p>
+                  Our solar designs are developed in strict accordance with Authority Having
+                  Jurisdiction (AHJ) requirements, applicable building and fire codes, the National
+                  Electrical Code (NEC), and utility interconnection standards. Our experienced team
+                  possesses in-depth expertise in residential solar PV system design, with a
+                  comprehensive understanding of permitting requirements, utility guidelines, and
+                  jurisdiction-specific compliance standards.
+                </p>
+                <p>
+                  TriventX offers a comprehensive portfolio of solar design and engineering services,
+                  including sales proposal designs, permit-ready plan sets, utility interconnection
+                  documentation, professional engineering support, construction documentation, and
+                  as-built drawings.
+                </p>
+                <p>
+                  By combining technical expertise, regulatory knowledge, streamlined workflows, and a
+                  commitment to quality, TriventX enables solar professionals to accelerate project
+                  approvals, minimize design revisions, and execute installations with greater
+                  confidence and precision.
+                </p>
+              </div>
+            </div>
+            <div className="space-y-6 lg:sticky lg:top-28">
+              <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-xl">
+                <Image
+                  src="/images/residential-solar-home.jpg"
+                  alt="Two-story residential home with a rooftop solar PV system"
+                  fill
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  className="object-cover"
+                />
+              </div>
+              <div className="relative aspect-[16/9] rounded-3xl overflow-hidden shadow-xl">
+                <Image
+                  src="/images/solar-installation-crew.jpg"
+                  alt="Installation crew mounting solar panels on a residential roof"
+                  fill
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  className="object-cover"
+                />
+              </div>
+              <p className="font-heading text-lg font-bold text-text-primary">
+                TriventX — Engineering smarter. Delivering faster. Helping solar businesses scale.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -252,7 +287,8 @@ export default function AboutPage() {
         <div className="container-xl max-w-2xl text-center">
           <h2 className="font-heading text-3xl font-bold text-text-primary mb-4">Our Offices</h2>
           <p className="text-text-secondary mb-8">
-            Headquartered in Austin, TX, with engineering resources distributed across the United States.
+            Headquartered in Austin, TX, supporting clients and industry partners across the United
+            States, Canada, and Europe.
           </p>
           <div className="grid sm:grid-cols-2 gap-4">
             {[

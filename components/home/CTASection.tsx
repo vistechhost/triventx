@@ -49,12 +49,13 @@ export function CTASection() {
               Start Today
             </span>
             <h2 id="cta-heading" className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">
-              Ready to Scale Your{' '}
-              <span style={{ color: '#FF8A00' }}>Solar Business?</span>
+              Your Trusted{' '}
+              <span style={{ color: '#FF8A00' }}>Solar Engineering Partner</span>
             </h2>
             <p className="text-slate-400 text-lg leading-relaxed mb-8">
-              Join 500+ solar installers who've eliminated permit bottlenecks, closed more deals,
-              and grown faster with TriventX's engineering services.
+              Whether you require support for a single solar project, an ongoing portfolio, or a
+              fully outsourced engineering and design operation, TriventX operates as an extension
+              of your business.
             </p>
 
             <div className="space-y-3 mb-8">
@@ -135,12 +136,14 @@ export function CTASection() {
                     defaultValue=""
                   >
                     <option value="" disabled>Service Interested In</option>
-                    <option>Solar Permit Design</option>
                     <option>Solar Sales Proposals</option>
-                    <option>Preliminary Designs</option>
-                    <option>Engineering Stamps</option>
+                    <option>Site Surveys &amp; Remote Assessments</option>
+                    <option>Solar Permit Design</option>
+                    <option>PE Review &amp; Stamping</option>
+                    <option>Solar Permitting Services</option>
+                    <option>Interconnection Services</option>
                     <option>As-Built Drawings</option>
-                    <option>CAD Conversion</option>
+                    <option>PTO Support</option>
                     <option>Multiple Services</option>
                   </select>
                   <button
