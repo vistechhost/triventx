@@ -4,8 +4,9 @@ export function formatDate(timestamp: any): string {
   let date: Date;
   if (timestamp.toDate && typeof timestamp.toDate === "function") {
     date = timestamp.toDate();
-  } else if (timestamp._seconds !== undefined) {
-    date = new Date(timestamp._seconds * 1000);
+  } else if ((timestamp.seconds ?? timestamp._seconds) !== undefined) {
+    // Serialized Timestamps use `seconds` from the client SDK and `_seconds` from the admin SDK.
+    date = new Date((timestamp.seconds ?? timestamp._seconds) * 1000);
   } else {
     date = new Date(timestamp);
   }
@@ -25,8 +26,9 @@ export function formatDateTime(timestamp: any): string {
   let date: Date;
   if (timestamp.toDate && typeof timestamp.toDate === "function") {
     date = timestamp.toDate();
-  } else if (timestamp._seconds !== undefined) {
-    date = new Date(timestamp._seconds * 1000);
+  } else if ((timestamp.seconds ?? timestamp._seconds) !== undefined) {
+    // Serialized Timestamps use `seconds` from the client SDK and `_seconds` from the admin SDK.
+    date = new Date((timestamp.seconds ?? timestamp._seconds) * 1000);
   } else {
     date = new Date(timestamp);
   }

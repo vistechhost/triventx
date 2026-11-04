@@ -12,7 +12,7 @@ interface ServiceHeroProps {
 
 export function ServiceHero({ service, interactive }: ServiceHeroProps) {
   return (
-    <section className="pt-24 pb-16 md:pt-32 bg-white overflow-hidden relative" aria-labelledby="service-hero-heading">
+    <section className="pt-24 pb-16 md:pt-32 bg-background overflow-hidden relative" aria-labelledby="service-hero-heading">
       <div className="absolute inset-0 bg-hero-mesh pointer-events-none" aria-hidden="true" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -81,7 +81,7 @@ export function ServiceHero({ service, interactive }: ServiceHeroProps) {
               </Link>
               <Link
                 href="/services"
-                className="inline-flex items-center justify-center gap-2 bg-white hover:bg-background-subtle text-text-primary font-semibold px-6 py-4 rounded-xl border border-border transition-all duration-200 hover:shadow-card"
+                className="inline-flex items-center justify-center gap-2 bg-surface hover:bg-background-subtle text-text-primary font-semibold px-6 py-4 rounded-xl border border-border transition-all duration-200 hover:shadow-card"
               >
                 <ArrowLeft className="w-4 h-4" />
                 All Services

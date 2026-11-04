@@ -63,6 +63,14 @@ npx firebase-tools deploy --only firestore:rules
 
 Or paste the contents of `firestore.rules` directly in the Firebase Console.
 
+#### Apply Storage Security Rules
+
+Project files attached to the lead form depend on these rules, and deploying them replaces any rules set in the Firebase Console.
+
+```bash
+npx firebase-tools deploy --only storage
+```
+
 #### Deploy Firestore Indexes
 
 ```bash
@@ -135,8 +143,10 @@ The admin portal at `/admin` requires authentication via Firebase Auth.
 | Dashboard | `/admin` | Stats overview, recent leads, quick actions |
 | Services | `/admin/services` | Edit service content (title, description, features, TAT) |
 | Images | `/admin/images` | Drag-and-drop upload, delete, copy URLs |
-| Leads | `/admin/leads` | View/filter all contact submissions, update status, export CSV |
+| Leads | `/admin/leads` | View/filter all contact submissions, download attached files, update status, export CSV |
 | Site Settings | `/admin/site-settings` | Edit hero text, contact info, social links, stats |
+
+Each new lead can also be sent to a CRM: set `NEXT_PUBLIC_CRM_WEBHOOK_URL` to a webhook (Zapier, Make, HubSpot workflow, etc.) and it receives the lead as JSON.
 
 ---
 
@@ -158,11 +168,13 @@ In Vercel, paste the full private key including `-----BEGIN PRIVATE KEY-----` he
 
 ## Customization
 
-Search for `// TODO: REPLACE` comments to find placeholder content:
-- `components/home/TrustBar.tsx` — Replace gradient tiles with real client logos
-- `components/home/TestimonialsCarousel.tsx` — Replace with real testimonials
-- `app/(public)/about/page.tsx` — Replace team initials with real photos
-- `app/(public)/about/page.tsx` — Replace certification placeholders with official logos
+Company details and anything a visitor might want to verify live in `lib/data/site-config.ts`: phone, email, WhatsApp, address, hours, response times, leadership, certifications, offices, case studies, and testimonials. Values left as `null` or an empty list are hidden on the site, so only add details that have been confirmed. The public site reads these values from this file at build time, not from Admin → Site Settings.
+
+Services, including wind energy and telecom, are defined in `lib/data/services.ts`, and FAQs in `lib/data/faqs.ts`.
+
+### Local Testing With Emulators
+
+To test forms and uploads without touching production data, set `NEXT_PUBLIC_FIREBASE_EMULATOR=true` with a `demo-` project ID and run `firebase emulators:start --project demo-triventx --only auth,firestore,storage`.
 
 ### Brand Colors
 

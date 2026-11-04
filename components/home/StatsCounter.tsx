@@ -83,7 +83,7 @@ export function StatsCounter() {
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
   return (
-    <section className="section-padding bg-white" aria-labelledby="stats-heading" ref={ref}>
+    <section className="section-padding bg-background" aria-labelledby="stats-heading" ref={ref}>
       <div className="container-xl">
         <div className="text-center mb-14">
           <span
@@ -108,7 +108,7 @@ export function StatsCounter() {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="card-base p-8 text-center group hover:shadow-[0_8px_48px_rgba(10,14,26,0.12)] hover:-translate-y-1 transition-all duration-300"
+              className="card-base p-8 text-center group hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300"
             >
               <div className={`w-14 h-14 ${stat.bg} rounded-2xl flex items-center justify-center mx-auto mb-5 group-hover:scale-110 transition-transform`}>
                 <stat.icon className={`w-7 h-7 ${stat.color}`} />

@@ -8,15 +8,17 @@ import { WhyChooseUs } from '@/components/home/WhyChooseUs'
 import { ProcessTimeline } from '@/components/home/ProcessTimeline'
 import { TechStack } from '@/components/home/TechStack'
 import { IndustriesServed } from '@/components/home/IndustriesServed'
+import { SampleDeliverables } from '@/components/home/SampleDeliverables'
 import { CaseStudies } from '@/components/home/CaseStudies'
 import { TestimonialsCarousel } from '@/components/home/TestimonialsCarousel'
 import { FAQSection } from '@/components/home/FAQSection'
 import { CTASection } from '@/components/home/CTASection'
+import { SITE_CONFIG } from '@/lib/data/site-config'
 
 export const metadata: Metadata = {
-  title: 'Solar Engineering Services | TriventX Energy LLP',
+  title: { absolute: 'Solar Engineering Services | TriventX Energy LLP' },
   description:
-    'TriventX delivers accurate, code-compliant solar PV design and engineering — sales proposals, site assessments, AHJ-ready permit plan sets, PE review & stamping, interconnection, PTO support, and as-built drawings.',
+    'TriventX delivers accurate, code-compliant solar PV design and engineering — sales proposals, site assessments, AHJ-ready permit plan sets, PE review & stamping, interconnection, PTO support, and as-built drawings — plus wind energy and telecom engineering.',
   alternates: {
     canonical: '/',
   },
@@ -33,24 +35,23 @@ export default function HomePage() {
           __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'LocalBusiness',
-            name: 'TriventX Energy LLP',
-            description: 'Solar PV design and engineering services including sales proposals, permit plan sets, PE review & stamping, interconnection, PTO support, and as-built drawings.',
-            url: 'https://triventxenergy.com',
-            telephone: '+1-888-247-6535',
-            email: 'hello@triventxenergy.com',
-            address: {
-              '@type': 'PostalAddress',
-              streetAddress: '1234 Innovation Drive, Suite 400',
-              addressLocality: 'Austin',
-              addressRegion: 'TX',
-              postalCode: '78701',
-              addressCountry: 'US',
-            },
-            sameAs: [
-              'https://linkedin.com/company/triventxenergy',
-              'https://twitter.com/triventxenergy',
-            ],
-            openingHours: 'Mo-Fr 08:00-22:00',
+            name: SITE_CONFIG.name,
+            description: 'Solar PV design and engineering services including sales proposals, permit plan sets, PE review & stamping, interconnection, PTO support, and as-built drawings, plus wind energy and telecom engineering.',
+            url: SITE_CONFIG.url,
+            ...(SITE_CONFIG.phone && { telephone: SITE_CONFIG.phone }),
+            ...(SITE_CONFIG.email && { email: SITE_CONFIG.email }),
+            ...(SITE_CONFIG.address && {
+              address: {
+                '@type': 'PostalAddress',
+                streetAddress: SITE_CONFIG.address.street,
+                addressLocality: SITE_CONFIG.address.city,
+                addressRegion: SITE_CONFIG.address.region,
+                postalCode: SITE_CONFIG.address.postalCode,
+                addressCountry: SITE_CONFIG.address.country,
+              },
+            }),
+            sameAs: [SITE_CONFIG.social.linkedin, SITE_CONFIG.social.twitter],
+            openingHours: SITE_CONFIG.openingHours,
             priceRange: '$$',
           }),
         }}
@@ -64,6 +65,7 @@ export default function HomePage() {
       <ProcessTimeline />
       <TechStack />
       <IndustriesServed />
+      <SampleDeliverables />
       <CaseStudies />
       <TestimonialsCarousel />
       <FAQSection />

@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { CheckCircle, ArrowRight, Clock } from 'lucide-react'
 import { SERVICES_DATA } from '@/lib/data/services'
+import { SITE_CONFIG } from '@/lib/data/site-config'
 import { ServiceInteractive } from '@/components/services/ServiceInteractive'
 import { ServiceLifecycle } from '@/components/services/ServiceLifecycle'
 import { CTASection } from '@/components/home/CTASection'
@@ -24,7 +25,8 @@ function Feature({ text }: { text: string }) {
 }
 
 export async function generateStaticParams() {
-  return SERVICES_DATA.map((s) => ({ slug: s.slug }))
+  // Solar Sales Proposals has its own landing page at services/solar-sales-proposals.
+  return SERVICES_DATA.filter((s) => s.slug !== 'solar-sales-proposals').map((s) => ({ slug: s.slug }))
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -43,7 +45,7 @@ export default async function ServiceDetailPage({ params }: Props) {
   const service = SERVICES_DATA.find((s) => s.slug === slug)
   if (!service) notFound()
 
-  const otherServices = SERVICES_DATA.filter((s) => s.slug !== slug).slice(0, 3)
+  const otherServices = SERVICES_DATA.filter((s) => s.slug !== slug && s.category === service.category).slice(0, 3)
 
   return (
     <>
@@ -58,16 +60,16 @@ export default async function ServiceDetailPage({ params }: Props) {
             description: service.shortDescription,
             provider: {
               '@type': 'Organization',
-              name: 'TriventX Energy LLP',
-              url: 'https://triventxenergy.com',
+              name: SITE_CONFIG.name,
+              url: SITE_CONFIG.url,
             },
-            serviceType: 'Solar Engineering Services',
+            serviceType: service.category === 'solar' ? 'Solar Engineering Services' : service.title,
           }),
         }}
       />
 
       {/* Hero Section */}
-      <section className="pt-24 pb-16 md:pt-32 bg-white overflow-hidden relative" aria-labelledby="service-hero-heading">
+      <section className="pt-24 pb-16 md:pt-32 bg-background overflow-hidden relative" aria-labelledby="service-hero-heading">
         <div className="bg-hero-mesh absolute inset-0 pointer-events-none" aria-hidden="true" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Breadcrumb */}
@@ -124,7 +126,7 @@ export default async function ServiceDetailPage({ params }: Props) {
                 </Link>
                 <Link
                   href="/services"
-                  className="inline-flex items-center justify-center gap-2 bg-white hover:bg-background-subtle text-text-primary font-semibold px-6 py-4 rounded-xl border border-border transition-all duration-200"
+                  className="inline-flex items-center justify-center gap-2 bg-surface hover:bg-background-subtle text-text-primary font-semibold px-6 py-4 rounded-xl border border-border transition-all duration-200"
                 >
                   ← All Services
                 </Link>
@@ -133,7 +135,20 @@ export default async function ServiceDetailPage({ params }: Props) {
 
             {/* Right: Interactive Client Component */}
             <div>
-              <ServiceInteractive slug={slug} fallback={<ServiceLifecycle currentSlug={slug} />} />
+              {service.heroVisualUrl ? (
+                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-xl">
+                  <Image
+                    src={service.heroVisualUrl}
+                    alt={`${service.title} project`}
+                    fill
+                    preload
+                    sizes="(min-width: 1024px) 50vw, 100vw"
+                    className="object-cover"
+                  />
+                </div>
+              ) : (
+                <ServiceInteractive slug={slug} fallback={<ServiceLifecycle currentSlug={slug} />} />
+              )}
             </div>
           </div>
         </div>
@@ -154,13 +169,16 @@ export default async function ServiceDetailPage({ params }: Props) {
               ))}
             </div>
             {service.heroImageUrl && (
-              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden lg:sticky lg:top-28" style={{ boxShadow: 'var(--shadow-card)' }}>
+              <div
+                className={`relative aspect-[4/3] rounded-2xl overflow-hidden lg:sticky lg:top-28 ${service.heroImageFit === 'contain' ? 'bg-white border border-border' : ''}`}
+                style={{ boxShadow: 'var(--shadow-card)' }}
+              >
                 <Image
                   src={service.heroImageUrl}
-                  alt={`${service.title} — residential solar project`}
+                  alt={`${service.title} sample`}
                   fill
                   sizes="(min-width: 1024px) 50vw, 100vw"
-                  className="object-cover"
+                  className={service.heroImageFit === 'contain' ? 'object-contain' : 'object-cover'}
                 />
               </div>
             )}
@@ -169,7 +187,7 @@ export default async function ServiceDetailPage({ params }: Props) {
       </section>
 
       {/* Full features */}
-      <section className="section-padding bg-white" aria-labelledby="features-heading">
+      <section className="section-padding bg-background" aria-labelledby="features-heading">
         <div className="container-xl">
           <h2 id="features-heading" className="font-heading text-3xl font-bold text-text-primary mb-10 text-center">
             Everything Included
@@ -199,7 +217,7 @@ export default async function ServiceDetailPage({ params }: Props) {
               {service.planIncludes.map((item, i) => (
                 <li
                   key={item}
-                  className="flex items-start gap-4 p-5 bg-white rounded-2xl border border-border"
+                  className="flex items-start gap-4 p-5 bg-surface rounded-2xl border border-border"
                 >
                   <span className="w-9 h-9 rounded-xl bg-primary text-white font-bold text-sm flex items-center justify-center shrink-0">
                     {i + 1}
@@ -214,29 +232,45 @@ export default async function ServiceDetailPage({ params }: Props) {
 
       {/* Project gallery */}
       {service.gallery && (
-        <section className="section-padding bg-background-subtle" aria-labelledby="gallery-heading">
+        <section className={`section-padding ${service.planIncludes ? 'bg-background' : 'bg-background-subtle'}`} aria-labelledby="gallery-heading">
           <div className="container-xl">
             <div className="text-center mb-10">
               <h2 id="gallery-heading" className="font-heading text-3xl font-bold text-text-primary mb-4">
-                As-Built Solar Projects — Residential
+                {service.galleryTitle}
               </h2>
-              <p className="text-text-secondary max-w-2xl mx-auto text-lg">
-                Completed residential rooftop installations — the field conditions our as-built
-                drawings capture for closeout, inspection, and future maintenance.
-              </p>
+              <p className="text-text-secondary max-w-2xl mx-auto text-lg">{service.galleryDescription}</p>
             </div>
-            <div className="grid sm:grid-cols-2 gap-6">
+            <div className={`grid sm:grid-cols-2 gap-6 ${service.gallery.length === 3 ? 'lg:grid-cols-3' : ''}`}>
               {service.gallery.map((photo) => (
                 <figure key={photo.src} className="card-base overflow-hidden">
-                  <div className="relative aspect-[16/10]">
-                    <Image
-                      src={photo.src}
-                      alt={photo.caption}
-                      fill
-                      sizes="(min-width: 640px) 50vw, 100vw"
-                      className="object-cover"
-                    />
-                  </div>
+                  {photo.fit === 'contain' ? (
+                    // Drawings open full size so the fine print can be read
+                    <a
+                      href={photo.src}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="relative block aspect-[16/10] bg-white"
+                      aria-label={`View full size: ${photo.caption}`}
+                    >
+                      <Image
+                        src={photo.src}
+                        alt={photo.caption}
+                        fill
+                        sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                        className="object-contain"
+                      />
+                    </a>
+                  ) : (
+                    <div className="relative aspect-[16/10]">
+                      <Image
+                        src={photo.src}
+                        alt={photo.caption}
+                        fill
+                        sizes="(min-width: 640px) 50vw, 100vw"
+                        className="object-cover"
+                      />
+                    </div>
+                  )}
                   <figcaption className="px-5 py-4 text-sm font-medium text-text-primary">
                     {photo.caption}
                   </figcaption>
@@ -249,7 +283,7 @@ export default async function ServiceDetailPage({ params }: Props) {
 
       {/* Related services */}
       <section
-        className={`section-padding ${service.planIncludes || service.gallery ? 'bg-white' : 'bg-background-subtle'}`}
+        className={`section-padding ${service.planIncludes && service.gallery ? 'bg-background-subtle' : service.planIncludes || service.gallery ? 'bg-background' : 'bg-background-subtle'}`}
         aria-labelledby="related-heading"
       >
         <div className="container-xl">
@@ -261,7 +295,7 @@ export default async function ServiceDetailPage({ params }: Props) {
               <Link
                 key={svc.slug}
                 href={`/services/${svc.slug}`}
-                className="group bg-white rounded-2xl border border-border p-5 hover:border-primary/30 transition-all"
+                className="group bg-surface rounded-2xl border border-border p-5 hover:border-primary/30 transition-all"
                 style={{ boxShadow: 'var(--shadow-card)' }}
               >
                 {svc.tat && <p className="text-xs font-semibold text-accent mb-2">{svc.tat} TAT</p>}

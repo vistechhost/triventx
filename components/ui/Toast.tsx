@@ -63,7 +63,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
               animate={{ opacity: 1, x: 0, scale: 1 }}
               exit={{ opacity: 0, x: 60, scale: 0.9 }}
               transition={{ duration: 0.25 }}
-              className={`pointer-events-auto flex items-start gap-3 bg-white rounded-xl p-4 shadow-xl border border-border max-w-sm ${variantBg[toast.variant]}`}
+              className={`pointer-events-auto flex items-start gap-3 bg-surface rounded-xl p-4 shadow-xl border border-border max-w-sm ${variantBg[toast.variant]}`}
               role="alert"
             >
               <div className="shrink-0 mt-0.5">{icons[toast.variant]}</div>

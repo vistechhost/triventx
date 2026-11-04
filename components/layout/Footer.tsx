@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import {
+  Clock,
   Phone,
   Mail,
   MapPin,
@@ -12,29 +13,27 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { Logo } from "@/components/ui/Logo";
+import { SERVICES_DATA, serviceLabel } from "@/lib/data/services";
+import { SITE_CONFIG } from "@/lib/data/site-config";
+import { addressLines, formatPhone, telHref } from "@/lib/utils/contact";
 
-const footerServices = [
-  { label: "Solar Sales Proposals", href: "/services/solar-sales-proposals" },
-  { label: "Site Surveys & Assessments", href: "/services/site-surveys-remote-assessments" },
-  { label: "Solar Permit Design", href: "/services/solar-permit-design" },
-  { label: "PE Review & Stamping", href: "/services/engineering-stamps" },
-  { label: "Solar Permitting Services", href: "/services/solar-permitting-services" },
-  { label: "Interconnection Services", href: "/services/interconnection-services" },
-  { label: "As-Built Drawings", href: "/services/as-built-drawings" },
-  { label: "PTO Support", href: "/services/pto-support" },
+const footerCompany = [
+  { label: "About TriventX", href: "/about" },
+  { label: "US Customers", href: "/us" },
+  { label: "Service Terms", href: "/terms" },
+  { label: "Contact", href: "/contact" },
 ];
 
-const footerResources = [
-  { label: "NEC Code Reference", href: "#" },
-  { label: "Permit Checklist", href: "#" },
-  { label: "TAT Calculator", href: "#" },
-  { label: "Blog", href: "#" },
-  { label: "Case Studies", href: "#" },
+const socialLinks = [
+  { icon: Linkedin, href: SITE_CONFIG.social.linkedin, label: "LinkedIn" },
+  { icon: Facebook, href: SITE_CONFIG.social.facebook, label: "Facebook" },
+  { icon: Instagram, href: SITE_CONFIG.social.instagram, label: "Instagram" },
+  { icon: Twitter, href: SITE_CONFIG.social.twitter, label: "Twitter" },
 ];
 
 export function Footer() {
   return (
-    <footer className="bg-[#0A0E1A] text-white">
+    <footer className="bg-[#0A0E1A] text-white border-t border-white/10">
       {/* Main Footer */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
@@ -50,28 +49,7 @@ export function Footer() {
             </p>
             {/* Social */}
             <div className="flex items-center gap-3">
-              {[
-                {
-                  icon: Linkedin,
-                  href: "https://linkedin.com/company/triventxenergy",
-                  label: "LinkedIn",
-                },
-                {
-                  icon: Facebook,
-                  href: "https://facebook.com/triventxenergy",
-                  label: "Facebook",
-                },
-                {
-                  icon: Instagram,
-                  href: "https://instagram.com/triventxenergy",
-                  label: "Instagram",
-                },
-                {
-                  icon: Twitter,
-                  href: "https://twitter.com/triventxenergy",
-                  label: "Twitter",
-                },
-              ].map(({ icon: Icon, href, label }) => (
+              {socialLinks.map(({ icon: Icon, href, label }) => (
                 <a
                   key={label}
                   href={href}
@@ -90,14 +68,14 @@ export function Footer() {
           <div>
             <h3 className="font-heading font-bold text-base mb-5">Services</h3>
             <ul className="space-y-3">
-              {footerServices.map((svc) => (
-                <li key={svc.label}>
+              {SERVICES_DATA.map((svc) => (
+                <li key={svc.slug}>
                   <Link
-                    href={svc.href}
+                    href={`/services/${svc.slug}`}
                     className="text-sm text-slate-400 hover:text-primary transition-colors flex items-center gap-1.5 group"
                   >
                     <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity -ml-4 group-hover:ml-0" />
-                    {svc.label}
+                    {serviceLabel(svc)}
                   </Link>
                 </li>
               ))}
@@ -106,9 +84,9 @@ export function Footer() {
 
           {/* Column 3: Resources */}
           <div>
-            <h3 className="font-heading font-bold text-base mb-5">Resources</h3>
+            <h3 className="font-heading font-bold text-base mb-5">Company</h3>
             <ul className="space-y-3">
-              {footerResources.map((res) => (
+              {footerCompany.map((res) => (
                 <li key={res.label}>
                   <Link
                     href={res.href}
@@ -126,31 +104,49 @@ export function Footer() {
           <div>
             <h3 className="font-heading font-bold text-base mb-5">Contact</h3>
             <ul className="space-y-4 mb-6">
+              {SITE_CONFIG.phone && (
+                <li className="flex items-start gap-3">
+                  <Phone className="w-4 h-4 text-primary mt-0.5 shrink-0" />
+                  <a
+                    href={telHref(SITE_CONFIG.phone)}
+                    className="text-sm text-slate-400 hover:text-primary transition-colors"
+                  >
+                    {formatPhone(SITE_CONFIG.phone)}
+                  </a>
+                </li>
+              )}
+              {SITE_CONFIG.email && (
+                <li className="flex items-start gap-3">
+                  <Mail className="w-4 h-4 text-primary mt-0.5 shrink-0" />
+                  <a
+                    href={`mailto:${SITE_CONFIG.email}`}
+                    className="text-sm text-slate-400 hover:text-primary transition-colors break-all"
+                  >
+                    {SITE_CONFIG.email}
+                  </a>
+                </li>
+              )}
+              {SITE_CONFIG.address && (
+                <li className="flex items-start gap-3">
+                  <MapPin className="w-4 h-4 text-primary mt-0.5 shrink-0" />
+                  <address className="text-sm text-slate-400 not-italic">
+                    {addressLines(SITE_CONFIG.address).map((line) => (
+                      <span key={line} className="block">
+                        {line}
+                      </span>
+                    ))}
+                  </address>
+                </li>
+              )}
               <li className="flex items-start gap-3">
-                <Phone className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-                <a
-                  href="tel:+18882476535"
-                  className="text-sm text-slate-400 hover:text-primary transition-colors"
-                >
-                  +1 (888) 247-6535
-                </a>
-              </li>
-              <li className="flex items-start gap-3">
-                <Mail className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-                <a
-                  href="mailto:hello@triventxenergy.com"
-                  className="text-sm text-slate-400 hover:text-primary transition-colors"
-                >
-                  hello@triventxenergy.com
-                </a>
-              </li>
-              <li className="flex items-start gap-3">
-                <MapPin className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-                <span className="text-sm text-slate-400">
-                  1234 Innovation Drive, Suite 400
-                  <br />
-                  Austin, TX 78701
-                </span>
+                <Clock className="w-4 h-4 text-primary mt-0.5 shrink-0" />
+                <div className="text-sm text-slate-400">
+                  {SITE_CONFIG.hours.slice(0, 2).map((h) => (
+                    <span key={h.days} className="block">
+                      {h.days}: {h.time}
+                    </span>
+                  ))}
+                </div>
               </li>
             </ul>
 
@@ -188,17 +184,19 @@ export function Footer() {
             reserved.
           </p>
           <div className="flex items-center gap-6">
-            {["Privacy Policy", "Terms of Service", "Cookie Policy"].map(
-              (item) => (
-                <Link
-                  key={item}
-                  href="#"
-                  className="text-xs text-slate-500 hover:text-slate-300 transition-colors"
-                >
-                  {item}
-                </Link>
-              ),
-            )}
+            {[
+              { label: "Privacy Policy", href: "#" },
+              { label: "Service Terms", href: "/terms" },
+              { label: "Cookie Policy", href: "#" },
+            ].map((item) => (
+              <Link
+                key={item.label}
+                href={item.href}
+                className="text-xs text-slate-500 hover:text-slate-300 transition-colors"
+              >
+                {item.label}
+              </Link>
+            ))}
           </div>
         </div>
       </div>

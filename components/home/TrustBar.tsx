@@ -1,7 +1,8 @@
 'use client'
 
+import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { Wrench, Building2, HardHat, House } from 'lucide-react'
+import { ArrowRight, Wrench, Building2, HardHat, House } from 'lucide-react'
 
 const audiences = [
   { name: 'Solar Installers', icon: Wrench },
@@ -44,6 +45,13 @@ export function TrustBar() {
             </motion.div>
           ))}
         </div>
+        <p className="mt-8 text-center text-sm text-text-secondary">
+          Our core focus is the United States, with support for partners in Canada and Europe.{' '}
+          <Link href="/us" className="inline-flex items-center gap-1 font-semibold text-primary hover:underline">
+            US customers start here
+            <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+          </Link>
+        </p>
       </div>
     </section>
   )

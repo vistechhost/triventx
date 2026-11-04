@@ -1,10 +1,13 @@
 'use client'
 
 import { useState, useEffect, useTransition } from 'react'
-import { Users, Download, Search, Filter, Eye } from 'lucide-react'
+import { Users, Download, Search, Filter, Eye, FileText, AlertCircle } from 'lucide-react'
 import { Badge } from '@/components/ui/Badge'
 import { Modal } from '@/components/ui/Modal'
+import { useToast } from '@/components/ui/Toast'
 import { getLeadsAction, updateLeadStatus } from '@/lib/actions/leads'
+import { getLeadFileUrl } from '@/lib/firebase/storage'
+import { SERVICES_DATA, serviceLabel } from '@/lib/data/services'
 import { formatDateTime } from '@/lib/utils/format'
 import type { Lead } from '@/lib/types'
 
@@ -16,14 +19,21 @@ const statusVariant: Record<Lead['status'], 'accent' | 'warning' | 'secondary' |
   closed: 'neutral',
 }
 
+// Older leads may reference a service that has since been renamed or merged.
+function serviceName(slug: string): string {
+  const service = SERVICES_DATA.find((s) => s.slug === slug)
+  return service ? serviceLabel(service) : slug.replace(/-/g, ' ')
+}
+
 function exportCSV(leads: Lead[]) {
-  const headers = ['Name', 'Email', 'Phone', 'Company', 'Service', 'Project Size', 'Status', 'Date']
+  const headers = ['Name', 'Company', 'Email', 'Phone', 'Service', 'Project Volume', 'Project Location', 'Message', 'Files', 'Source', 'Status', 'Date']
   const rows = leads.map((l) => [
-    l.name, l.email, l.phone, l.company || '',
-    l.serviceInterest, l.projectSize || '', l.status,
+    l.name, l.company || '', l.email, l.phone,
+    serviceName(l.serviceInterest), l.projectVolume || l.projectSize || '', l.projectLocation || '',
+    l.message || '', (l.attachments ?? []).map((f) => f.name).join('; '), l.source || '', l.status,
     formatDateTime(l.createdAt),
   ])
-  const csv = [headers, ...rows].map((r) => r.map((v) => `"${v}"`).join(',')).join('\n')
+  const csv = [headers, ...rows].map((r) => r.map((v) => `"${v.replace(/"/g, '""')}"`).join(',')).join('\n')
   const blob = new Blob([csv], { type: 'text/csv' })
   const url = URL.createObjectURL(blob)
   const a = document.createElement('a')
@@ -40,6 +50,7 @@ export default function AdminLeadsPage() {
   const [statusFilter, setStatusFilter] = useState<Lead['status'] | 'all'>('all')
   const [selectedLead, setSelectedLead] = useState<Lead | null>(null)
   const [isPending, startTransition] = useTransition()
+  const { showToast } = useToast()
 
   useEffect(() => {
     getLeadsAction().then((data) => {
@@ -62,6 +73,16 @@ export default function AdminLeadsPage() {
       await updateLeadStatus(id, status)
       setLeads((prev) => prev.map((l) => (l.id === id ? { ...l, status } : l)))
     })
+  }
+
+  const handleDownload = async (path: string) => {
+    try {
+      // Files are stored as attachments, so this downloads them without leaving the page.
+      window.location.assign(await getLeadFileUrl(path))
+    } catch (error) {
+      console.error('Could not open project file:', error)
+      showToast('Could not open that file. Please try again.', 'error')
+    }
   }
 
   return (
@@ -126,7 +147,7 @@ export default function AdminLeadsPage() {
             <table className="w-full" aria-label="Leads table">
               <thead className="border-b border-border">
                 <tr>
-                  {['Name', 'Email', 'Service', 'Status', 'Date', 'Actions'].map((h) => (
+                  {['Name', 'Email', 'Service', 'Location', 'Files', 'Status', 'Date', 'Actions'].map((h) => (
                     <th key={h} className="text-left text-xs font-semibold text-text-secondary uppercase tracking-wide px-5 py-3">
                       {h}
                     </th>
@@ -141,9 +162,11 @@ export default function AdminLeadsPage() {
                       {lead.company && <p className="text-xs text-text-secondary">{lead.company}</p>}
                     </td>
                     <td className="px-5 py-4 text-sm text-text-secondary">{lead.email}</td>
-                    <td className="px-5 py-4 text-sm text-text-secondary capitalize">
-                      {lead.serviceInterest.replace(/-/g, ' ')}
+                    <td className="px-5 py-4 text-sm text-text-secondary">
+                      {serviceName(lead.serviceInterest)}
                     </td>
+                    <td className="px-5 py-4 text-sm text-text-secondary">{lead.projectLocation || '—'}</td>
+                    <td className="px-5 py-4 text-sm text-text-secondary">{lead.attachments?.length || '—'}</td>
                     <td className="px-5 py-4">
                       <select
                         value={lead.status}
@@ -190,21 +213,49 @@ export default function AdminLeadsPage() {
                 { label: 'Email', value: selectedLead.email },
                 { label: 'Phone', value: selectedLead.phone },
                 { label: 'Company', value: selectedLead.company || '—' },
-                { label: 'Service', value: selectedLead.serviceInterest.replace(/-/g, ' ') },
-                { label: 'Project Size', value: selectedLead.projectSize || '—' },
+                { label: 'Service', value: serviceName(selectedLead.serviceInterest) },
+                { label: 'Project Volume', value: (selectedLead.projectVolume || selectedLead.projectSize || '—').replace(/-/g, ' ') },
+                { label: 'Project Location', value: selectedLead.projectLocation || '—' },
+                { label: 'Submitted From', value: selectedLead.source || '—' },
               ].map(({ label, value }) => (
                 <div key={label}>
                   <p className="text-xs font-semibold text-text-secondary uppercase tracking-wide">{label}</p>
-                  <p className="text-sm font-medium text-text-primary mt-0.5 capitalize">{value}</p>
+                  <p className="text-sm font-medium text-text-primary mt-0.5 break-words">{value}</p>
                 </div>
               ))}
             </div>
             <div>
               <p className="text-xs font-semibold text-text-secondary uppercase tracking-wide mb-1">Message</p>
               <p className="text-sm text-text-secondary leading-relaxed bg-background-subtle rounded-xl p-4">
-                {selectedLead.message}
+                {selectedLead.message || 'No additional requirements provided.'}
               </p>
             </div>
+            {(selectedLead.attachments?.length ?? 0) > 0 && (
+              <div>
+                <p className="text-xs font-semibold text-text-secondary uppercase tracking-wide mb-2">Project Files</p>
+                <ul className="space-y-2">
+                  {selectedLead.attachments?.map((file) => (
+                    <li key={file.path}>
+                      <button
+                        type="button"
+                        onClick={() => handleDownload(file.path)}
+                        className="w-full flex items-center gap-2 rounded-lg border border-border px-3 py-2 text-left text-sm font-medium text-text-primary hover:border-primary/40 hover:text-primary transition-colors"
+                      >
+                        <FileText className="w-4 h-4 text-primary shrink-0" aria-hidden="true" />
+                        <span className="flex-1 min-w-0 truncate">{file.name}</span>
+                        <Download className="w-4 h-4 shrink-0" aria-hidden="true" />
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {(selectedLead.failedAttachments?.length ?? 0) > 0 && (
+              <p className="flex items-start gap-2 rounded-lg bg-amber-50 px-3 py-2 text-sm text-amber-800">
+                <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" aria-hidden="true" />
+                <span>Failed to upload, ask the client to resend: {selectedLead.failedAttachments?.join(', ')}</span>
+              </p>
+            )}
             <div className="flex items-center justify-between pt-2">
               <Badge variant={statusVariant[selectedLead.status]} dot>
                 {selectedLead.status.charAt(0).toUpperCase() + selectedLead.status.slice(1)}

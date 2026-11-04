@@ -13,7 +13,7 @@ const tools = [
 
 export function TechStack() {
   return (
-    <section className="section-padding bg-white" aria-labelledby="tech-heading">
+    <section className="section-padding bg-background" aria-labelledby="tech-heading">
       <div className="container-xl">
         <div className="text-center mb-14">
           <span

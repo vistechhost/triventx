@@ -1,6 +1,10 @@
 @import "tailwindcss";
 
-@theme {
+/* Dark mode is class-based so the theme toggle can override the OS setting. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* `static` keeps every token available to inline styles and the overrides below. */
+@theme static {
   /* Colors */
   --color-primary: #ff8a00;
   --color-primary-dark: #e67300;
@@ -41,6 +45,62 @@
   --animate-scan: scan 3s linear infinite;
   --animate-slide-up: slideUp 0.5s ease-out forwards;
   --animate-fade-in: fadeIn 0.5s ease-out forwards;
+}
+
+/*
+ * Dark theme. Components use semantic tokens (bg-surface, text-text-primary,
+ * border-border), so overriding the tokens here restyles the whole public site.
+ * The 50-level tints sit behind icons; they turn translucent so they don't glare.
+ */
+.dark {
+  color-scheme: dark;
+  --color-background: #0a0e1a;
+  --color-background-subtle: #0e1424;
+  --color-background-muted: #182033;
+  --color-surface: #151c2e;
+  --color-text-primary: #f1f5f9;
+  --color-text-secondary: #a8b5c9;
+  --color-border: #2a344b;
+  --color-secondary: #4d94ff;
+
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.35);
+  --shadow-card-hover: 0 8px 48px rgba(0, 0, 0, 0.5);
+
+  --color-blue-50: rgb(59 130 246 / 0.16);
+  --color-yellow-50: rgb(234 179 8 / 0.16);
+  --color-orange-50: rgb(249 115 22 / 0.16);
+  --color-purple-50: rgb(168 85 247 / 0.18);
+  --color-sky-50: rgb(14 165 233 / 0.16);
+  --color-emerald-50: rgb(16 185 129 / 0.16);
+  --color-teal-50: rgb(20 184 166 / 0.16);
+  --color-rose-50: rgb(244 63 94 / 0.16);
+
+  --color-purple-600: #c084fc;
+  --color-rose-600: #fb7185;
+  --color-rose-500: #fb7185;
+  --color-teal-600: #2dd4bf;
+  --color-teal-500: #2dd4bf;
+  --color-emerald-600: #34d399;
+  --color-yellow-600: #facc15;
+  --color-sky-600: #38bdf8;
+}
+
+/* The admin portal has not been themed, so it always renders with light tokens. */
+.theme-light {
+  color-scheme: light;
+  --color-background: #ffffff;
+  --color-background-subtle: #f8fafc;
+  --color-background-muted: #f1f5f9;
+  --color-surface: #ffffff;
+  --color-text-primary: #0a0e1a;
+  --color-text-secondary: #475569;
+  --color-border: #e2e8f0;
+  --color-secondary: #0066ff;
+  --shadow-card: 0 4px 24px rgba(10, 14, 26, 0.06);
+  --shadow-card-hover: 0 8px 48px rgba(10, 14, 26, 0.12);
+  --color-purple-50: #faf5ff;
+  --color-purple-600: #9333ea;
+  color: var(--color-text-primary);
 }
 
 @keyframes float {
@@ -98,8 +158,8 @@ html {
 }
 
 body {
-  background-color: #ffffff;
-  color: #0a0e1a;
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
   font-family: var(--font-inter, system-ui, sans-serif);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -152,25 +212,30 @@ h6 {
 }
 
 .card-base {
-  background-color: #ffffff;
+  background-color: var(--color-surface);
   border-radius: 1rem;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 4px 24px rgba(10, 14, 26, 0.06);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-card);
 }
 
 .service-card {
-  background-color: #ffffff;
+  background-color: var(--color-surface);
   border-radius: 1rem;
   padding: 2rem;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 4px 24px rgba(10, 14, 26, 0.06);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-card);
   transition: all 0.3s;
   cursor: pointer;
 }
 
 .service-card:hover {
-  box-shadow: 0 8px 48px rgba(10, 14, 26, 0.12);
+  box-shadow: var(--shadow-card-hover);
   transform: translateY(-0.25rem);
+}
+
+.dark .glass-card {
+  background: rgba(21, 28, 46, 0.85);
+  border-color: rgba(255, 255, 255, 0.08);
 }
 
 .glass-card {
@@ -242,14 +307,14 @@ h6 {
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: var(--color-background-muted);
 }
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: #94a3b8;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: #64748b;
 }
 
 :focus-visible {

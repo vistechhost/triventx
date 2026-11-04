@@ -85,14 +85,14 @@ export function IndustriesServed() {
 
         {/* Tabs */}
         <div className="flex justify-center mb-10">
-          <div className="inline-flex bg-white rounded-2xl p-1.5 border border-border shadow-sm" role="tablist">
+          <div className="inline-flex bg-surface rounded-2xl p-1.5 border border-border shadow-sm" role="tablist">
             {industries.map((ind) => (
               <button
                 key={ind.id}
                 role="tab"
                 aria-selected={active === ind.id}
                 onClick={() => setActive(ind.id)}
-                className={`flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold transition-all duration-200 ${
+                className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-6 py-3 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 ${
                   active === ind.id
                     ? 'bg-primary text-white shadow-sm'
                     : 'text-text-secondary hover:text-text-primary hover:bg-background-subtle'

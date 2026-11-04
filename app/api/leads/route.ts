@@ -6,10 +6,11 @@ const leadSchema = z.object({
   name: z.string().min(2),
   email: z.string().email(),
   phone: z.string().min(7),
-  company: z.string().optional(),
+  company: z.string().min(2),
   serviceInterest: z.string().min(1),
-  projectSize: z.string().optional(),
-  message: z.string().min(10),
+  projectVolume: z.string().min(1),
+  projectLocation: z.string().min(2),
+  message: z.string().max(5000).optional(),
 })
 
 export async function POST(request: NextRequest) {

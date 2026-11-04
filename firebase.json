@@ -4,6 +4,13 @@
     "public": "out",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "cleanUrls": true,
+    "redirects": [
+      {
+        "source": "/services/solar-permitting-services",
+        "destination": "/services/solar-permit-design",
+        "type": 301
+      }
+    ],
     "rewrites": [
       {
         "source": "**",
@@ -14,5 +21,8 @@
   "firestore": {
     "rules": "firestore.rules",
     "indexes": "firestore.indexes.json"
+  },
+  "storage": {
+    "rules": "storage.rules"
   }
 }

@@ -3,14 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import {
-  ArrowRight,
-  PlayCircle,
-  CheckCircle,
-  ShieldCheck,
-  Clock,
-  Zap,
-} from "lucide-react";
+import { ArrowRight, CheckCircle, ShieldCheck, Clock } from "lucide-react";
 
 const trustPoints = [
   { icon: ShieldCheck, text: "AHJ & NEC-Compliant Designs" },
@@ -21,108 +14,32 @@ const trustPoints = [
 export function Hero() {
   return (
     <section
-      className="relative pt-20 md:pt-32 pb-24 md:pb-32 overflow-hidden bg-white"
+      className="relative isolate overflow-hidden bg-[#0A0E1A] pt-28 md:pt-36 pb-16 md:pb-24"
       aria-labelledby="hero-heading"
     >
-      {/* Grid Background */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        <div
-          className="absolute inset-0 opacity-[0.15]"
-          style={{
-            backgroundImage: `linear-gradient(#475569 1px, transparent 1px), linear-gradient(90deg, #475569 1px, transparent 1px)`,
-            backgroundSize: "40px 40px",
-            maskImage:
-              "radial-gradient(ellipse at center, black, transparent 80%)",
-          }}
-        />
+      {/* Background photo */}
+      <Image
+        src="/images/hero-us-home-solar.jpg"
+        alt="Single-story home with a multi-plane rooftop solar array"
+        fill
+        preload
+        sizes="100vw"
+        className="-z-20 object-cover object-bottom"
+      />
+      {/* Keeps the copy readable over the sky while leaving the house visible below */}
+      <div
+        className="absolute inset-0 -z-10 bg-gradient-to-b from-[#0A0E1A]/85 via-[#0A0E1A]/70 to-[#0A0E1A]/35"
+        aria-hidden="true"
+      />
 
-        {/* Animated Gradient Orbs */}
-        <div className="absolute top-1/4 -left-20 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] animate-pulse" />
-        <div
-          className="absolute bottom-1/4 -right-20 w-[500px] h-[500px] bg-secondary/10 rounded-full blur-[120px] animate-pulse"
-          style={{ animationDelay: "1s" }}
-        />
-      </div>
-
-      {/* Decorative Grid Elements */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden hidden lg:block">
-        <motion.div
-          animate={{ y: [0, -20, 0], rotate: [0, 5, 0] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/4 right-[12%] w-32 h-32 border border-slate-200 rounded-3xl bg-white/50 backdrop-blur-sm shadow-sm flex items-center justify-center"
-        >
-          <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center">
-            <Zap className="w-8 h-8 text-primary" />
-          </div>
-        </motion.div>
-
-        <motion.div
-          animate={{ y: [0, 20, 0], rotate: [0, -5, 0] }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1,
-          }}
-          className="absolute bottom-1/3 left-[10%] w-24 h-24 border border-slate-200 rounded-2xl bg-white/50 backdrop-blur-sm shadow-sm flex items-center justify-center"
-        >
-          <div className="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center">
-            <ShieldCheck className="w-6 h-6 text-secondary" />
-          </div>
-        </motion.div>
-
-        {/* Small floating "grid boxes" */}
-        <motion.div
-          animate={{
-            scale: [1, 1.1, 1],
-            opacity: [0.3, 0.6, 0.3],
-            x: [0, 10, 0],
-          }}
-          transition={{ duration: 4, repeat: Infinity }}
-          className="absolute top-1/3 left-[15%] w-4 h-4 bg-primary/20 rounded-sm"
-        />
-        <motion.div
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.2, 0.5, 0.2],
-            x: [0, -10, 0],
-          }}
-          transition={{ duration: 5, repeat: Infinity, delay: 2 }}
-          className="absolute bottom-1/4 right-[20%] w-6 h-6 bg-secondary/20 rounded-md"
-        />
-
-        {/* 24-Hour TAT Floating Badge */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 1, duration: 0.5 }}
-          className="absolute top-1/2 right-[15%] hidden xl:flex flex-col items-center justify-center w-28 h-28 rounded-full bg-white shadow-xl border border-slate-100 z-20"
-        >
-          <motion.div
-            animate={{ scale: [1, 1.05, 1] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="text-center"
-          >
-            <span className="block text-3xl font-bold text-primary leading-none">
-              24
-            </span>
-            <span className="block text-[10px] font-bold text-slate-500 uppercase tracking-tighter">
-              Hour TAT
-            </span>
-          </motion.div>
-          <div className="absolute inset-0 rounded-full border-2 border-primary/20 border-t-primary animate-spin-slow" />
-        </motion.div>
-      </div>
-
-      {/* Text Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <span className="inline-flex items-center gap-2 text-sm font-bold text-primary rounded-full px-5 py-2 mb-8 bg-primary/5 border border-primary/10">
+            <span className="inline-flex items-center gap-2 text-sm font-bold text-white rounded-full px-5 py-2 mb-8 bg-white/10 border border-white/20 backdrop-blur-sm">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
@@ -136,27 +53,17 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-text-primary leading-[1.05] tracking-tight mb-8"
+            className="font-heading text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-[1.05] tracking-tight mb-8"
           >
             Engineering Smarter.{" "}
-            <span
-              className="relative inline-block"
-              style={{
-                background: "linear-gradient(135deg, #FF8A00, #0066FF)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
-            >
-              Delivering Faster.
-            </span>
+            <span className="text-primary-light">Delivering Faster.</span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-xl md:text-2xl text-text-secondary leading-relaxed mb-12 max-w-3xl mx-auto font-medium"
+            className="text-lg md:text-xl text-white/90 leading-relaxed mb-10 max-w-3xl mx-auto font-medium"
           >
             Accurate, efficient, and code-compliant design solutions for solar
             installers, EPC companies, and contractors — from sales proposals
@@ -164,85 +71,65 @@ export function Hero() {
             drawings.
           </motion.p>
 
-          {/* Trust points grid */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 mb-12 max-w-3xl mx-auto"
-          >
-            {trustPoints.map((point) => (
-              <div
-                key={point.text}
-                className="flex items-center gap-3 p-4 rounded-2xl bg-slate-50 border border-slate-100 shadow-sm hover:shadow-md transition-shadow"
-              >
-                <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center shrink-0 shadow-sm">
-                  <point.icon className="w-5 h-5 text-primary" />
-                </div>
-                <span className="text-sm font-bold text-slate-700 text-left">
-                  {point.text}
-                </span>
-              </div>
-            ))}
-          </motion.div>
-
-          {/* CTAs */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-5"
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10"
           >
             <Link
               href="/contact"
-              className="group relative inline-flex items-center gap-2 bg-text-primary text-white font-bold px-10 py-5 rounded-2xl transition-all duration-300 hover:shadow-2xl hover:shadow-primary/20 hover:-translate-y-1 text-lg overflow-hidden w-full sm:w-auto justify-center"
+              className="group inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white font-bold px-10 py-5 rounded-2xl transition-all duration-300 hover:-translate-y-1 text-lg w-full sm:w-auto"
             >
-              <div className="absolute inset-0 bg-primary translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-              <span className="relative z-10 flex items-center gap-2">
-                Get Free Quote
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </span>
+              Get Free Quote
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link
               href="/services"
-              className="inline-flex items-center gap-2 bg-white text-text-primary font-bold px-10 py-5 rounded-2xl border-2 border-slate-200 transition-all duration-300 hover:border-primary/50 hover:bg-slate-50 hover:-translate-y-1 text-lg w-full sm:w-auto justify-center"
+              className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold px-10 py-5 rounded-2xl border border-white/30 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 text-lg w-full sm:w-auto"
             >
-              <PlayCircle className="w-6 h-6 text-primary" />
               View Our Services
             </Link>
           </motion.div>
 
-          {/* Hero image */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
+          <motion.ul
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.5 }}
-            className="relative mt-16 max-w-5xl mx-auto"
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-3xl mx-auto mb-8"
           >
-            <div className="relative aspect-[16/9] rounded-3xl overflow-hidden border border-slate-200 shadow-2xl">
-              <Image
-                src="/images/modern-home-rooftop-solar.jpg"
-                alt="Modern residential home with a rooftop solar PV array"
-                fill
-                preload
-                sizes="(min-width: 1024px) 1024px, 100vw"
-                className="object-cover"
-              />
-            </div>
-            <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 flex flex-wrap justify-center gap-3 w-max max-w-[calc(100%-2rem)]">
-              {["AHJ-Ready Permit Plan Sets", "NEC 2020/2023", "US · Canada · Europe"].map(
-                (chip) => (
-                  <span
-                    key={chip}
-                    className="px-4 py-2 rounded-full bg-white border border-slate-200 shadow-md text-xs sm:text-sm font-bold text-slate-700"
-                  >
-                    {chip}
-                  </span>
-                ),
-              )}
-            </div>
+            {trustPoints.map((point) => (
+              <li
+                key={point.text}
+                className="flex items-center gap-3 p-3 rounded-2xl bg-[#0A0E1A]/60 border border-white/15 backdrop-blur-md"
+              >
+                <span className="w-9 h-9 rounded-xl bg-primary/20 flex items-center justify-center shrink-0">
+                  <point.icon className="w-5 h-5 text-primary-light" />
+                </span>
+                <span className="text-sm font-bold text-white text-left">
+                  {point.text}
+                </span>
+              </li>
+            ))}
+          </motion.ul>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+          >
+            <Link
+              href="/us"
+              className="inline-flex items-center gap-2 rounded-full bg-[#0A0E1A]/70 border border-white/20 backdrop-blur-md px-5 py-2.5 text-sm font-bold text-white hover:text-primary-light transition-colors"
+            >
+              Based in the United States? See our US services
+              <ArrowRight className="w-4 h-4" />
+            </Link>
           </motion.div>
         </div>
+
+        {/* Leaves the house in the photo visible below the copy */}
+        <div className="h-32 md:h-56 lg:h-72" aria-hidden="true" />
       </div>
     </section>
   );

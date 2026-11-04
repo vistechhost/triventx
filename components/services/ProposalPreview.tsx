@@ -36,12 +36,12 @@ export function ProposalPreview() {
   const roi = useCountUp(312, isInView, 0)
 
   return (
-    <div ref={ref} className="bg-white rounded-2xl border border-border shadow-xl overflow-hidden max-w-2xl mx-auto">
+    <div ref={ref} className="bg-surface rounded-2xl border border-border shadow-xl overflow-hidden max-w-2xl mx-auto">
       {/* Header */}
       <div className="bg-gradient-to-r from-[#0A0E1A] to-[#1A2335] p-6 flex items-center justify-between">
         <div>
           <p className="text-white font-heading font-bold text-lg">Solar Investment Analysis</p>
-          <p className="text-slate-400 text-sm">123 Maple Street, Austin TX 78701</p>
+          <p className="text-slate-400 text-sm">Sample proposal · Illustrative figures</p>
         </div>
         <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center">
           <Sun className="w-6 h-6 text-white" />
@@ -69,15 +69,17 @@ export function ProposalPreview() {
         <p className="text-sm font-bold text-text-primary mb-4">Monthly Production (kWh)</p>
         <div className="flex items-end gap-1.5 h-32">
           {production.map((val, i) => (
-            <div key={i} className="flex-1 flex flex-col items-center gap-1">
-              <div
-                className="w-full rounded-t-lg bg-gradient-to-t from-primary to-amber-400 transition-all duration-700"
-                style={{
-                  height: isInView ? `${(val / maxProd) * 100}%` : '0%',
-                  transitionDelay: `${i * 60}ms`,
-                }}
-                aria-label={`${months[i]}: ${val} kWh`}
-              />
+            <div key={i} className="flex-1 h-full flex flex-col items-center gap-1">
+              <div className="w-full flex-1 flex items-end">
+                <div
+                  className="w-full rounded-t-lg bg-gradient-to-t from-primary to-amber-400 transition-all duration-700"
+                  style={{
+                    height: isInView ? `${(val / maxProd) * 100}%` : '0%',
+                    transitionDelay: `${i * 60}ms`,
+                  }}
+                  aria-label={`${months[i]}: ${val} kWh`}
+                />
+              </div>
               <span className="text-[9px] text-text-secondary font-medium">{months[i].slice(0, 1)}</span>
             </div>
           ))}
@@ -88,7 +90,7 @@ export function ProposalPreview() {
       <div className="border-t border-border px-6 py-4 bg-background-subtle flex items-center justify-between">
         <div className="flex items-center gap-2">
           <div className="w-2 h-2 bg-accent rounded-full animate-pulse" />
-          <span className="text-xs font-semibold text-accent">Federal ITC (30%) Applied</span>
+          <span className="text-xs font-semibold text-accent">Eligible Incentives Applied</span>
         </div>
         <span className="text-xs text-text-secondary">Prepared by TriventX Energy LLP</span>
       </div>

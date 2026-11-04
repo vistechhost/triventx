@@ -64,9 +64,9 @@ export function BlueprintHover() {
           style={{ clipPath: `inset(0 ${100 - (hovered ? progress * 100 : 50)}% 0 0)` }}
           aria-hidden="true"
         >
-          <div className="absolute inset-0 bg-background-subtle" />
+          <div className="absolute inset-0 bg-slate-50" />
           {/* Finished house illustration */}
-          <svg viewBox="0 0 320 220" className="w-[85%]" fill="none">
+          <svg viewBox="0 0 320 220" className="relative w-[85%]" fill="none">
             {/* Ground */}
             <rect x="40" y="160" width="240" height="5" rx="2" fill="#E8F4E8" />
             {/* House walls */}
@@ -130,8 +130,8 @@ export function BlueprintHover() {
       </div>
 
       <p className="text-center text-sm text-text-secondary mt-3">
-        <strong className="text-text-primary">Left:</strong> Blueprint sketch &nbsp;|&nbsp;
-        <strong className="text-text-primary">Right:</strong> AHJ-compliant permit package
+        <strong className="text-text-primary">Left:</strong> AHJ-compliant permit package &nbsp;|&nbsp;
+        <strong className="text-text-primary">Right:</strong> Blueprint sketch
       </p>
     </div>
   )

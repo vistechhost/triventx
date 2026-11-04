@@ -5,24 +5,22 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown, Phone } from "lucide-react";
-import { Button } from "@/components/ui/Button";
 import { Logo } from "@/components/ui/Logo";
+import { ThemeToggle } from "@/components/layout/ThemeToggle";
+import { OTHER_SERVICES, SOLAR_SERVICES, serviceLabel } from "@/lib/data/services";
+import { SITE_CONFIG } from "@/lib/data/site-config";
 import { cn } from "@/lib/utils/cn";
+import { formatPhone, telHref } from "@/lib/utils/contact";
 
-const services = [
-  { label: "Solar Sales Proposals", href: "/services/solar-sales-proposals" },
-  { label: "Site Surveys & Assessments", href: "/services/site-surveys-remote-assessments" },
-  { label: "Solar Permit Design", href: "/services/solar-permit-design" },
-  { label: "PE Review & Stamping", href: "/services/engineering-stamps" },
-  { label: "Solar Permitting Services", href: "/services/solar-permitting-services" },
-  { label: "Interconnection Services", href: "/services/interconnection-services" },
-  { label: "As-Built Drawings", href: "/services/as-built-drawings" },
-  { label: "PTO Support", href: "/services/pto-support" },
+const serviceGroups = [
+  { heading: "Solar Engineering", items: SOLAR_SERVICES },
+  { heading: "Beyond Solar", items: OTHER_SERVICES },
 ];
 
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services", hasDropdown: true },
+  { label: "US Customers", href: "/us" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
@@ -47,9 +45,8 @@ export function Navbar() {
     <header
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        scrolled || mobileOpen
-          ? "bg-white/95 backdrop-blur-md border-b border-border shadow-sm"
-          : "bg-transparent",
+        "bg-surface/95 backdrop-blur-md border-b border-border",
+        (scrolled || mobileOpen) && "shadow-sm",
       )}
     >
       <nav
@@ -96,20 +93,27 @@ export function Navbar() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 8 }}
                         transition={{ duration: 0.15 }}
-                        className="absolute top-full left-0 mt-1 w-64 bg-white rounded-2xl shadow-xl border border-border p-2"
+                        className="absolute top-full left-0 mt-1 w-72 bg-surface rounded-2xl shadow-xl border border-border p-2"
                         onMouseEnter={() => setServicesOpen(true)}
                         onMouseLeave={() => setServicesOpen(false)}
                         role="menu"
                       >
-                        {services.map((svc) => (
-                          <Link
-                            key={svc.href}
-                            href={svc.href}
-                            role="menuitem"
-                            className="block px-4 py-2.5 rounded-xl text-sm font-medium text-text-secondary hover:text-primary hover:bg-primary/5 transition-colors"
-                          >
-                            {svc.label}
-                          </Link>
+                        {serviceGroups.map((group) => (
+                          <div key={group.heading}>
+                            <p className="px-4 pt-2 pb-1 text-[11px] font-bold uppercase tracking-wider text-text-secondary">
+                              {group.heading}
+                            </p>
+                            {group.items.map((svc) => (
+                              <Link
+                                key={svc.slug}
+                                href={`/services/${svc.slug}`}
+                                role="menuitem"
+                                className="block px-4 py-2 rounded-xl text-sm font-medium text-text-secondary hover:text-primary hover:bg-primary/5 transition-colors"
+                              >
+                                {serviceLabel(svc)}
+                              </Link>
+                            ))}
+                          </div>
                         ))}
                         <div className="border-t border-border mt-2 pt-2">
                           <Link
@@ -143,14 +147,17 @@ export function Navbar() {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-3">
-            <a
-              href="tel:+18882476535"
-              className="flex items-center gap-2 text-sm font-semibold text-text-secondary hover:text-primary transition-colors"
-              aria-label="Call us"
-            >
-              <Phone className="w-4 h-4" />
-              +1 (888) 247-6535
-            </a>
+            <ThemeToggle />
+            {SITE_CONFIG.phone && (
+              <a
+                href={telHref(SITE_CONFIG.phone)}
+                className="hidden xl:flex items-center gap-2 text-sm font-semibold text-text-secondary hover:text-primary transition-colors"
+                aria-label="Call us"
+              >
+                <Phone className="w-4 h-4" />
+                {formatPhone(SITE_CONFIG.phone)}
+              </a>
+            )}
             <Link
               href="/contact"
               className="inline-flex items-center justify-center gap-2 font-semibold transition-all duration-200 bg-primary hover:bg-primary-dark text-white px-4 py-2 text-sm rounded-lg hover:shadow-glow-primary hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50"
@@ -159,19 +166,22 @@ export function Navbar() {
             </Link>
           </div>
 
-          {/* Mobile Toggle */}
-          <button
-            className="md:hidden p-2 rounded-lg text-text-secondary hover:text-text-primary hover:bg-background-subtle transition-colors"
-            onClick={() => setMobileOpen((v) => !v)}
-            aria-expanded={mobileOpen}
-            aria-label={mobileOpen ? "Close menu" : "Open menu"}
-          >
-            {mobileOpen ? (
-              <X className="w-6 h-6" />
-            ) : (
-              <Menu className="w-6 h-6" />
-            )}
-          </button>
+          {/* Mobile Controls */}
+          <div className="md:hidden flex items-center gap-1">
+            <ThemeToggle />
+            <button
+              className="p-2 rounded-lg text-text-secondary hover:text-text-primary hover:bg-background-subtle transition-colors"
+              onClick={() => setMobileOpen((v) => !v)}
+              aria-expanded={mobileOpen}
+              aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            >
+              {mobileOpen ? (
+                <X className="w-6 h-6" />
+              ) : (
+                <Menu className="w-6 h-6" />
+              )}
+            </button>
+          </div>
         </div>
       </nav>
 
@@ -183,7 +193,7 @@ export function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden bg-white border-t border-border overflow-hidden"
+            className="md:hidden bg-surface border-t border-border overflow-hidden max-h-[calc(100vh-4rem)] overflow-y-auto"
           >
             <div className="px-4 py-6 space-y-1">
               <Link
@@ -196,16 +206,22 @@ export function Navbar() {
                 <p className="px-4 py-2 text-xs font-bold text-text-secondary uppercase tracking-wider">
                   Services
                 </p>
-                {services.map((svc) => (
+                {[...SOLAR_SERVICES, ...OTHER_SERVICES].map((svc) => (
                   <Link
-                    key={svc.href}
-                    href={svc.href}
+                    key={svc.slug}
+                    href={`/services/${svc.slug}`}
                     className="block pl-8 pr-4 py-2.5 rounded-xl text-sm font-medium text-text-secondary hover:text-primary hover:bg-primary/5 transition-colors"
                   >
-                    {svc.label}
+                    {serviceLabel(svc)}
                   </Link>
                 ))}
               </div>
+              <Link
+                href="/us"
+                className="block px-4 py-3 rounded-xl text-sm font-semibold text-text-primary hover:bg-primary/5 hover:text-primary transition-colors"
+              >
+                US Customers
+              </Link>
               <Link
                 href="/about"
                 className="block px-4 py-3 rounded-xl text-sm font-semibold text-text-primary hover:bg-primary/5 hover:text-primary transition-colors"
@@ -225,13 +241,15 @@ export function Navbar() {
                 >
                   Get Free Quote
                 </Link>
-                <a
-                  href="tel:+18882476535"
-                  className="flex items-center justify-center gap-2 w-full mt-3 text-sm font-semibold text-text-secondary hover:text-primary transition-colors py-2"
-                >
-                  <Phone className="w-4 h-4" />
-                  +1 (888) 247-6535
-                </a>
+                {SITE_CONFIG.phone && (
+                  <a
+                    href={telHref(SITE_CONFIG.phone)}
+                    className="flex items-center justify-center gap-2 w-full mt-3 text-sm font-semibold text-text-secondary hover:text-primary transition-colors py-2"
+                  >
+                    <Phone className="w-4 h-4" />
+                    {formatPhone(SITE_CONFIG.phone)}
+                  </a>
+                )}
               </div>
             </div>
           </motion.div>

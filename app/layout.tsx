@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { ToastProvider } from "@/components/ui/Toast";
+import { ThemeProvider } from "@/components/layout/ThemeProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
     template: "%s | TriventX Energy LLP",
   },
   description:
-    "Accurate, efficient, and code-compliant solar PV design and engineering — sales proposals, site assessments, AHJ-ready permit plan sets, PE review & stamping, interconnection, PTO support, and as-built drawings.",
+    "Accurate, efficient, and code-compliant solar PV design and engineering — sales proposals, site assessments, AHJ-ready permit plan sets, PE review & stamping, interconnection, PTO support, and as-built drawings — plus wind energy and telecom engineering.",
   icons: {
     icon: "/icon.svg",
     apple: "/logo.svg",
@@ -37,9 +38,11 @@ export const metadata: Metadata = {
     "solar sales proposals",
     "AHJ compliant solar drawings",
     "solar site survey",
-    "solar permitting services",
+    "solar permit plan sets",
     "solar interconnection services",
     "solar PTO support",
+    "wind energy engineering services",
+    "telecom engineering services",
   ],
   authors: [{ name: "TriventX Energy LLP" }],
   creator: "TriventX Energy LLP",
@@ -74,9 +77,12 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${inter.variable} ${spaceGrotesk.variable} h-full`}
+      suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col antialiased">
-        <ToastProvider>{children}</ToastProvider>
+        <ThemeProvider>
+          <ToastProvider>{children}</ToastProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

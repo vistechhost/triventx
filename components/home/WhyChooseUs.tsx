@@ -55,7 +55,7 @@ const pillars = [
 
 export function WhyChooseUs() {
   return (
-    <section className="section-padding bg-white" aria-labelledby="why-heading">
+    <section className="section-padding bg-background" aria-labelledby="why-heading">
       <div className="container-xl">
         <div className="text-center mb-14">
           <span

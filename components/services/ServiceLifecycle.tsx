@@ -1,11 +1,11 @@
 import Link from 'next/link'
 import { CheckCircle } from 'lucide-react'
-import { SERVICES_DATA } from '@/lib/data/services'
+import { SOLAR_SERVICES } from '@/lib/data/services'
 import { cn } from '@/lib/utils/cn'
 
 // Shows where a service sits in the proposal → PTO project lifecycle
 export function ServiceLifecycle({ currentSlug }: { currentSlug: string }) {
-  const steps = [...SERVICES_DATA].sort((a, b) => a.order - b.order)
+  const steps = [...SOLAR_SERVICES].sort((a, b) => a.order - b.order)
 
   return (
     <div className="card-base p-6 md:p-8">

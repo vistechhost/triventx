@@ -1,12 +1,27 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
-import { CheckCircle, Award, Globe, Users, Target, Zap, Shield, Handshake } from 'lucide-react'
+import Link from 'next/link'
+import {
+  ArrowRight,
+  ClipboardCheck,
+  ExternalLink,
+  Globe,
+  Handshake,
+  Headset,
+  PenTool,
+  Shield,
+  Stamp,
+  Target,
+  Zap,
+} from 'lucide-react'
 import { CTASection } from '@/components/home/CTASection'
+import { CERTIFICATIONS, LEADERSHIP, OFFICES } from '@/lib/data/site-config'
+import { addressLines } from '@/lib/utils/contact'
 
 export const metadata: Metadata = {
   title: 'About Us',
   description:
-    'TriventX provides Solar PV Installation Design and Engineering Drawing Services for solar installers, EPC companies, and contractors across the United States, Canada, and Europe.',
+    'TriventX provides Solar PV Installation Design and Engineering Drawing Services, plus wind energy and telecom engineering, for installers, EPC companies, and contractors across the United States, Canada, and Europe.',
 }
 
 const values = [
@@ -44,49 +59,48 @@ const values = [
   },
 ]
 
-const team = [
+const teams = [
   {
-    name: 'Dr. Ananya Krishnamurthy',
-    title: 'Chief Executive Officer',
-    bio: 'Former VP of Engineering at a national solar EPC. 15 years in renewable energy infrastructure and project finance.',
-    initials: 'AK',
-    color: 'from-orange-400 to-amber-500',
+    icon: PenTool,
+    title: 'Design Engineers',
+    description:
+      'Prepare sales layouts, site plans, single-line and three-line diagrams, and as-built drawings to each AHJ and utility standard.',
   },
   {
-    name: 'Marcus Chen, P.E.',
-    title: 'Head of Engineering',
-    bio: 'Licensed electrical PE in 32 states. Led engineering teams at SunPower and Nextracker before co-founding TriventX.',
-    initials: 'MC',
-    color: 'from-blue-400 to-indigo-500',
+    icon: Stamp,
+    title: 'Engineering Reviewers',
+    description:
+      'Check structural and electrical calculations and coordinate with licensed professional engineers when a stamped submission is required.',
   },
   {
-    name: 'Sophia Reyes',
-    title: 'VP of Operations',
-    bio: 'Former operations director at a 500-installer network. Built TriventX\'s quality management system from the ground up.',
-    initials: 'SR',
-    color: 'from-green-400 to-teal-500',
+    icon: ClipboardCheck,
+    title: 'Permitting & Utility Coordinators',
+    description:
+      'Manage permit applications, SolarAPP+ submissions, AHJ comments, interconnection applications, and PTO follow-through.',
   },
   {
-    name: 'James Okafor, P.E.',
-    title: 'Lead Structural Engineer',
-    bio: 'Structural PE specializing in ground-mount and carport racking systems. Published researcher in solar structural loading.',
-    initials: 'JO',
-    color: 'from-purple-400 to-violet-500',
+    icon: Headset,
+    title: 'Project & Account Managers',
+    description:
+      'Give you one point of contact who knows your markets, tracks every project, and keeps turnaround on schedule.',
   },
 ]
 
-const certifications = [
-  { name: 'NABCEP', full: 'North American Board of Certified Energy Practitioners', abbr: 'NA' },
-  { name: 'IEEE', full: 'Institute of Electrical and Electronics Engineers', abbr: 'IE' },
-  { name: 'SEIA', full: 'Solar Energy Industries Association', abbr: 'SE' },
-  { name: 'ACCA', full: 'Air Conditioning Contractors of America', abbr: 'AC' },
+// Codes the work is designed to. These are standards we follow, not memberships or certifications held.
+const standards = [
+  { name: 'NEC (NFPA 70)', full: 'National Electrical Code' },
+  { name: 'IBC / IRC', full: 'International Building and Residential Codes' },
+  { name: 'IFC', full: 'International Fire Code, including rooftop PV pathways' },
+  { name: 'ASCE 7', full: 'Minimum Design Loads for Buildings and Other Structures' },
+  { name: 'IEEE 1547', full: 'Interconnection of Distributed Energy Resources' },
+  { name: 'UL 1741', full: 'Inverters and Interconnection Equipment' },
 ]
 
 export default function AboutPage() {
   return (
     <div className="pt-24 md:pt-28">
       {/* Hero */}
-      <section className="section-padding bg-white relative">
+      <section className="section-padding bg-background relative">
         <div className="absolute inset-0 bg-hero-mesh pointer-events-none" aria-hidden="true" />
         <div className="container-xl relative z-10">
           <div className="max-w-4xl">
@@ -100,7 +114,7 @@ export default function AboutPage() {
               Built by Engineers,{' '}
               <span
                 style={{
-                  background: 'linear-gradient(135deg, #FF8A00, #0066FF)',
+                  background: 'linear-gradient(135deg, #FF8A00, var(--color-secondary))',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text',
@@ -184,7 +198,7 @@ export default function AboutPage() {
       </section>
 
       {/* Values */}
-      <section className="section-padding bg-white" aria-labelledby="values-heading">
+      <section className="section-padding bg-background" aria-labelledby="values-heading">
         <div className="container-xl">
           <div className="text-center mb-14">
             <span
@@ -198,8 +212,8 @@ export default function AboutPage() {
             </h2>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {values.map((v, i) => (
-              <div key={v.title} className="card-base p-7 text-center group hover:shadow-[0_8px_48px_rgba(10,14,26,0.1)] hover:-translate-y-1 transition-all duration-300">
+            {values.map((v) => (
+              <div key={v.title} className="card-base p-7 text-center group hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300">
                 <div className={`w-14 h-14 ${v.bg} rounded-2xl flex items-center justify-center mx-auto mb-5 group-hover:scale-110 transition-transform`}>
                   <v.icon className={`w-7 h-7 ${v.color}`} />
                 </div>
@@ -211,7 +225,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Team */}
+      {/* Team description */}
       <section className="section-padding bg-background-subtle" aria-labelledby="team-heading">
         <div className="container-xl">
           <div className="text-center mb-14">
@@ -219,93 +233,148 @@ export default function AboutPage() {
               className="inline-flex items-center gap-2 text-sm font-semibold text-primary rounded-full px-4 py-1.5 mb-4"
               style={{ backgroundColor: 'rgba(255, 138, 0, 0.1)' }}
             >
-              Leadership
+              Our Team
             </span>
             <h2 id="team-heading" className="font-heading text-3xl md:text-4xl font-bold text-text-primary mb-4">
               The Team Behind TriventX
             </h2>
+            <p className="text-text-secondary max-w-3xl mx-auto text-lg">
+              TriventX operates as an extension of your business. Our experienced team combines deep
+              expertise in solar PV design with a working knowledge of permitting requirements,
+              utility guidelines, and jurisdiction-specific compliance standards.
+            </p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {team.map((member) => (
-              <div key={member.name} className="card-base p-6 text-center group">
-                {/* Avatar */}
-                <div
-                  className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${member.color} flex items-center justify-center text-white font-bold text-xl mx-auto mb-4 group-hover:scale-105 transition-transform`}
-                  aria-hidden="true"
-                >
-                  {member.initials}
-                  {/* TODO: REPLACE with real team photos */}
+            {teams.map((team) => (
+              <div key={team.title} className="card-base p-6">
+                <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
+                  <team.icon className="w-6 h-6 text-primary" aria-hidden="true" />
                 </div>
-                <h3 className="font-heading font-bold text-lg text-text-primary mb-1">{member.name}</h3>
-                <p className="text-sm font-semibold text-primary mb-3">{member.title}</p>
-                <p className="text-xs text-text-secondary leading-relaxed">{member.bio}</p>
-                <a
-                  href="#"
-                  className="inline-flex items-center gap-1.5 mt-4 text-xs font-semibold text-text-secondary hover:text-primary transition-colors"
-                  aria-label={`${member.name} on LinkedIn`}
-                >
-                  {/* TODO: REPLACE with real LinkedIn URLs */}
-                  LinkedIn Profile →
-                </a>
+                <h3 className="font-heading font-bold text-lg text-text-primary mb-2">{team.title}</h3>
+                <p className="text-sm text-text-secondary leading-relaxed">{team.description}</p>
               </div>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* Certifications */}
-      <section className="section-padding bg-white" aria-labelledby="certs-heading">
-        <div className="container-xl max-w-3xl">
-          <h2 id="certs-heading" className="font-heading text-3xl font-bold text-text-primary mb-10 text-center">
-            Certifications & Memberships
-          </h2>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-5">
-            {certifications.map((cert) => (
-              <div
-                key={cert.name}
-                className="flex flex-col items-center gap-3 p-5 rounded-2xl border border-border hover:border-primary/30 hover:shadow-card transition-all text-center"
-              >
-                <div
-                  className="w-14 h-14 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center text-white font-bold"
-                  aria-hidden="true"
-                >
-                  {cert.abbr}
-                  {/* TODO: REPLACE with official logos */}
-                </div>
-                <div>
-                  <p className="font-bold text-text-primary text-sm">{cert.name}</p>
-                  <p className="text-[10px] text-text-secondary mt-0.5 leading-tight">{cert.full}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Offices */}
-      <section className="section-padding bg-background-subtle">
-        <div className="container-xl max-w-2xl text-center">
-          <h2 className="font-heading text-3xl font-bold text-text-primary mb-4">Our Offices</h2>
-          <p className="text-text-secondary mb-8">
-            Headquartered in Austin, TX, supporting clients and industry partners across the United
-            States, Canada, and Europe.
-          </p>
-          <div className="grid sm:grid-cols-2 gap-4">
-            {[
-              { city: 'Austin, TX', role: 'Headquarters & Operations', state: 'Texas' },
-              { city: 'Phoenix, AZ', role: 'Southwest Engineering Hub', state: 'Arizona' },
-            ].map((office) => (
-              <div key={office.city} className="card-base p-5 text-left">
-                <div className="flex items-center gap-3 mb-2">
-                  <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
-                    <Globe className="w-4 h-4 text-primary" />
+          {LEADERSHIP.length > 0 && (
+            <div className="mt-16">
+              <h3 className="font-heading text-2xl font-bold text-text-primary mb-8 text-center">Leadership</h3>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {LEADERSHIP.map((member) => (
+                  <div key={member.name} className="card-base p-6 text-center">
+                    <div className="relative w-20 h-20 rounded-2xl overflow-hidden bg-primary/10 flex items-center justify-center text-primary font-bold text-xl mx-auto mb-4">
+                      {member.photoUrl ? (
+                        <Image src={member.photoUrl} alt={member.name} fill sizes="80px" className="object-cover" />
+                      ) : (
+                        <span aria-hidden="true">
+                          {member.name.split(' ').map((part) => part[0]).slice(0, 2).join('')}
+                        </span>
+                      )}
+                    </div>
+                    <h4 className="font-heading font-bold text-lg text-text-primary mb-1">{member.name}</h4>
+                    <p className="text-sm font-semibold text-primary mb-3">{member.title}</p>
+                    <p className="text-xs text-text-secondary leading-relaxed">{member.bio}</p>
+                    {member.linkedinUrl && (
+                      <a
+                        href={member.linkedinUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 mt-4 text-xs font-semibold text-text-secondary hover:text-primary transition-colors"
+                        aria-label={`${member.name} on LinkedIn`}
+                      >
+                        LinkedIn Profile
+                        <ExternalLink className="w-3 h-3" aria-hidden="true" />
+                      </a>
+                    )}
                   </div>
-                  <span className="font-bold text-text-primary">{office.city}</span>
-                </div>
-                <p className="text-sm text-text-secondary">{office.role}</p>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* Standards */}
+      <section className="section-padding bg-background" aria-labelledby="standards-heading">
+        <div className="mx-auto max-w-5xl">
+          <h2 id="standards-heading" className="font-heading text-3xl font-bold text-text-primary mb-4 text-center">
+            Codes &amp; Standards We Design To
+          </h2>
+          <p className="text-text-secondary text-center max-w-2xl mx-auto mb-10">
+            We apply the editions adopted by each jurisdiction, along with local amendments and
+            utility requirements.
+          </p>
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+            {standards.map((standard) => (
+              <div key={standard.name} className="p-5 rounded-2xl border border-border">
+                <p className="font-bold text-text-primary text-sm">{standard.name}</p>
+                <p className="text-xs text-text-secondary mt-1 leading-relaxed">{standard.full}</p>
               </div>
             ))}
           </div>
+
+          {CERTIFICATIONS.length > 0 && (
+            <div className="mt-14">
+              <h3 className="font-heading text-2xl font-bold text-text-primary mb-8 text-center">
+                Certifications &amp; Memberships
+              </h3>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-5">
+                {CERTIFICATIONS.map((cert) => (
+                  <a
+                    key={cert.name}
+                    href={cert.verificationUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-5 rounded-2xl border border-border hover:border-primary/30 hover:shadow-card transition-all text-center"
+                  >
+                    <p className="font-bold text-text-primary text-sm">{cert.name}</p>
+                    <p className="text-xs text-text-secondary mt-1 leading-tight">{cert.fullName}</p>
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* Where we work */}
+      <section className="section-padding bg-background-subtle" aria-labelledby="locations-heading">
+        <div className="mx-auto max-w-2xl text-center">
+          <h2 id="locations-heading" className="font-heading text-3xl font-bold text-text-primary mb-4">
+            {OFFICES.length > 0 ? 'Our Offices' : 'Where We Work'}
+          </h2>
+          <p className="text-text-secondary mb-6">
+            Supporting clients and industry partners across the United States, Canada, and Europe.
+          </p>
+          <Link
+            href="/us"
+            className="inline-flex items-center gap-2 font-semibold text-primary hover:gap-3 transition-all"
+          >
+            Services for US customers
+            <ArrowRight className="w-4 h-4" aria-hidden="true" />
+          </Link>
+          {OFFICES.length > 0 && (
+            <div className="grid sm:grid-cols-2 gap-4 mt-8">
+              {OFFICES.map((office) => (
+                <div key={office.city} className="card-base p-5 text-left">
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
+                      <Globe className="w-4 h-4 text-primary" aria-hidden="true" />
+                    </div>
+                    <span className="font-bold text-text-primary">{office.city}</span>
+                  </div>
+                  <p className="text-sm text-text-secondary">{office.role}</p>
+                  {office.address && (
+                    <address className="text-sm text-text-secondary not-italic mt-2">
+                      {addressLines(office.address).map((line) => (
+                        <span key={line} className="block">{line}</span>
+                      ))}
+                    </address>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 

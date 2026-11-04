@@ -1,30 +1,38 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import {
   FileText,
   BarChart3,
   Satellite,
   Award,
-  ClipboardCheck,
   PlugZap,
   PenTool,
   BadgeCheck,
   ArrowRight,
   Clock,
+  Wind,
+  RadioTower,
 } from 'lucide-react'
-import { SERVICES_DATA } from '@/lib/data/services'
+import { OTHER_SERVICES, SOLAR_SERVICES } from '@/lib/data/services'
 
 const iconMap: Record<string, typeof FileText> = {
   FileText,
   BarChart3,
   Satellite,
   Award,
-  ClipboardCheck,
   PlugZap,
   PenTool,
   BadgeCheck,
+  Wind,
+  RadioTower,
+}
+
+const otherServiceImages: Record<string, string> = {
+  'wind-energy-services': '/images/wind-onshore-farm.jpg',
+  'telecom-engineering-services': '/images/telecom-fiber-optic.jpg',
 }
 
 const styleMap: Record<string, { bg: string; iconColor: string; highlight?: string }> = {
@@ -32,7 +40,6 @@ const styleMap: Record<string, { bg: string; iconColor: string; highlight?: stri
   'site-surveys-remote-assessments': { bg: 'bg-yellow-50', iconColor: 'text-yellow-600' },
   'solar-permit-design': { bg: 'bg-orange-50', iconColor: 'text-orange-500', highlight: 'Most Popular' },
   'engineering-stamps': { bg: 'bg-purple-50', iconColor: 'text-purple-500' },
-  'solar-permitting-services': { bg: 'bg-sky-50', iconColor: 'text-sky-600' },
   'interconnection-services': { bg: 'bg-emerald-50', iconColor: 'text-emerald-600' },
   'as-built-drawings': { bg: 'bg-teal-50', iconColor: 'text-teal-500' },
   'pto-support': { bg: 'bg-rose-50', iconColor: 'text-rose-500' },
@@ -60,7 +67,7 @@ export function ServicesGrid() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {SERVICES_DATA.map((svc, i) => {
+          {SOLAR_SERVICES.map((svc, i) => {
             const Icon = iconMap[svc.iconName] ?? FileText
             const style = styleMap[svc.slug] ?? { bg: 'bg-orange-50', iconColor: 'text-orange-500' }
             return (
@@ -110,12 +117,65 @@ export function ServicesGrid() {
               </motion.div>
             )
           })}
+          <Link
+            href="/contact"
+            className="group flex flex-col justify-center rounded-2xl bg-primary p-8 text-white transition-all duration-300 hover:bg-primary-dark hover:-translate-y-1"
+          >
+            <h3 className="font-heading font-bold text-xl mb-3">Not sure what you need?</h3>
+            <p className="text-sm text-white/90 leading-relaxed mb-5">
+              Tell us about your project and we&apos;ll recommend the right mix of services.
+            </p>
+            <span className="inline-flex items-center gap-2 text-sm font-bold">
+              Talk to an engineer
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </span>
+          </Link>
+        </div>
+
+        {/* Other engineering services */}
+        <div className="mt-16">
+          <h3 className="font-heading font-bold text-2xl md:text-3xl text-text-primary text-center mb-3">
+            Beyond Solar: Wind Energy &amp; Telecom
+          </h3>
+          <p className="text-text-secondary max-w-2xl mx-auto text-center mb-8">
+            The same structured workflows and quality control, applied to wider energy and
+            communications infrastructure.
+          </p>
+          <div className="grid md:grid-cols-2 gap-6">
+            {OTHER_SERVICES.map((svc) => {
+              const Icon = iconMap[svc.iconName] ?? FileText
+              return (
+                <Link
+                  key={svc.slug}
+                  href={`/services/${svc.slug}`}
+                  className="group relative isolate block overflow-hidden rounded-2xl min-h-72 p-8 flex flex-col justify-end"
+                  aria-label={`Learn more about ${svc.title}`}
+                >
+                  <Image
+                    src={otherServiceImages[svc.slug] ?? svc.heroImageUrl}
+                    alt=""
+                    fill
+                    sizes="(min-width: 768px) 50vw, 100vw"
+                    className="-z-20 object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 -z-10 bg-gradient-to-t from-[#0A0E1A]/95 via-[#0A0E1A]/60 to-[#0A0E1A]/20" aria-hidden="true" />
+                  <Icon className="w-8 h-8 text-primary-light mb-3" aria-hidden="true" />
+                  <h4 className="font-heading font-bold text-2xl text-white mb-2">{svc.title}</h4>
+                  <p className="text-sm text-white/85 leading-relaxed mb-4">{svc.shortDescription}</p>
+                  <span className="inline-flex items-center gap-2 text-sm font-bold text-primary-light">
+                    Learn More
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </span>
+                </Link>
+              )
+            })}
+          </div>
         </div>
 
         <div className="text-center mt-12">
           <Link
             href="/services"
-            className="inline-flex items-center gap-2 bg-white border border-border hover:border-primary text-text-primary hover:text-primary font-semibold px-8 py-4 rounded-xl transition-all duration-200 hover:shadow-card"
+            className="inline-flex items-center gap-2 bg-surface border border-border hover:border-primary text-text-primary hover:text-primary font-semibold px-8 py-4 rounded-xl transition-all duration-200 hover:shadow-card"
           >
             View All Services
             <ArrowRight className="w-5 h-5" />
