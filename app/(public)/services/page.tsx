@@ -88,15 +88,8 @@ export default function ServicesPage() {
           <h1 className="font-heading text-4xl md:text-5xl font-bold text-text-primary mb-6">
             Our Core Solar Engineering Services
           </h1>
-          <p className="text-lg text-text-secondary max-w-3xl mx-auto leading-relaxed mb-4">
-            At TriventX, we deliver comprehensive, end-to-end solar engineering, design, permitting,
-            and back-office support solutions tailored to the needs of solar installers, EPC
-            companies, contractors, and homeowners.
-          </p>
           <p className="text-lg text-text-secondary max-w-3xl mx-auto leading-relaxed">
-            From the initial customer proposal through system design, permitting, interconnection,
-            installation documentation, and final utility approval, our experienced engineering
-            team provides reliable support across the entire solar project lifecycle.
+            Design, permitting, and engineering — from first proposal to PTO.
           </p>
         </div>
       </section>
@@ -112,8 +105,7 @@ export default function ServicesPage() {
             Beyond Solar: Wind Energy &amp; Telecom
           </h2>
           <p className="text-text-secondary text-lg max-w-3xl mb-8">
-            We apply the same structured workflows and quality control to wider energy and
-            communications infrastructure.
+            Same workflows and quality control, for wind and telecom.
           </p>
           <ServiceList services={OTHER_SERVICES} startAt={SOLAR_SERVICES.length} />
         </div>
@@ -126,8 +118,7 @@ export default function ServicesPage() {
             Not Sure Which Service You Need?
           </h2>
           <p className="text-text-secondary text-lg mb-8">
-            Our team will review your project requirements and recommend the right combination of
-            services to keep your installation timeline on track.
+            Share your project. We&apos;ll recommend the right services.
           </p>
           <Link
             href="/contact"

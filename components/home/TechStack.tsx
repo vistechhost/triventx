@@ -26,8 +26,7 @@ export function TechStack() {
             Industry-Leading Software Stack
           </h2>
           <p className="text-text-secondary max-w-2xl mx-auto text-lg">
-            We invest in the best engineering and design tools so every deliverable reflects
-            state-of-the-art accuracy and professionalism.
+            The tools behind every deliverable.
           </p>
         </div>
 

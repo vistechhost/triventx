@@ -46,7 +46,6 @@ export function TrustBar() {
           ))}
         </div>
         <p className="mt-8 text-center text-sm text-text-secondary">
-          Our core focus is the United States, with support for partners in Canada and Europe.{' '}
           <Link href="/us" className="inline-flex items-center gap-1 font-semibold text-primary hover:underline">
             US customers start here
             <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />

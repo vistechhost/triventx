@@ -7,7 +7,7 @@ const samples = [
     src: '/images/solar-proposal-sample.jpg',
     alt: 'Sample US-style solar sales proposal with financial summary and savings report',
     title: 'Sales Proposal',
-    description: 'Financial summary, ROI, energy offset, and long-term savings.',
+    description: 'Savings, ROI, and energy offset.',
     href: '/services/solar-sales-proposals',
     fit: 'object-cover',
   },
@@ -15,7 +15,7 @@ const samples = [
     src: '/images/permit-site-plan.png',
     alt: 'Sample PV site plan drawing showing roof sections, fire pathways, and setbacks',
     title: 'Site Plan',
-    description: 'Module layout, fire pathways, setbacks, and equipment locations.',
+    description: 'Layout, fire pathways, and setbacks.',
     href: '/services/solar-permit-design',
     fit: 'object-contain',
   },
@@ -23,7 +23,7 @@ const samples = [
     src: '/images/permit-three-line-diagram.png',
     alt: 'Sample three-line electrical diagram with conductor schedule',
     title: 'Three-Line Diagram',
-    description: 'Electrical design with conductor, conduit, and equipment schedules.',
+    description: 'Electrical design and wire schedules.',
     href: '/services/solar-permit-design',
     fit: 'object-contain',
   },
@@ -31,7 +31,7 @@ const samples = [
     src: '/images/permit-attachment-string-layout.png',
     alt: 'Sample attachment and string layout drawing with point-load table',
     title: 'Attachment & String Layout',
-    description: 'Attachment points, circuit layout, and structural point loads.',
+    description: 'Attachments, strings, and point loads.',
     href: '/services/solar-permit-design',
     fit: 'object-contain',
   },
@@ -52,8 +52,7 @@ export function SampleDeliverables() {
             See What You Get
           </h2>
           <p className="text-text-secondary max-w-2xl mx-auto text-lg">
-            Representative samples of the proposals and permit drawings we deliver. Project
-            identifiers have been removed.
+            Sample proposals and permit drawings. Project details removed.
           </p>
         </div>
 

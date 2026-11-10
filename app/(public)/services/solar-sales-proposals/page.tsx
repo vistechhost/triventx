@@ -24,23 +24,23 @@ const highlights = [
 ]
 
 const sampleCallouts = [
-  { title: 'Financial Summary', description: 'System cost, upfront cost, estimated savings, and payback period on one page.' },
-  { title: 'ROI Chart', description: 'A clear view of how the investment grows over the life of the system.' },
-  { title: 'Roof Layout', description: 'The proposed array on the customer’s own home, so the project feels real.' },
-  { title: 'Energy Offset & Savings Report', description: 'How much of their usage solar covers, and what it saves them over the long term.' },
+  { title: 'Financial Summary', description: 'Cost, savings, and payback on one page.' },
+  { title: 'ROI Chart', description: 'How the investment grows over time.' },
+  { title: 'Roof Layout', description: 'The array on the customer’s own home.' },
+  { title: 'Energy Offset & Savings Report', description: 'Usage covered and long-term savings.' },
 ]
 
 const steps = [
-  { icon: Upload, title: 'Send the project', description: 'Share the address, utility bill or usage data, and preferred equipment.' },
-  { icon: PenTool, title: 'We model and design', description: 'We build the layout and production model, then calculate the customer’s savings.' },
+  { icon: Upload, title: 'Send the project', description: 'Address, utility bill, and preferred equipment.' },
+  { icon: PenTool, title: 'We model and design', description: 'Layout, production model, and savings.' },
   { icon: Send, title: 'Your rep presents', description: `A branded proposal is delivered within ${service.tat.toLowerCase()}, ready for the customer.` },
 ]
 
 const faqs = [
   { question: 'Can proposals carry our branding?', answer: 'Yes. Proposals are delivered with your company logo and colors.' },
-  { question: 'What do you need to get started?', answer: 'The site address and utility usage data or a recent bill, plus your preferred equipment and financing options if you have them.' },
-  { question: 'Which incentives are included?', answer: 'We include the federal, state, and utility programs the customer is eligible for at the time the proposal is prepared.' },
-  { question: 'Can you compare financing options?', answer: 'Yes. Proposals can compare cash, loan, and other financing options so your rep can present the best fit.' },
+  { question: 'What do you need to get started?', answer: 'Site address, a utility bill or usage data, and your preferred equipment and financing.' },
+  { question: 'Which incentives are included?', answer: 'Federal, state, and utility programs the customer is eligible for.' },
+  { question: 'Can you compare financing options?', answer: 'Yes — cash, loan, and other options side by side.' },
 ]
 
 export default function SolarSalesProposalsPage() {
@@ -89,8 +89,7 @@ export default function SolarSalesProposalsPage() {
                 <span className="text-primary-light">Help You Close</span>
               </h1>
               <p className="text-lg text-slate-300 leading-relaxed mb-8">
-                High-impact, data-driven proposals that give homeowners clear and compelling project
-                insights, and keep your sales reps moving between site assessment and signature.
+                Clear, data-driven proposals that homeowners understand — and reps close.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link
@@ -153,8 +152,7 @@ export default function SolarSalesProposalsPage() {
               A US-Style Proposal Your Customers Understand
             </h2>
             <p className="text-text-secondary max-w-2xl mx-auto text-lg">
-              Everything a homeowner needs to say yes, in a format they can follow at the kitchen
-              table. Figures shown are for illustration only.
+              Everything a homeowner needs to say yes. Figures are for illustration only.
             </p>
           </div>
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center mb-14">

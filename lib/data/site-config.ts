@@ -62,17 +62,17 @@ export const RESPONSE_TIMES = [
   {
     label: 'During business hours',
     target: 'Within 30 minutes',
-    detail: 'An engineer reviews your request and replies with next steps.',
+    detail: 'An engineer replies with next steps.',
   },
   {
     label: 'Outside business hours',
     target: 'Next business morning',
-    detail: 'Requests sent overnight or on Sunday are answered when we next open.',
+    detail: 'Overnight and Sunday requests answered when we open.',
   },
   {
     label: 'Your quote and timeline',
     target: 'In the first reply',
-    detail: 'Once we have your project details, you get a transparent quote and delivery date.',
+    detail: 'A clear quote and delivery date.',
   },
 ]
 

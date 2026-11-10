@@ -10,12 +10,10 @@ export const SERVICES_DATA: Omit<Service, 'updatedAt'>[] = [
     title: 'Solar Sales Proposals',
     category: 'solar',
     shortDescription:
-      'High-impact, data-driven proposals built on LiDAR data, satellite imagery, production modeling, and savings calculations — helping installers close more deals.',
-    longDescription: `High-impact, data-driven solar proposals developed using LiDAR data, satellite imagery, system production modeling, energy analysis, and savings calculations. Our proposals provide customers with clear and compelling project insights while helping installers accelerate sales and improve conversion rates.
+      'Data-driven proposals built on LiDAR, production modeling, and savings analysis — made to close deals.',
+    longDescription: `Data-driven solar proposals built on LiDAR data, satellite imagery, production modeling, and savings analysis.
 
-Each proposal includes a detailed system overview, site-specific production estimates using NREL TMY data, 25-year financial projections with utility rate escalation, incentive breakdowns (federal, state, SREC, and utility programs, where the customer is eligible), and a clean executive summary built for homeowners.
-
-Our team delivers within 2 hours so your sales reps never lose momentum between site assessment and close.`,
+Each proposal covers the system, production estimates, 25-year savings, and eligible incentives — delivered within 2 hours.`,
     tat: '2 Hours',
     features: [
       'LiDAR data & satellite imagery analysis',
@@ -39,10 +37,10 @@ Our team delivers within 2 hours so your sales reps never lose momentum between 
     title: 'Site Surveys & Assessments',
     category: 'solar',
     shortDescription:
-      'Comprehensive site evaluations covering roof measurements, satellite imagery, shading analysis, and structural considerations — the foundation for accurate system design.',
-    longDescription: `Comprehensive site evaluations incorporating roof measurements, satellite imagery, shading analysis, structural considerations, and site-specific conditions. These assessments provide the technical foundation required for accurate system sizing, equipment placement, and installation planning.
+      'Roof measurements, shading, and structural review — the base for accurate system design.',
+    longDescription: `Detailed site evaluations covering roof measurements, satellite imagery, shading, and structural conditions.
 
-Using industry-leading tools such as AuroraSolar, Helioscope, and Scanifly, we model each site with LiDAR-precision roof geometry and real shading data, so system size, layout, and production are validated before design and permitting begin.`,
+Modeled in AuroraSolar, Helioscope, and Scanifly, so size, layout, and production are confirmed before design begins.`,
     tat: '',
     features: [
       'Roof measurements & geometry modeling',
@@ -64,28 +62,24 @@ Using industry-leading tools such as AuroraSolar, Helioscope, and Scanifly, we m
     title: 'Solar Permit Design',
     category: 'solar',
     shortDescription:
-      'Complete, AHJ-ready permit plan sets and full permitting support — site plans, module layouts, single-line diagrams, structural details, SolarAPP+ submissions, and AHJ coordination.',
-    longDescription: `Our Permit Design Services form the foundation of a streamlined, efficient, and successful solar installation process. We provide comprehensive, AHJ-ready permit plan packages engineered to facilitate faster approvals, minimize revision cycles, mitigate costly project delays, and keep installations progressing on schedule.
+      'AHJ-ready permit plan sets and full permitting — SLDs, structural details, SolarAPP+, and AHJ coordination.',
+    longDescription: `AHJ-ready permit plan sets built for faster approvals and fewer revisions.
 
-Each permit package is developed with meticulous attention to technical accuracy and regulatory compliance, adhering to NEC 2020/2023 standards, applicable building and fire codes, local jurisdictional requirements, and utility-specific guidelines. Our rigorous quality-control process is designed to maximize the likelihood of first-time approval, helping solar installers reduce administrative overhead and move projects from permitting to construction with greater speed and confidence.
-
-Complete permit packages incorporate site plans, module layouts, electrical schematics, single-line diagrams, structural details, equipment specifications, code notes, and NEC-compliant documentation. Our goal is simple: deliver permit-ready designs that accelerate approvals and installation timelines.
-
-We also manage the permit itself, with full-service support covering permit package preparation, SolarAPP+ submissions, AHJ coordination, application management, revision support, and compliance verification. Our team helps reduce permitting complexity and keeps projects moving toward approval.`,
+Every package follows NEC 2020/2023, local building and fire codes, and utility rules. We also manage the permit itself — SolarAPP+, AHJ coordination, and revisions through approval.`,
     tat: '6 Hours',
     features: [
-      'Scaled Site Plans – Accurate panel layouts and equipment placement',
-      'Single-Line Diagrams (SLD) – Clear electrical system representation',
-      'Three-Line Diagrams (3LD) – Detailed electrical design documentation',
-      'Code Compliance Review – AHJ-specific verification and permitting support',
-      'NEC 2020/2023 Compliance – Up-to-date industry-standard documentation',
-      'Equipment Cut Sheets & Specifications – Complete technical documentation for approvals',
-      'SolarAPP+ Submissions – Automated permitting where the jurisdiction supports it',
-      'AHJ Coordination – Permit application management through to approval',
-      'Revision Support – AHJ-requested corrections handled until the permit is approved',
+      'Scaled Site Plans – Panel layout & equipment placement',
+      'Single-Line Diagrams (SLD) – Clear electrical overview',
+      'Three-Line Diagrams (3LD) – Detailed electrical design',
+      'Code Compliance Review – AHJ-specific checks',
+      'NEC 2020/2023 Compliance – Current code editions',
+      'Equipment Cut Sheets – Specs for approval',
+      'SolarAPP+ Submissions – Where the AHJ supports it',
+      'AHJ Coordination – Managed through approval',
+      'Revision Support – AHJ corrections until approval',
     ],
     planIncludes: [
-      'Permit-ready solar drawings prepared according to AHJ and utility requirements',
+      'Permit-ready drawings to AHJ & utility rules',
       'Electrical Single Line & Triple Line Diagrams',
       'Structural Calculations',
       'Equipment Specifications',
@@ -96,7 +90,7 @@ We also manage the permit itself, with full-service support covering permit pack
     heroImageFit: 'contain',
     galleryTitle: 'Sample Permit Drawings',
     galleryDescription:
-      'Representative sheets from a residential PV permit set. Project identifiers have been removed. Select a sheet to view it full size.',
+      'Sheets from a residential permit set, project details removed. Click to view full size.',
     gallery: [
       { src: '/images/permit-site-plan.png', caption: 'PV 1.0 — Site plan with roof sections, fire pathways, and setbacks', fit: 'contain' },
       { src: '/images/permit-three-line-diagram.png', caption: 'E 1.1 — Three-line diagram with conduit and conductor schedule', fit: 'contain' },
@@ -111,13 +105,11 @@ We also manage the permit itself, with full-service support covering permit pack
     title: 'PE Review & Stamping',
     category: 'solar',
     shortDescription:
-      'Licensed professional engineering support — structural calculations, electrical reviews, and code compliance verification, with PE-stamped documentation where required.',
-    longDescription: `Licensed professional engineering support covering structural calculations, electrical engineering reviews, code compliance verification, and jurisdiction-specific requirements. Where required, we provide PE-reviewed and stamped documentation suitable for permitting and regulatory submission.
+      'Licensed PE structural and electrical review, with stamped documents where required.',
+    longDescription: `Licensed PE review of structural and electrical design, with stamped documents where your AHJ requires them.
 
-We provide electrical P.E. stamps for single-line diagrams, three-line diagrams, and power system studies. Structural stamps cover racking system designs, ballasted systems, and ground mounts. All calculations comply with NEC, ASCE 7, IBC, and local building codes.
-
-Our PE stamp service includes permit compliance letters, professional engineer wet stamps or digital signatures, and engineer's calculations as required by the AHJ.`,
-    tat: '18-24 Hours',
+Electrical stamps for SLDs, 3LDs, and power studies. Structural stamps for racking, ballasted, and ground-mount systems — all to NEC, ASCE 7, and IBC.`,
+    tat: '6 Hours',
     features: [
       'Structural calculations',
       'Electrical engineering reviews',
@@ -140,10 +132,10 @@ Our PE stamp service includes permit compliance letters, professional engineer w
     title: 'Interconnection Services',
     category: 'solar',
     shortDescription:
-      'End-to-end utility interconnection support — application preparation, technical documentation, and coordination throughout the approval process.',
-    longDescription: `End-to-end utility interconnection support, including application preparation, technical documentation, system information, utility-specific requirements, and coordination throughout the approval process. Our structured approach helps simplify grid-connection requirements and reduce administrative bottlenecks.
+      'Utility applications, technical documents, and coordination through approval.',
+    longDescription: `End-to-end utility interconnection support, from application to approval.
 
-From the initial customer proposal through system design, permitting, interconnection, installation documentation, and final utility approval, our experienced engineering team provides reliable support across the entire solar project lifecycle.`,
+We prepare the application and technical documents, meet each utility's requirements, and coordinate until the system is approved.`,
     tat: '',
     features: [
       'Interconnection application preparation',
@@ -163,12 +155,10 @@ From the initial customer proposal through system design, permitting, interconne
     title: 'As-Built Drawings',
     category: 'solar',
     shortDescription:
-      'Accurate post-installation documentation reflecting field modifications, final equipment locations, and installed system configurations — inspection-ready for closeout.',
-    longDescription: `Accurate post-installation as-built documentation reflecting field modifications, final equipment locations, installed system configurations, and construction changes. These records provide reliable, inspection-ready documentation for project closeout, future maintenance, and utility or AHJ requirements.
+      'Post-install drawings showing field changes and final equipment — ready for closeout.',
+    longDescription: `Accurate as-built drawings showing field changes, final equipment locations, and the installed system.
 
-We update all affected drawings from your original permit set: site plans with final panel placement, single-line diagrams with as-installed equipment model numbers and wire sizes, and any structural modifications. Our team compares your site photos and field markups against the original designs to produce accurate, closeout-ready documentation.
-
-Delivered within 6 hours of receiving your field documentation, our as-builts have a 99.2% first-submission closeout rate.`,
+We update your original permit set from site photos and field markups — delivered within 6 hours, ready for inspection and closeout.`,
     tat: '6 Hours',
     features: [
       'Field modification documentation',
@@ -184,7 +174,7 @@ Delivered within 6 hours of receiving your field documentation, our as-builts ha
     ],
     galleryTitle: 'As-Built Solar Projects — Residential',
     galleryDescription:
-      'Completed residential rooftop installations — the field conditions our as-built drawings capture for closeout, inspection, and future maintenance.',
+      'Completed rooftop installs — the field conditions our as-builts capture.',
     gallery: [
       { src: '/images/residential-solar-home.jpg', caption: 'Two-story residence with a pitched-roof PV array' },
       { src: '/images/hero-us-home-solar.jpg', caption: 'Single-story home with a multi-plane rooftop array' },
@@ -202,10 +192,10 @@ Delivered within 6 hours of receiving your field documentation, our as-builts ha
     shortTitle: 'PTO Support',
     category: 'solar',
     shortDescription:
-      'PTO support and project closeout — utility submissions, required documentation, compliance verification, and coordination of final approval requirements.',
-    longDescription: `Comprehensive PTO support and project closeout services, including utility submissions, required documentation, compliance verification, and coordination of final approval requirements. We help installers move completed systems toward operational status with greater efficiency.
+      'Utility submissions, closeout documents, and final approval coordination.',
+    longDescription: `PTO and closeout support that moves finished systems to operation.
 
-We combine technical expertise, streamlined workflows, and compliance-driven processes to ensure every project progresses efficiently from concept to commissioning and closeout.`,
+Utility submissions, closeout documents, compliance checks, and final approval coordination.`,
     tat: '',
     features: [
       'PTO utility submissions',
@@ -225,12 +215,10 @@ We combine technical expertise, streamlined workflows, and compliance-driven pro
     title: 'Wind Energy Services',
     category: 'other',
     shortDescription:
-      'Engineering and documentation support for onshore and offshore wind projects — site and turbine layouts, electrical design, permit packages, and grid-connection documentation.',
-    longDescription: `TriventX extends its renewable engineering practice to wind energy, supporting developers, EPC companies, and contractors on onshore and offshore wind projects with accurate, code-compliant design documentation.
+      'Turbine layouts, electrical design, permits, and grid documents for onshore and offshore wind.',
+    longDescription: `Engineering documentation for onshore and offshore wind projects.
 
-Our team prepares site and turbine layout drawings, electrical single-line and collection-system diagrams, permit packages, and interconnection documentation, and coordinates with licensed professional engineers wherever a stamped submission is required.
-
-From early feasibility through construction documentation and as-built records, we apply the same structured workflows and quality-control procedures we use on solar projects, so your documentation stays consistent, complete, and ready for review.`,
+Site and turbine layouts, electrical and collection-system diagrams, permits, and grid documents — with PE coordination where a stamp is needed.`,
     tat: '',
     features: [
       'Site & turbine layout drawings',
@@ -246,7 +234,7 @@ From early feasibility through construction documentation and as-built records, 
     heroImageUrl: '/images/wind-engineering-team.jpg',
     galleryTitle: 'Wind Project Types We Support',
     galleryDescription:
-      'From utility-scale onshore sites to offshore arrays, we provide the engineering documentation each stage of the project requires.',
+      'Onshore and offshore — documentation for every project stage.',
     gallery: [
       { src: '/images/wind-turbine-closeup.jpg', caption: 'Onshore utility-scale turbines' },
       { src: '/images/wind-offshore-farm.jpg', caption: 'Offshore wind arrays' },
@@ -261,12 +249,10 @@ From early feasibility through construction documentation and as-built records, 
     title: 'Telecom Engineering Services',
     category: 'other',
     shortDescription:
-      'Design documentation for telecom infrastructure — 4G/5G sites, fiber-optic routes, site power, and permit-ready construction drawings for carriers and contractors.',
-    longDescription: `TriventX supports carriers, tower companies, and contractors with design documentation for telecommunications infrastructure, including mobile network sites, broadband, and fiber-optic networks.
+      '4G/5G sites, fiber routes, site power, and permit-ready construction drawings.',
+    longDescription: `Design documentation for mobile, broadband, and fiber-optic networks.
 
-We prepare 4G/5G site layouts, tower and rooftop equipment drawings, fiber-optic route and outside-plant drawings, and site power and backup system diagrams, along with the permit and right-of-way packages needed to move construction forward.
-
-Our engineering support extends through closeout, with as-built documentation and PE review coordination wherever a stamped submission is required, so each site is delivered with complete and consistent records.`,
+4G/5G site layouts, tower and rooftop drawings, fiber routes, site power diagrams, and permit packages — through to as-builts.`,
     tat: '',
     features: [
       '4G/5G site design drawings',
@@ -300,12 +286,12 @@ export const SERVICE_OPTIONS = [
 export const SITE_SETTINGS_DEFAULT = {
   heroHeadline: 'Engineering Smarter. Delivering Faster.',
   heroSubheadline:
-    'Accurate, efficient, and code-compliant solar PV design and engineering drawings for solar installers, EPC companies, and contractors.',
+    'Code-compliant solar design and engineering for installers, EPCs, and contractors.',
   phone: SITE_CONFIG.phone ? formatPhone(SITE_CONFIG.phone) : '',
   email: SITE_CONFIG.email ?? '',
   address: SITE_CONFIG.address ? addressLines(SITE_CONFIG.address).join(', ') : '',
   social: SITE_CONFIG.social,
-  footerTagline: 'Engineering smarter. Delivering faster. Helping solar businesses scale.',
+  footerTagline: 'Engineering smarter. Delivering faster.',
   stats: {
     projects: 10000,
     installers: 500,

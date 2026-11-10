@@ -65,10 +65,8 @@ export function Hero() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-lg md:text-xl text-white/90 leading-relaxed mb-10 max-w-3xl mx-auto font-medium"
           >
-            Accurate, efficient, and code-compliant design solutions for solar
-            installers, EPC companies, and contractors — from sales proposals
-            and permit-ready plan sets to interconnection, PTO, and as-built
-            drawings.
+            Proposals, permit plan sets, PE stamps, interconnection, and PTO —
+            for solar installers, EPCs, and contractors.
           </motion.p>
 
           <motion.div

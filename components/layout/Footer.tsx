@@ -43,9 +43,8 @@ export function Footer() {
               <Logo variant="white" />
             </Link>
             <p className="text-slate-400 text-sm leading-relaxed mb-6">
-              Engineering smarter. Delivering faster. Helping solar businesses
-              scale with accurate, AHJ- and NEC-compliant solar design and
-              engineering.
+              Engineering smarter. Delivering faster. AHJ- and NEC-compliant
+              solar design and engineering.
             </p>
             {/* Social */}
             <div className="flex items-center gap-3">

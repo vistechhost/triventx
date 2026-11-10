@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { TrendingUp, Users, MapPin, Clock } from 'lucide-react'
+import { TrendingUp, MapPin, Clock } from 'lucide-react'
 
 interface StatItem {
   icon: typeof TrendingUp
@@ -20,25 +20,16 @@ const stats: StatItem[] = [
     value: 10000,
     suffix: '+',
     label: 'Projects Completed',
-    description: 'Permit designs, proposals & engineering packages delivered',
+    description: 'Plan sets, proposals & stamps delivered',
     color: 'text-primary',
     bg: 'bg-primary/10',
-  },
-  {
-    icon: Users,
-    value: 500,
-    suffix: '+',
-    label: 'Active Installers',
-    description: 'Solar contractors relying on TriventX for daily operations',
-    color: 'text-secondary',
-    bg: 'bg-secondary/10',
   },
   {
     icon: MapPin,
     value: 50,
     suffix: '',
     label: 'US States',
-    description: 'Full AHJ code coverage and licensed P.E. stamps nationwide',
+    description: 'AHJ coverage & PE stamps',
     color: 'text-accent',
     bg: 'bg-accent/10',
   },
@@ -47,7 +38,7 @@ const stats: StatItem[] = [
     value: 6,
     suffix: 'hr',
     label: 'Average TAT',
-    description: 'Industry-fastest turnaround on permit-ready design packages',
+    description: 'Permit design turnaround',
     color: 'text-primary-dark',
     bg: 'bg-primary/10',
   },
@@ -96,19 +87,18 @@ export function StatsCounter() {
             The Scale of Our Impact
           </h2>
           <p className="text-text-secondary max-w-2xl mx-auto text-lg">
-            Every number represents a project delivered on time, a permit approved on first submission,
-            and an installer who could focus on installation instead of paperwork.
+            Less paperwork for installers. More time on the roof.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {stats.map((stat, i) => (
             <motion.div
               key={stat.label}
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="card-base p-8 text-center group hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300"
+              className="card-base p-8 text-center sm:last:col-span-2 lg:last:col-span-1 group hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300"
             >
               <div className={`w-14 h-14 ${stat.bg} rounded-2xl flex items-center justify-center mx-auto mb-5 group-hover:scale-110 transition-transform`}>
                 <stat.icon className={`w-7 h-7 ${stat.color}`} />

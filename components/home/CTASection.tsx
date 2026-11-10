@@ -44,9 +44,7 @@ export function CTASection() {
               <span style={{ color: '#FF8A00' }}>Solar Engineering Partner</span>
             </h2>
             <p className="text-slate-400 text-lg leading-relaxed mb-8">
-              Whether you require support for a single solar project, an ongoing portfolio, or a
-              fully outsourced engineering and design operation, TriventX operates as an extension
-              of your business.
+              One project or your full design team — we work as an extension of your business.
             </p>
 
             <div className="space-y-3 mb-8">

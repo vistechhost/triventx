@@ -39,9 +39,9 @@ export function FAQSection({ items = FAQS, heading = 'Frequently Asked Questions
             {heading}
           </h2>
           <p className="text-text-secondary max-w-2xl mx-auto text-lg">
-            Everything you need to know about working with TriventX. Can&apos;t find your answer?{' '}
+            Quick answers. Can&apos;t find yours?{' '}
             <Link href="/contact" className="text-primary font-semibold hover:underline">
-              Contact us directly.
+              Contact us.
             </Link>
           </p>
         </div>

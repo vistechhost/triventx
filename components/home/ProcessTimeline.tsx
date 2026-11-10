@@ -10,8 +10,7 @@ const steps = [
     step: 1,
     icon: Upload,
     title: 'Submit Project',
-    description:
-      'Share your site survey, satellite imagery, equipment specs, and utility info through our project form or by email.',
+    description: 'Send site, equipment, and utility details.',
     time: 'Instant',
     color: 'bg-primary',
   },
@@ -19,8 +18,7 @@ const steps = [
     step: 2,
     icon: Search,
     title: 'Review & Confirm',
-    description:
-      'Our engineers review your submission, confirm all required details, and assign the project to a specialist.',
+    description: 'We confirm details and assign an engineer.',
     time: '< 30 min',
     color: 'bg-secondary',
   },
@@ -28,8 +26,7 @@ const steps = [
     step: 3,
     icon: PenTool,
     title: 'Design & Engineer',
-    description:
-      'Licensed engineers produce your drawings to AHJ-specific standards with full code compliance and QA review.',
+    description: 'Drawings built to your AHJ and NEC.',
     time: 'Core TAT',
     color: 'bg-accent',
   },
@@ -37,8 +34,7 @@ const steps = [
     step: 4,
     icon: CheckCircle,
     title: 'Quality Assurance',
-    description:
-      'Three-stage QA check by a senior engineer confirms accuracy, completeness, and code compliance before delivery.',
+    description: 'Senior engineer checks every sheet.',
     time: 'Included',
     color: 'bg-purple-500',
   },
@@ -46,8 +42,7 @@ const steps = [
     step: 5,
     icon: Send,
     title: 'Deliver & Support',
-    description:
-      'Permit-ready package delivered by email, with AHJ-requested revisions included until the permit is approved.',
+    description: 'Permit-ready set delivered. Free AHJ revisions until approval.',
     link: { href: '/terms#revisions', label: 'Revision policy' },
     time: 'On Time',
     color: 'bg-rose-500',
@@ -72,8 +67,7 @@ export function ProcessTimeline() {
             From Submit to Stamped in 5 Steps
           </h2>
           <p className="text-text-secondary max-w-2xl mx-auto text-lg">
-            A transparent, repeatable process engineered for speed and accuracy — so you always
-            know where your project stands.
+            Simple. Transparent. On time.
           </p>
         </div>
 

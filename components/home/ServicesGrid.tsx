@@ -60,9 +60,7 @@ export function ServicesGrid() {
             Our Core Solar Engineering Services
           </h2>
           <p className="text-text-secondary max-w-3xl mx-auto text-lg">
-            From the initial customer proposal through system design, permitting, interconnection,
-            installation documentation, and final utility approval — reliable support across the
-            entire solar project lifecycle.
+            Proposal to PTO — one partner for the full project.
           </p>
         </div>
 
@@ -123,7 +121,7 @@ export function ServicesGrid() {
           >
             <h3 className="font-heading font-bold text-xl mb-3">Not sure what you need?</h3>
             <p className="text-sm text-white/90 leading-relaxed mb-5">
-              Tell us about your project and we&apos;ll recommend the right mix of services.
+              Share your project. We&apos;ll recommend the right services.
             </p>
             <span className="inline-flex items-center gap-2 text-sm font-bold">
               Talk to an engineer
@@ -138,8 +136,7 @@ export function ServicesGrid() {
             Beyond Solar: Wind Energy &amp; Telecom
           </h3>
           <p className="text-text-secondary max-w-2xl mx-auto text-center mb-8">
-            The same structured workflows and quality control, applied to wider energy and
-            communications infrastructure.
+            Same workflows and quality control, for wind and telecom.
           </p>
           <div className="grid md:grid-cols-2 gap-6">
             {OTHER_SERVICES.map((svc) => {

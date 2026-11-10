@@ -21,37 +21,32 @@ const usFocus = [
   {
     icon: Landmark,
     title: 'Built for Your AHJ',
-    description:
-      'Plan sets follow the requirements of the Authority Having Jurisdiction on each project, including local building and fire codes and fire-pathway setbacks.',
+    description: 'Local building and fire codes, including fire-pathway setbacks.',
   },
   {
     icon: FileCheck2,
     title: 'NEC 2020/2023 Compliant',
-    description:
-      'We design to the NEC edition your jurisdiction has adopted and note the applicable code cycle on every set of drawings.',
+    description: 'Your adopted NEC edition, noted on every set.',
   },
   {
     icon: ClipboardCheck,
     title: 'SolarAPP+ Submissions',
-    description:
-      'Where your jurisdiction supports it, we prepare and manage SolarAPP+ submissions along with traditional permit applications.',
+    description: 'Prepared and managed where your AHJ supports it.',
   },
   {
     icon: Stamp,
     title: 'PE Review & Stamping',
-    description:
-      'Structural and electrical review by licensed professional engineers, with stamped documentation where your AHJ requires it.',
+    description: 'Licensed structural and electrical PEs, stamped where required.',
   },
   {
     icon: PlugZap,
     title: 'Utility Interconnection & PTO',
-    description:
-      'Application preparation, utility-specific documentation, and coordination through to Permission to Operate.',
+    description: 'Applications and utility documents, through to PTO.',
   },
   {
     icon: Clock,
     title: 'US Business Hours',
-    description: `Our team is available ${SITE_CONFIG.hours[0].days}, ${SITE_CONFIG.hours[0].time}, and ${SITE_CONFIG.hours[1].days}, ${SITE_CONFIG.hours[1].time}.`,
+    description: `${SITE_CONFIG.hours[0].days}, ${SITE_CONFIG.hours[0].time}. ${SITE_CONFIG.hours[1].days}, ${SITE_CONFIG.hours[1].time}.`,
   },
 ]
 
@@ -95,9 +90,8 @@ export default function UnitedStatesPage() {
               <span className="text-primary-light">US Permitting</span>
             </h1>
             <p className="text-lg md:text-xl text-white/90 leading-relaxed mb-8">
-              AHJ-ready plan sets, NEC-compliant engineering, PE stamping, and utility
-              interconnection support — so your US projects move from proposal to Permission to
-              Operate with fewer delays.
+              AHJ-ready plan sets, PE stamps, and interconnection — proposal to PTO with fewer
+              delays.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
@@ -126,8 +120,7 @@ export default function UnitedStatesPage() {
               Engineered Around US Requirements
             </h2>
             <p className="text-text-secondary max-w-2xl mx-auto text-lg">
-              Every US jurisdiction and utility has its own rules. Our work is built around them
-              from the first drawing.
+              Every AHJ and utility has its own rules. We build to them.
             </p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -152,8 +145,7 @@ export default function UnitedStatesPage() {
               Services for US Solar Projects
             </h2>
             <p className="text-text-secondary max-w-2xl mx-auto text-lg">
-              Use one service or the full project lifecycle, from the first customer proposal to
-              final utility approval.
+              One service or the full project — proposal to PTO.
             </p>
           </div>
           <div className="grid md:grid-cols-2 gap-4">

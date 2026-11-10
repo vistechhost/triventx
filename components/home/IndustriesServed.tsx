@@ -11,7 +11,7 @@ const industries = [
     icon: Home,
     headline: 'Rooftop Solar for Homeowners',
     description:
-      'We process thousands of residential permit packages monthly, covering single-family, multi-family, and townhome installations. Our residential designs are optimized for the quick permit cycles that keep your sales and installation teams moving.',
+      'Single-family, multi-family, and townhomes — designed for quick permit cycles.',
     features: [
       'Standard & complex roof geometries',
       'HOA and CC&R compliance documentation',
@@ -30,7 +30,7 @@ const industries = [
     icon: Building2,
     headline: 'Commercial & Industrial Solar',
     description:
-      'Commercial projects demand more from engineering documentation — complex electrical systems, structural variances, and multi-authority permit chains. Our commercial engineering team specializes in C&I projects from 100 kW to 2 MW.',
+      'C&I projects from 100 kW to 2 MW — complex electrical, structural, and permit needs.',
     features: [
       'Carport canopy structural design',
       'Rooftop ballasted & penetrating mounts',
@@ -49,7 +49,7 @@ const industries = [
     icon: Zap,
     headline: 'Large-Scale Ground Mount Arrays',
     description:
-      'From agrivoltaic installations to multi-site utility-scale portfolios, we provide engineering documentation packages that satisfy the rigorous requirements of transmission utilities, FERC, and state PUCs.',
+      'Agrivoltaic to multi-site portfolios — documentation for utilities, FERC, and state PUCs.',
     features: [
       'Tracker & fixed-tilt ground mount design',
       'Transmission interconnection studies',

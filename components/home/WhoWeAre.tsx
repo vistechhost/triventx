@@ -49,14 +49,11 @@ export function WhoWeAre() {
               Solar PV Design & Engineering You Can Build On
             </h2>
             <p className="text-text-secondary text-lg leading-relaxed mb-5">
-              TriventX is a leading provider of Solar PV Installation Design and Engineering Drawing
-              Services, supporting solar installers, EPC companies, and contractors across the United
-              States with accurate, efficient, and code-compliant design solutions.
+              Accurate, code-compliant solar PV design for installers, EPCs, and contractors across
+              the United States.
             </p>
             <p className="text-text-secondary leading-relaxed mb-6">
-              Every design is developed in strict accordance with the standards that govern your
-              project — so you can accelerate approvals, minimize design revisions, and execute
-              installations with greater confidence and precision.
+              Faster approvals. Fewer revisions. Every design built to:
             </p>
             <ul className="grid sm:grid-cols-2 gap-3 mb-8">
               {standards.map((item) => (

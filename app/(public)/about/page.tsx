@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import {
   ArrowRight,
+  CheckCircle,
   ClipboardCheck,
   ExternalLink,
   Globe,
@@ -28,32 +29,28 @@ const values = [
   {
     icon: Target,
     title: 'Precision',
-    description:
-      'Every drawing is engineered to AHJ-specific requirements. We maintain a living database of local code adoptions and submission standards across all 50 states.',
+    description: 'Every drawing built to your AHJ’s rules.',
     color: 'text-primary',
     bg: 'bg-primary/10',
   },
   {
     icon: Zap,
     title: 'Speed',
-    description:
-      'Our process is optimized to reduce idle time. From project receipt to delivery, every step is measured and benchmarked against our industry-leading turnaround targets.',
+    description: 'Every step measured against our turnaround targets.',
     color: 'text-accent',
     bg: 'bg-accent/10',
   },
   {
     icon: Shield,
     title: 'Compliance',
-    description:
-      'Code compliance is not a feature — it\'s the floor. Every deliverable is reviewed against current NEC, NESC, ASCE, and jurisdiction-specific requirements.',
+    description: 'Checked against NEC, NESC, ASCE, and local codes.',
     color: 'text-secondary',
     bg: 'bg-secondary/10',
   },
   {
     icon: Handshake,
     title: 'Partnership',
-    description:
-      'We function as an embedded engineering department for our clients. Your account manager understands your business, your markets, and your AHJ relationships.',
+    description: 'Your embedded engineering department.',
     color: 'text-purple-600',
     bg: 'bg-purple-50',
   },
@@ -63,27 +60,32 @@ const teams = [
   {
     icon: PenTool,
     title: 'Design Engineers',
-    description:
-      'Prepare sales layouts, site plans, single-line and three-line diagrams, and as-built drawings to each AHJ and utility standard.',
+    description: 'Layouts, site plans, SLDs, 3LDs, and as-builts.',
   },
   {
     icon: Stamp,
     title: 'Engineering Reviewers',
-    description:
-      'Check structural and electrical calculations and coordinate with licensed professional engineers when a stamped submission is required.',
+    description: 'Structural and electrical checks, plus PE stamp coordination.',
   },
   {
     icon: ClipboardCheck,
     title: 'Permitting & Utility Coordinators',
-    description:
-      'Manage permit applications, SolarAPP+ submissions, AHJ comments, interconnection applications, and PTO follow-through.',
+    description: 'Permits, SolarAPP+, interconnection, and PTO.',
   },
   {
     icon: Headset,
     title: 'Project & Account Managers',
-    description:
-      'Give you one point of contact who knows your markets, tracks every project, and keeps turnaround on schedule.',
+    description: 'One point of contact for every project.',
   },
+]
+
+const highlights = [
+  'Clients across the United States, Canada, and Europe',
+  'Built to AHJ, NEC, building, fire, and utility rules',
+  'Deep residential solar PV expertise',
+  'Proposals, permit sets, PE support, and as-builts',
+  'Competitive pricing and fast turnaround',
+  'Faster approvals and fewer revisions',
 ]
 
 // Codes the work is designed to. These are standards we follow, not memberships or certifications held.
@@ -124,9 +126,8 @@ export default function AboutPage() {
               </span>
             </h1>
             <p className="text-xl text-text-secondary leading-relaxed">
-              TriventX is a leading provider of Solar PV Installation Design and Engineering Drawing
-              Services, specializing in supporting solar installers, EPC companies, and contractors
-              across the United States with accurate, efficient, and code-compliant design solutions.
+              Accurate, code-compliant solar PV design and engineering for installers, EPCs, and
+              contractors.
             </p>
           </div>
         </div>
@@ -140,35 +141,17 @@ export default function AboutPage() {
               <h2 id="story-heading" className="font-heading text-3xl font-bold text-text-primary mb-8">
                 Who We Are
               </h2>
-              <div className="space-y-6 text-text-secondary leading-relaxed text-lg">
-                <p>
-                  With extensive experience in the engineering and design industry, TriventX has
-                  established a strong track record of delivering high-quality, technically precise,
-                  and reliable engineering documentation to clients and industry partners across the
-                  United States, Canada, and Europe. Our services are designed to optimize project
-                  efficiency while maintaining competitive pricing and rapid turnaround times.
-                </p>
-                <p>
-                  Our solar designs are developed in strict accordance with Authority Having
-                  Jurisdiction (AHJ) requirements, applicable building and fire codes, the National
-                  Electrical Code (NEC), and utility interconnection standards. Our experienced team
-                  possesses in-depth expertise in residential solar PV system design, with a
-                  comprehensive understanding of permitting requirements, utility guidelines, and
-                  jurisdiction-specific compliance standards.
-                </p>
-                <p>
-                  TriventX offers a comprehensive portfolio of solar design and engineering services,
-                  including sales proposal designs, permit-ready plan sets, utility interconnection
-                  documentation, professional engineering support, construction documentation, and
-                  as-built drawings.
-                </p>
-                <p>
-                  By combining technical expertise, regulatory knowledge, streamlined workflows, and a
-                  commitment to quality, TriventX enables solar professionals to accelerate project
-                  approvals, minimize design revisions, and execute installations with greater
-                  confidence and precision.
-                </p>
-              </div>
+              <p className="text-text-secondary leading-relaxed text-lg mb-6">
+                Engineers who know solar permitting, delivering precise documentation you can build on.
+              </p>
+              <ul className="space-y-4">
+                {highlights.map((item) => (
+                  <li key={item} className="flex items-start gap-3 text-text-primary font-medium">
+                    <CheckCircle className="w-5 h-5 text-accent shrink-0 mt-0.5" aria-hidden="true" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </div>
             <div className="space-y-6 lg:sticky lg:top-28">
               <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-xl">
@@ -190,7 +173,7 @@ export default function AboutPage() {
                 />
               </div>
               <p className="font-heading text-lg font-bold text-text-primary">
-                TriventX — Engineering smarter. Delivering faster. Helping solar businesses scale.
+                TriventX — Engineering smarter. Delivering faster.
               </p>
             </div>
           </div>
@@ -239,9 +222,7 @@ export default function AboutPage() {
               The Team Behind TriventX
             </h2>
             <p className="text-text-secondary max-w-3xl mx-auto text-lg">
-              TriventX operates as an extension of your business. Our experienced team combines deep
-              expertise in solar PV design with a working knowledge of permitting requirements,
-              utility guidelines, and jurisdiction-specific compliance standards.
+              Solar design, review, permitting, and project management — under one roof.
             </p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -301,8 +282,7 @@ export default function AboutPage() {
             Codes &amp; Standards We Design To
           </h2>
           <p className="text-text-secondary text-center max-w-2xl mx-auto mb-10">
-            We apply the editions adopted by each jurisdiction, along with local amendments and
-            utility requirements.
+            The editions your jurisdiction adopted, plus local amendments.
           </p>
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
             {standards.map((standard) => (
@@ -344,7 +324,7 @@ export default function AboutPage() {
             {OFFICES.length > 0 ? 'Our Offices' : 'Where We Work'}
           </h2>
           <p className="text-text-secondary mb-6">
-            Supporting clients and industry partners across the United States, Canada, and Europe.
+            United States, Canada, and Europe.
           </p>
           <Link
             href="/us"

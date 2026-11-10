@@ -32,8 +32,7 @@ export default function ContactPage() {
             Let&apos;s Start Your Next Project
           </h1>
           <p className="text-lg text-text-secondary max-w-2xl mx-auto mb-10">
-            Tell us about your project and attach any files you already have. Here is when you can
-            expect to hear from us.
+            Send your project and files. Here&apos;s when we&apos;ll reply.
           </p>
           <ResponseTimes />
         </div>

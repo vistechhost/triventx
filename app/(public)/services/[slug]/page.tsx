@@ -46,6 +46,9 @@ export default async function ServiceDetailPage({ params }: Props) {
   if (!service) notFound()
 
   const otherServices = SERVICES_DATA.filter((s) => s.slug !== slug && s.category === service.category).slice(0, 3)
+  // The hero shows the first paragraph, so "About This Service" starts from the second
+  const paragraphs = service.longDescription.split('\n\n')
+  const aboutParagraphs = paragraphs.length > 1 ? paragraphs.slice(1) : paragraphs
 
   return (
     <>
@@ -103,7 +106,7 @@ export default async function ServiceDetailPage({ params }: Props) {
                 {service.title}
               </h1>
               <p className="text-lg text-text-secondary leading-relaxed mb-8">
-                {service.longDescription.split('\n\n')[0]}
+                {paragraphs[0]}
               </p>
 
               <ul className="space-y-3 mb-10" aria-label="Service features">
@@ -162,7 +165,7 @@ export default async function ServiceDetailPage({ params }: Props) {
               <h2 id="service-desc-heading" className="font-heading text-3xl font-bold text-text-primary mb-8">
                 About This Service
               </h2>
-              {service.longDescription.split('\n\n').map((para, i) => (
+              {aboutParagraphs.map((para, i) => (
                 <p key={i} className="text-text-secondary leading-relaxed text-lg mb-5">
                   {para}
                 </p>
