@@ -70,7 +70,7 @@ export default function UnitedStatesPage() {
       />
 
       {/* Hero */}
-      <section className="relative isolate overflow-hidden bg-[#0A0E1A] pt-28 md:pt-40 pb-20 md:pb-28" aria-labelledby="us-heading">
+      <section className="relative isolate overflow-hidden bg-navy-950 pt-28 md:pt-40 pb-20 md:pb-28" aria-labelledby="us-heading">
         <Image
           src="/images/pe-review-rooftop-plans.jpg"
           alt="Engineer reviewing solar permit drawings beside a rooftop array in a US city"
@@ -79,7 +79,7 @@ export default function UnitedStatesPage() {
           sizes="100vw"
           className="-z-20 object-cover object-center"
         />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#0A0E1A]/95 via-[#0A0E1A]/80 to-[#0A0E1A]/40" aria-hidden="true" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-navy-950/95 via-navy-950/80 to-navy-950/40" aria-hidden="true" />
         <div className="container-xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <span className="inline-flex items-center gap-2 text-sm font-bold text-white rounded-full px-4 py-1.5 mb-6 bg-white/10 border border-white/20">

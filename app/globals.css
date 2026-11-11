@@ -5,27 +5,32 @@
 
 /* `static` keeps every token available to inline styles and the overrides below. */
 @theme static {
-  /* Colors */
-  --color-primary: #ff8a00;
-  --color-primary-dark: #e67300;
-  --color-primary-light: #ffb347;
-  --color-secondary: #0066ff;
-  --color-secondary-dark: #0052cc;
-  --color-secondary-light: #4d94ff;
-  --color-accent: #00c896;
-  --color-accent-dark: #00a87d;
-  --color-accent-light: #33d4ac;
+  /* Colors — taken from the TriventX logo: teal #028182 and navy #03184a. */
+  --color-primary: #028182;
+  --color-primary-dark: #016667;
+  --color-primary-light: #3ec4bc;
+  --color-secondary: #1d3f8f;
+  --color-secondary-dark: #03184a;
+  --color-secondary-light: #5b7fd1;
+  --color-accent: #0f9d74;
+  --color-accent-dark: #0b7d5c;
+  --color-accent-light: #3cc79b;
+  /* Dark brand surfaces: hero overlay, stats band, CTA, footer. */
+  --color-navy-950: #020f30;
+  --color-navy-900: #03184a;
+  --color-navy-800: #0a2763;
+  --color-navy-700: #163a85;
   --color-background: #ffffff;
-  --color-background-subtle: #f8fafc;
-  --color-background-muted: #f1f5f9;
+  --color-background-subtle: #f5f8fa;
+  --color-background-muted: #eaf1f4;
   --color-surface: #ffffff;
-  --color-text-primary: #0a0e1a;
-  --color-text-secondary: #475569;
-  --color-border: #e2e8f0;
+  --color-text-primary: #0b1838;
+  --color-text-secondary: #4a5672;
+  --color-border: #dfe6ee;
 
   /* Fonts */
   --font-sans: var(--font-inter), system-ui, sans-serif;
-  --font-heading: var(--font-space-grotesk), system-ui, sans-serif;
+  --font-heading: var(--font-outfit), system-ui, sans-serif;
 
   /* Border radius */
   --radius-2xl: 1rem;
@@ -33,11 +38,11 @@
   --radius-4xl: 2rem;
 
   /* Shadows */
-  --shadow-card: 0 4px 24px rgba(10, 14, 26, 0.06);
-  --shadow-card-hover: 0 8px 48px rgba(10, 14, 26, 0.12);
-  --shadow-glow-primary: 0 0 30px rgba(255, 138, 0, 0.25);
-  --shadow-glow-secondary: 0 0 30px rgba(0, 102, 255, 0.25);
-  --shadow-glow-accent: 0 0 30px rgba(0, 200, 150, 0.25);
+  --shadow-card: 0 4px 24px rgba(3, 24, 74, 0.06);
+  --shadow-card-hover: 0 12px 40px rgba(3, 24, 74, 0.12);
+  --shadow-glow-primary: 0 8px 24px rgba(2, 129, 130, 0.28);
+  --shadow-glow-secondary: 0 8px 24px rgba(29, 63, 143, 0.28);
+  --shadow-glow-accent: 0 8px 24px rgba(15, 157, 116, 0.25);
 
   /* Animations */
   --animate-float: float 6s ease-in-out infinite;
@@ -54,14 +59,16 @@
  */
 .dark {
   color-scheme: dark;
-  --color-background: #0a0e1a;
-  --color-background-subtle: #0e1424;
-  --color-background-muted: #182033;
-  --color-surface: #151c2e;
-  --color-text-primary: #f1f5f9;
-  --color-text-secondary: #a8b5c9;
-  --color-border: #2a344b;
-  --color-secondary: #4d94ff;
+  --color-background: #030d26;
+  --color-background-subtle: #061433;
+  --color-background-muted: #0c1e45;
+  --color-surface: #0b1a3d;
+  --color-text-primary: #eef3fa;
+  --color-text-secondary: #a9b7d0;
+  --color-border: #1d2e57;
+  /* Brighter teal so links stay readable on navy; white button text still passes AA-large. */
+  --color-primary: #0b9690;
+  --color-secondary: #7b9be6;
 
   --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.35);
   --shadow-card-hover: 0 8px 48px rgba(0, 0, 0, 0.5);
@@ -89,15 +96,16 @@
 .theme-light {
   color-scheme: light;
   --color-background: #ffffff;
-  --color-background-subtle: #f8fafc;
-  --color-background-muted: #f1f5f9;
+  --color-background-subtle: #f5f8fa;
+  --color-background-muted: #eaf1f4;
   --color-surface: #ffffff;
-  --color-text-primary: #0a0e1a;
-  --color-text-secondary: #475569;
-  --color-border: #e2e8f0;
-  --color-secondary: #0066ff;
-  --shadow-card: 0 4px 24px rgba(10, 14, 26, 0.06);
-  --shadow-card-hover: 0 8px 48px rgba(10, 14, 26, 0.12);
+  --color-text-primary: #0b1838;
+  --color-text-secondary: #4a5672;
+  --color-border: #dfe6ee;
+  --color-primary: #028182;
+  --color-secondary: #1d3f8f;
+  --shadow-card: 0 4px 24px rgba(3, 24, 74, 0.06);
+  --shadow-card-hover: 0 12px 40px rgba(3, 24, 74, 0.12);
   --color-purple-50: #faf5ff;
   --color-purple-600: #9333ea;
   color: var(--color-text-primary);
@@ -116,10 +124,10 @@
 @keyframes pulseGlow {
   0%,
   100% {
-    box-shadow: 0 0 20px rgba(255, 138, 0, 0.4);
+    box-shadow: 0 0 20px rgba(2, 129, 130, 0.35);
   }
   50% {
-    box-shadow: 0 0 40px rgba(255, 138, 0, 0.8);
+    box-shadow: 0 0 40px rgba(2, 129, 130, 0.7);
   }
 }
 
@@ -171,7 +179,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-space-grotesk, system-ui, sans-serif);
+  font-family: var(--font-outfit, system-ui, sans-serif);
 }
 
 /* Utility classes */
@@ -205,7 +213,7 @@ h6 {
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #ff8a00, #0066ff);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -234,7 +242,7 @@ h6 {
 }
 
 .dark .glass-card {
-  background: rgba(21, 28, 46, 0.85);
+  background: rgba(11, 26, 61, 0.85);
   border-color: rgba(255, 255, 255, 0.08);
 }
 
@@ -243,7 +251,7 @@ h6 {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.6);
-  box-shadow: 0 20px 60px rgba(10, 14, 26, 0.08);
+  box-shadow: 0 20px 60px rgba(3, 24, 74, 0.08);
 }
 
 .tat-badge {
@@ -254,9 +262,9 @@ h6 {
   border-radius: 9999px;
   font-weight: 700;
   font-size: 0.875rem;
-  background-color: rgba(0, 200, 150, 0.1);
-  color: #00c896;
-  border: 1px solid rgba(0, 200, 150, 0.2);
+  background-color: rgba(15, 157, 116, 0.1);
+  color: var(--color-accent);
+  border: 1px solid rgba(15, 157, 116, 0.2);
 }
 
 .section-label {
@@ -265,10 +273,10 @@ h6 {
   gap: 0.5rem;
   font-size: 0.875rem;
   font-weight: 600;
-  color: #ff8a00;
+  color: var(--color-primary);
   border-radius: 9999px;
   padding: 6px 16px;
-  background-color: rgba(255, 138, 0, 0.1);
+  background-color: rgba(2, 129, 130, 0.1);
   margin-bottom: 1rem;
 }
 
@@ -277,12 +285,12 @@ h6 {
   background:
     radial-gradient(
       ellipse at 20% 50%,
-      rgba(255, 138, 0, 0.07) 0%,
+      rgba(2, 129, 130, 0.08) 0%,
       transparent 50%
     ),
     radial-gradient(
       ellipse at 80% 50%,
-      rgba(0, 102, 255, 0.07) 0%,
+      rgba(29, 63, 143, 0.07) 0%,
       transparent 50%
     );
 }
@@ -291,12 +299,12 @@ h6 {
   background:
     radial-gradient(
       ellipse at top left,
-      rgba(255, 138, 0, 0.04) 0%,
+      rgba(2, 129, 130, 0.05) 0%,
       transparent 40%
     ),
     radial-gradient(
       ellipse at bottom right,
-      rgba(0, 200, 150, 0.04) 0%,
+      rgba(29, 63, 143, 0.04) 0%,
       transparent 40%
     );
 }
@@ -318,7 +326,7 @@ h6 {
 }
 
 :focus-visible {
-  outline: 2px solid #ff8a00;
+  outline: 2px solid var(--color-primary);
   outline-offset: 2px;
 }
 

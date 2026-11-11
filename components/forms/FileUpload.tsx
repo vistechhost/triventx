@@ -1,7 +1,7 @@
 'use client'
 
 import { useId, useRef, useState } from 'react'
-import { FileText, UploadCloud, X } from 'lucide-react'
+import { CheckCircle, FileText, UploadCloud, X } from 'lucide-react'
 import { cn } from '@/lib/utils/cn'
 
 // Keep the extension list and size limit in step with storage.rules.
@@ -12,6 +12,9 @@ const ALLOWED_EXTENSIONS = [
 const MAX_FILE_MB = 25
 const MAX_FILES = 10
 
+// Files that let us quote and start without a back-and-forth.
+const HELPFUL_FILES = ['Roof or site photos', 'Recent utility bill', 'Equipment datasheets', 'Existing plans or surveys']
+
 function formatSize(bytes: number): string {
   if (bytes < 1024 * 1024) return `${Math.max(1, Math.round(bytes / 1024))} KB`
   return `${(bytes / (1024 * 1024)).toFixed(1)} MB`
@@ -20,8 +23,8 @@ function formatSize(bytes: number): string {
 interface FileUploadProps {
   files: File[]
   onChange: (files: File[]) => void
-  /** Upload progress per file name, 0–100. */
-  progress: Record<string, number>
+  /** Upload progress per file, keyed by its position in `files`, 0–100. */
+  progress: Record<number, number>
   disabled?: boolean
 }
 
@@ -56,9 +59,17 @@ export function FileUpload({ files, onChange, progress, disabled }: FileUploadPr
 
   return (
     <div>
-      <label htmlFor={inputId} className="block text-sm font-semibold text-text-primary mb-1.5">
-        Project Files
+      <label htmlFor={inputId} className="block text-sm font-semibold text-text-primary mb-1">
+        Project Files <span className="font-normal text-text-secondary">(optional, speeds up your quote)</span>
       </label>
+      <ul className="flex flex-wrap gap-x-4 gap-y-1 mb-2">
+        {HELPFUL_FILES.map((item) => (
+          <li key={item} className="flex items-center gap-1.5 text-xs text-text-secondary">
+            <CheckCircle className="w-3.5 h-3.5 text-accent shrink-0" aria-hidden="true" />
+            {item}
+          </li>
+        ))}
+      </ul>
       <div
         onDragOver={(e) => {
           e.preventDefault()
@@ -93,7 +104,7 @@ export function FileUpload({ files, onChange, progress, disabled }: FileUploadPr
         <UploadCloud className="w-7 h-7 text-primary mx-auto mb-2" aria-hidden="true" />
         <p className="text-sm font-semibold text-text-primary">Drag files here or click to browse</p>
         <p className="mt-1 text-xs text-text-secondary">
-          PDF, DWG, surveys, and photos. Up to {MAX_FILES} files, {MAX_FILE_MB} MB each.
+          PDF, DWG, KMZ, ZIP, Excel, and photos (incl. HEIC). Up to {MAX_FILES} files, {MAX_FILE_MB} MB each.
         </p>
       </div>
 
@@ -106,9 +117,15 @@ export function FileUpload({ files, onChange, progress, disabled }: FileUploadPr
       )}
 
       {files.length > 0 && (
-        <ul className="mt-3 space-y-2">
-          {files.map((file) => {
-            const percent = progress[file.name]
+        <p className="mt-3 text-xs text-text-secondary" aria-live="polite">
+          {files.length} of {MAX_FILES} files attached · {formatSize(files.reduce((sum, f) => sum + f.size, 0))}
+        </p>
+      )}
+
+      {files.length > 0 && (
+        <ul className="mt-2 space-y-2">
+          {files.map((file, index) => {
+            const percent = progress[index]
             return (
               <li
                 key={`${file.name}-${file.size}`}
@@ -124,7 +141,7 @@ export function FileUpload({ files, onChange, progress, disabled }: FileUploadPr
                 <FileText className="relative w-4 h-4 text-primary shrink-0" aria-hidden="true" />
                 <span className="relative flex-1 min-w-0 truncate text-sm text-text-primary">{file.name}</span>
                 <span className="relative text-xs text-text-secondary shrink-0">
-                  {percent !== undefined ? `${Math.round(percent)}%` : formatSize(file.size)}
+                  {percent === undefined ? formatSize(file.size) : percent >= 100 ? 'Uploaded' : `${Math.round(percent)}%`}
                 </span>
                 <button
                   type="button"

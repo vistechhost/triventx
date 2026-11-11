@@ -12,7 +12,8 @@ import {
 } from "firebase/firestore";
 import { uploadLeadFile } from "@/lib/firebase/storage";
 import { toPlainObject } from "@/lib/utils/serialization";
-import type { Lead, LeadAttachment } from "@/lib/types";
+import { leadReference } from "@/lib/utils/lead-session";
+import type { Lead, LeadAttachment, LeadAttribution } from "@/lib/types";
 
 interface CreateLeadData {
   name: string;
@@ -24,6 +25,7 @@ interface CreateLeadData {
   projectLocation: string;
   message: string;
   source: string;
+  attribution?: LeadAttribution;
 }
 
 // Sends each new lead to the CRM webhook, if one is configured (see .env.local.example).
@@ -46,15 +48,17 @@ function forwardLeadToCrm(payload: Record<string, unknown>): void {
 export async function submitLead(
   data: CreateLeadData,
   files: File[] = [],
-  onProgress?: (fileName: string, percent: number) => void,
-): Promise<{ id: string; failedFiles: string[] }> {
+  /** Called with the file's position in `files`, so files with the same name don't share progress. */
+  onProgress?: (fileIndex: number, percent: number) => void,
+): Promise<{ id: string; reference: string; failedFiles: string[] }> {
   // The ID is created first so uploaded files can be stored under their lead.
   const leadRef = doc(collection(db, "leads"));
+  const reference = leadReference(leadRef.id);
 
   const uploads = await Promise.allSettled(
     files.map((file, index) =>
       uploadLeadFile(leadRef.id, file, index, (percent) =>
-        onProgress?.(file.name, percent),
+        onProgress?.(index, percent),
       ),
     ),
   );
@@ -73,6 +77,7 @@ export async function submitLead(
 
   await setDoc(leadRef, {
     ...data,
+    reference,
     attachments,
     failedAttachments: failedFiles,
     status: "new",
@@ -81,13 +86,14 @@ export async function submitLead(
 
   forwardLeadToCrm({
     id: leadRef.id,
+    reference,
     ...data,
     attachmentNames: attachments.map((file) => file.name),
     failedAttachments: failedFiles,
     submittedAt: new Date().toISOString(),
   });
 
-  return { id: leadRef.id, failedFiles };
+  return { id: leadRef.id, reference, failedFiles };
 }
 
 export async function updateLeadStatus(
@@ -96,6 +102,28 @@ export async function updateLeadStatus(
 ): Promise<void> {
   const docRef = doc(db, "leads", id);
   await updateDoc(docRef, { status });
+}
+
+/** Saves the admin's follow-up notes and next follow-up date (YYYY-MM-DD, or empty to clear). */
+export async function updateLeadFollowUp(
+  id: string,
+  followUp: { notes: string; nextFollowUp: string },
+): Promise<void> {
+  await updateDoc(doc(db, "leads", id), followUp);
+}
+
+/** Records that the client was contacted and schedules the next follow-up. */
+export async function markLeadContacted(
+  id: string,
+  nextFollowUp: string,
+): Promise<Timestamp> {
+  const lastContactedAt = Timestamp.now();
+  await updateDoc(doc(db, "leads", id), {
+    status: "contacted",
+    lastContactedAt,
+    nextFollowUp,
+  });
+  return lastContactedAt;
 }
 
 export async function getLeadsAction(): Promise<Lead[]> {

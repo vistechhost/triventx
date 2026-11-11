@@ -62,18 +62,18 @@ export default function SolarSalesProposalsPage() {
       />
 
       {/* Hero */}
-      <section className="relative overflow-hidden bg-[#0A0E1A] pt-28 md:pt-36 pb-20" aria-labelledby="proposal-heading">
+      <section className="relative overflow-hidden bg-navy-950 pt-28 md:pt-36 pb-20" aria-labelledby="proposal-heading">
         <div
           className="absolute inset-0 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse at 20% 30%, rgba(255,138,0,0.18) 0%, transparent 55%), radial-gradient(ellipse at 90% 80%, rgba(0,102,255,0.18) 0%, transparent 50%)' }}
+          style={{ background: 'radial-gradient(ellipse at 20% 30%, rgba(2,129,130,0.18) 0%, transparent 55%), radial-gradient(ellipse at 90% 80%, rgba(29,63,143,0.18) 0%, transparent 50%)' }}
           aria-hidden="true"
         />
         <div className="container-xl relative z-10 px-4 sm:px-6 lg:px-8">
           <nav aria-label="Breadcrumb" className="mb-8">
             <ol className="flex items-center gap-2 text-sm text-slate-400">
-              <li><Link href="/" className="hover:text-primary transition-colors">Home</Link></li>
+              <li><Link href="/" className="hover:text-primary-light transition-colors">Home</Link></li>
               <li aria-hidden="true">/</li>
-              <li><Link href="/services" className="hover:text-primary transition-colors">Services</Link></li>
+              <li><Link href="/services" className="hover:text-primary-light transition-colors">Services</Link></li>
               <li aria-hidden="true">/</li>
               <li className="text-white font-medium" aria-current="page">{service.title}</li>
             </ol>
@@ -143,8 +143,7 @@ export default function SolarSalesProposalsPage() {
         <div className="container-xl">
           <div className="text-center mb-14">
             <span
-              className="inline-flex items-center gap-2 text-sm font-semibold text-primary rounded-full px-4 py-1.5 mb-4"
-              style={{ backgroundColor: 'rgba(255, 138, 0, 0.1)' }}
+              className="inline-flex items-center gap-2 text-sm font-semibold text-primary rounded-full px-4 py-1.5 mb-4 bg-primary/10"
             >
               Visual Sample
             </span>
@@ -245,7 +244,7 @@ export default function SolarSalesProposalsPage() {
       </section>
 
       {/* Quote */}
-      <section id="quote" className="section-padding bg-[#0A0E1A] scroll-mt-20" aria-labelledby="proposal-quote-heading">
+      <section id="quote" className="section-padding bg-navy-950 scroll-mt-20" aria-labelledby="proposal-quote-heading">
         <div className="mx-auto max-w-3xl">
           <div className="text-center mb-10">
             <h2 id="proposal-quote-heading" className="font-heading text-3xl md:text-4xl font-bold text-white mb-4">

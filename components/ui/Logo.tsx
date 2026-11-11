@@ -1,86 +1,70 @@
+import Image from "next/image";
 import { cn } from "@/lib/utils/cn";
 
 interface LogoProps {
   className?: string;
+  /** Shows only the square icon, e.g. in the collapsed admin sidebar. */
   iconOnly?: boolean;
-  variant?: "white" | "primary" | "dark";
+  /**
+   * `primary`: full-colour logo, swapped for the reversed one in dark mode.
+   * `white`: reversed logo for dark backgrounds such as the footer.
+   */
+  variant?: "primary" | "white";
+  priority?: boolean;
 }
 
-export function Logo({
-  className,
-  iconOnly = false,
-  variant = "primary",
-}: LogoProps) {
-  const isWhite = variant === "white";
+// Source artwork: public/brand/triventx-logo*.png, 720 × 195.
+const LOGO_WIDTH = 720;
+const LOGO_HEIGHT = 195;
+const ALT = "TriventX Energy";
+
+export function Logo({ className, iconOnly = false, variant = "primary", priority = false }: LogoProps) {
+  if (iconOnly) {
+    return (
+      <Image
+        src="/brand/triventx-icon-512.png"
+        alt={ALT}
+        width={40}
+        height={40}
+        className={cn("h-10 w-10 rounded-xl", className)}
+      />
+    );
+  }
+
+  const sizing = cn("h-11 md:h-14 w-auto", className);
+
+  if (variant === "white") {
+    return (
+      <Image
+        src="/brand/triventx-logo-reversed.png"
+        alt={ALT}
+        width={LOGO_WIDTH}
+        height={LOGO_HEIGHT}
+        preload={priority}
+        className={sizing}
+      />
+    );
+  }
 
   return (
-    <div className={cn("flex items-center gap-2.5 group", className)}>
-      <div
-        className={cn(
-          "relative w-10 h-10 flex items-center justify-center transition-all duration-500",
-          !iconOnly && "shrink-0",
-        )}
-      >
-        {/* Background Shape */}
-        <div
-          className={cn(
-            "absolute inset-0 rounded-xl rotate-45 transition-all duration-500 group-hover:rotate-[135deg]",
-            isWhite ? "bg-white" : "bg-primary shadow-glow-primary",
-          )}
-        />
-
-        {/* T + X Integrated Symbol */}
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="relative z-10 w-6 h-6"
-        >
-          {/* Stylized T (Solid & Modern) */}
-          <path
-            d="M6 6H18M12 6V18"
-            stroke={isWhite ? "#FF8A00" : "white"}
-            strokeWidth="3"
-            strokeLinecap="round"
-          />
-          {/* Stylized X (Solar Pulse / Grid Style) */}
-          <path
-            d="M17 13L21 17L17 21"
-            stroke={isWhite ? "#0066FF" : "rgba(255,255,255,0.7)"}
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <path
-            d="M7 13L3 17L7 21"
-            stroke={isWhite ? "#0066FF" : "rgba(255,255,255,0.7)"}
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </div>
-
-      {!iconOnly && (
-        <div className="flex flex-col">
-          <span
-            className={cn(
-              "font-heading font-bold text-xl tracking-tight leading-none",
-              isWhite ? "text-white" : "text-text-primary",
-            )}
-          >
-            Trivent<span className="text-primary">X</span>
-          </span>
-          <span
-            className={cn(
-              "text-[10px] font-bold tracking-[0.2em] uppercase leading-none mt-1",
-              isWhite ? "text-white/60" : "text-primary",
-            )}
-          >
-            Energy LLP
-          </span>
-        </div>
-      )}
-    </div>
+    <>
+      <Image
+        src="/brand/triventx-logo.png"
+        alt={ALT}
+        width={LOGO_WIDTH}
+        height={LOGO_HEIGHT}
+        preload={priority}
+        className={cn(sizing, "dark:hidden")}
+      />
+      <Image
+        src="/brand/triventx-logo-reversed.png"
+        alt={ALT}
+        width={LOGO_WIDTH}
+        height={LOGO_HEIGHT}
+        // Only one of the pair is visible, so load it eagerly rather than preloading both.
+        loading={priority ? "eager" : undefined}
+        className={cn(sizing, "hidden dark:block")}
+      />
+    </>
   );
 }

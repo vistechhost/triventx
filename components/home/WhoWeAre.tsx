@@ -5,11 +5,11 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { ArrowRight, CheckCircle } from 'lucide-react'
 
-const standards = [
-  'AHJ requirements',
-  'Building & fire codes',
-  'National Electrical Code (NEC)',
-  'Utility interconnection standards',
+const strengths = [
+  'Intelligent design',
+  'Technical precision',
+  'Permitting expertise',
+  'Seamless project coordination',
 ]
 
 export function WhoWeAre() {
@@ -40,29 +40,33 @@ export function WhoWeAre() {
             transition={{ duration: 0.6, delay: 0.1 }}
           >
             <span
-              className="inline-flex items-center gap-2 text-sm font-semibold text-primary rounded-full px-4 py-1.5 mb-4"
-              style={{ backgroundColor: 'rgba(255, 138, 0, 0.1)' }}
+              className="inline-flex items-center gap-2 text-sm font-semibold text-primary rounded-full px-4 py-1.5 mb-4 bg-primary/10"
             >
               Who We Are
             </span>
-            <h2 id="who-heading" className="font-heading text-3xl md:text-4xl font-bold text-text-primary mb-6">
-              Solar PV Design & Engineering You Can Build On
+            <h2 id="who-heading" className="font-heading text-3xl md:text-4xl font-bold text-text-primary mb-6 leading-tight">
+              Beyond Solar Design.{' '}
+              <span className="text-primary">We Engineer Energy Solutions That Scale.</span>
             </h2>
             <p className="text-text-secondary text-lg leading-relaxed mb-5">
-              Accurate, code-compliant solar PV design for installers, EPCs, and contractors across
-              the United States.
+              From the first proposal to final Permission to Operate (PTO), we bring every critical
+              stage of your solar project under one connected engineering ecosystem — for installers,
+              EPCs, and contractors across the US, Canada, and Europe.
             </p>
-            <p className="text-text-secondary leading-relaxed mb-6">
-              Faster approvals. Fewer revisions. Every design built to:
+            <p className="text-text-secondary leading-relaxed mb-4">
+              We combine these to turn complex workflows into predictable project outcomes:
             </p>
-            <ul className="grid sm:grid-cols-2 gap-3 mb-8">
-              {standards.map((item) => (
+            <ul className="grid sm:grid-cols-2 gap-3 mb-6">
+              {strengths.map((item) => (
                 <li key={item} className="flex items-center gap-2.5 text-sm font-medium text-text-primary">
-                  <CheckCircle className="w-4 h-4 text-accent shrink-0" />
+                  <CheckCircle className="w-4 h-4 text-accent shrink-0" aria-hidden="true" />
                   {item}
                 </li>
               ))}
             </ul>
+            <p className="font-heading text-lg font-bold text-text-primary border-l-4 border-primary pl-4 mb-8">
+              We don&apos;t just support your projects. We engineer the foundation for your growth.
+            </p>
             <Link
               href="/about"
               className="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all"

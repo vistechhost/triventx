@@ -1,34 +1,76 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
-import { ArrowRight, CheckCircle, ShieldCheck, Clock } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 
-const trustPoints = [
-  { icon: ShieldCheck, text: "AHJ & NEC-Compliant Designs" },
-  { icon: Clock, text: "Fast Turnaround Times" },
-  { icon: CheckCircle, text: "Built to Minimize Revisions" },
+// Background photos that cross-fade and slowly zoom, like a looping GIF.
+const slides = [
+  {
+    src: "/images/hero-us-home-solar.jpg",
+    alt: "Single-story home with a multi-plane rooftop solar array",
+    position: "object-bottom",
+  },
+  {
+    src: "/images/solar-installation-crew.jpg",
+    alt: "Installation crew mounting solar panels on a residential roof",
+    position: "object-center",
+  },
+  {
+    src: "/images/pe-review-rooftop-plans.jpg",
+    alt: "Engineer reviewing solar plan drawings on a commercial rooftop",
+    position: "object-center",
+  },
 ];
+const SLIDE_MS = 6000;
+const FADE_MS = 1500;
 
 export function Hero() {
+  const reduceMotion = useReducedMotion();
+  const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    if (reduceMotion) return;
+    const timer = setInterval(() => setActive((i) => (i + 1) % slides.length), SLIDE_MS);
+    return () => clearInterval(timer);
+  }, [reduceMotion]);
+
   return (
     <section
-      className="relative isolate overflow-hidden bg-[#0A0E1A] pt-28 md:pt-36 pb-16 md:pb-24"
+      className="relative isolate overflow-hidden bg-navy-950 pt-28 md:pt-36 pb-16 md:pb-24"
       aria-labelledby="hero-heading"
     >
-      {/* Background photo */}
-      <Image
-        src="/images/hero-us-home-solar.jpg"
-        alt="Single-story home with a multi-plane rooftop solar array"
-        fill
-        preload
-        sizes="100vw"
-        className="-z-20 object-cover object-bottom"
-      />
+      {/* Animated background photos */}
+      <div className="absolute inset-0 -z-20 overflow-hidden">
+        {slides.map((slide, i) => {
+          const isActive = i === active;
+          return (
+            <Image
+              key={slide.src}
+              src={slide.src}
+              alt={i === 0 ? slide.alt : ""}
+              aria-hidden={i === 0 ? undefined : true}
+              fill
+              preload={i === 0}
+              sizes="100vw"
+              className={`object-cover ${slide.position}`}
+              style={{
+                opacity: isActive ? 1 : 0,
+                transform: isActive && !reduceMotion ? "scale(1.08)" : "scale(1)",
+                // Zoom in while showing; reset the zoom only after the photo has faded out.
+                transition: isActive
+                  ? `opacity ${FADE_MS}ms ease, transform ${SLIDE_MS + FADE_MS}ms linear`
+                  : `opacity ${FADE_MS}ms ease, transform 0s linear ${FADE_MS}ms`,
+              }}
+            />
+          );
+        })}
+      </div>
       {/* Keeps the copy readable over the sky while leaving the house visible below */}
       <div
-        className="absolute inset-0 -z-10 bg-gradient-to-b from-[#0A0E1A]/85 via-[#0A0E1A]/70 to-[#0A0E1A]/35"
+        className="absolute inset-0 -z-10 bg-gradient-to-b from-navy-950/85 via-navy-950/70 to-navy-950/35"
         aria-hidden="true"
       />
 
@@ -73,7 +115,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10"
+            className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
             <Link
               href="/contact"
@@ -89,44 +131,9 @@ export function Hero() {
               View Our Services
             </Link>
           </motion.div>
-
-          <motion.ul
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-3xl mx-auto mb-8"
-          >
-            {trustPoints.map((point) => (
-              <li
-                key={point.text}
-                className="flex items-center gap-3 p-3 rounded-2xl bg-[#0A0E1A]/60 border border-white/15 backdrop-blur-md"
-              >
-                <span className="w-9 h-9 rounded-xl bg-primary/20 flex items-center justify-center shrink-0">
-                  <point.icon className="w-5 h-5 text-primary-light" />
-                </span>
-                <span className="text-sm font-bold text-white text-left">
-                  {point.text}
-                </span>
-              </li>
-            ))}
-          </motion.ul>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-          >
-            <Link
-              href="/us"
-              className="inline-flex items-center gap-2 rounded-full bg-[#0A0E1A]/70 border border-white/20 backdrop-blur-md px-5 py-2.5 text-sm font-bold text-white hover:text-primary-light transition-colors"
-            >
-              Based in the United States? See our US services
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </motion.div>
         </div>
 
-        {/* Leaves the house in the photo visible below the copy */}
+        {/* Leaves the lower part of each photo visible below the copy */}
         <div className="h-32 md:h-56 lg:h-72" aria-hidden="true" />
       </div>
     </section>

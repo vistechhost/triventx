@@ -1,47 +1,17 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { motion, useInView } from 'framer-motion'
-import { TrendingUp, MapPin, Clock } from 'lucide-react'
+import { useInView } from 'framer-motion'
 
-interface StatItem {
-  icon: typeof TrendingUp
-  value: number
-  suffix: string
-  label: string
-  description: string
-  color: string
-  bg: string
-}
-
-const stats: StatItem[] = [
-  {
-    icon: TrendingUp,
-    value: 10000,
-    suffix: '+',
-    label: 'Projects Completed',
-    description: 'Plan sets, proposals & stamps delivered',
-    color: 'text-primary',
-    bg: 'bg-primary/10',
-  },
-  {
-    icon: MapPin,
-    value: 50,
-    suffix: '',
-    label: 'US States',
-    description: 'AHJ coverage & PE stamps',
-    color: 'text-accent',
-    bg: 'bg-accent/10',
-  },
-  {
-    icon: Clock,
-    value: 6,
-    suffix: 'hr',
-    label: 'Average TAT',
-    description: 'Permit design turnaround',
-    color: 'text-primary-dark',
-    bg: 'bg-primary/10',
-  },
+// Figures supplied by the client in the Nov 2026 website feedback. Change them here only.
+const stats = [
+  { value: 50000, suffix: '+', label: 'Projects Completed' },
+  { value: 900, suffix: ' MW', label: 'Total System Size Designed' },
+  { value: 80, suffix: '+', label: 'Active Clients' },
+  { value: 100, suffix: '+', label: 'In-House Engineers' },
+  { value: 97, suffix: '%', label: 'AHJ & Utility Approval Rate' },
+  { value: 3, suffix: ' Regions', label: 'US, Canada & Europe' },
+  { value: 6, suffix: ' hr', label: 'Average TAT' },
 ]
 
 function AnimatedCount({ target, suffix, active }: { target: number; suffix: string; active: boolean }) {
@@ -62,55 +32,43 @@ function AnimatedCount({ target, suffix, active }: { target: number; suffix: str
   }, [active, target])
 
   return (
-    <span>
-      {count.toLocaleString()}
-      {suffix}
-    </span>
+    <>
+      {/* Screen readers get the final figure rather than the count-up. */}
+      <span aria-hidden="true">
+        {count.toLocaleString('en-US')}
+        {suffix}
+      </span>
+      <span className="sr-only">
+        {target.toLocaleString('en-US')}
+        {suffix}
+      </span>
+    </>
   )
 }
 
 export function StatsCounter() {
   const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const isInView = useInView(ref, { once: true, margin: '-60px' })
 
   return (
-    <section className="section-padding bg-background" aria-labelledby="stats-heading" ref={ref}>
-      <div className="container-xl">
-        <div className="text-center mb-14">
-          <span
-            className="inline-flex items-center gap-2 text-sm font-semibold text-primary rounded-full px-4 py-1.5 mb-4"
-            style={{ backgroundColor: 'rgba(255, 138, 0, 0.1)' }}
-          >
-            By the Numbers
-          </span>
-          <h2 id="stats-heading" className="font-heading text-3xl md:text-4xl font-bold text-text-primary mb-4">
-            The Scale of Our Impact
-          </h2>
-          <p className="text-text-secondary max-w-2xl mx-auto text-lg">
-            Less paperwork for installers. More time on the roof.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {stats.map((stat, i) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="card-base p-8 text-center sm:last:col-span-2 lg:last:col-span-1 group hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300"
-            >
-              <div className={`w-14 h-14 ${stat.bg} rounded-2xl flex items-center justify-center mx-auto mb-5 group-hover:scale-110 transition-transform`}>
-                <stat.icon className={`w-7 h-7 ${stat.color}`} />
+    <section className="bg-navy-900 border-t border-white/10" aria-labelledby="stats-heading" ref={ref}>
+      <h2 id="stats-heading" className="sr-only">
+        TriventX by the numbers
+      </h2>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14">
+        {/* Rows are centred, so the shorter last row sits in the middle at every width. */}
+        <dl className="flex flex-wrap justify-center -m-2">
+          {stats.map((stat) => (
+            <div key={stat.label} className="basis-1/2 md:basis-1/4 p-2">
+              <div className="h-full flex flex-col-reverse justify-end rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-5 text-center">
+                <dt className="text-xs sm:text-sm font-medium text-slate-300 leading-snug">{stat.label}</dt>
+                <dd className="font-heading font-bold text-2xl sm:text-3xl lg:text-4xl text-primary-light mb-1.5 whitespace-nowrap">
+                  <AnimatedCount target={stat.value} suffix={stat.suffix} active={isInView} />
+                </dd>
               </div>
-              <p className={`font-heading font-bold text-4xl md:text-5xl ${stat.color} mb-2`}>
-                <AnimatedCount target={stat.value} suffix={stat.suffix} active={isInView} />
-              </p>
-              <p className="font-semibold text-text-primary text-lg mb-2">{stat.label}</p>
-              <p className="text-sm text-text-secondary leading-relaxed">{stat.description}</p>
-            </motion.div>
+            </div>
           ))}
-        </div>
+        </dl>
       </div>
     </section>
   )

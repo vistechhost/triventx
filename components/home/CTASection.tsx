@@ -8,19 +8,19 @@ import { formatPhone, telHref } from '@/lib/utils/contact'
 
 export function CTASection() {
   return (
-    <section id="quote" className="section-padding relative overflow-hidden bg-[#0A0E1A] scroll-mt-20" aria-labelledby="cta-heading">
+    <section id="quote" className="section-padding relative overflow-hidden bg-navy-950 scroll-mt-20" aria-labelledby="cta-heading">
       {/* Background decoration */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            'radial-gradient(ellipse at 30% 50%, rgba(255,138,0,0.12) 0%, transparent 50%), radial-gradient(ellipse at 70% 50%, rgba(0,102,255,0.12) 0%, transparent 50%)',
+            'radial-gradient(ellipse at 30% 50%, rgba(2,129,130,0.12) 0%, transparent 50%), radial-gradient(ellipse at 70% 50%, rgba(29,63,143,0.12) 0%, transparent 50%)',
         }}
         aria-hidden="true"
       />
       <div
         className="absolute top-0 left-0 right-0 h-px"
-        style={{ background: 'linear-gradient(90deg, transparent, rgba(255,138,0,0.3), transparent)' }}
+        style={{ background: 'linear-gradient(90deg, transparent, rgba(2,129,130,0.3), transparent)' }}
         aria-hidden="true"
       />
 
@@ -34,14 +34,14 @@ export function CTASection() {
             transition={{ duration: 0.6 }}
           >
             <span
-              className="inline-flex items-center gap-2 text-sm font-semibold text-primary rounded-full px-4 py-1.5 mb-6"
-              style={{ backgroundColor: 'rgba(255, 138, 0, 0.15)' }}
+              className="inline-flex items-center gap-2 text-sm font-semibold text-primary-light rounded-full px-4 py-1.5 mb-6"
+              style={{ backgroundColor: 'rgba(2, 129, 130, 0.15)' }}
             >
               Start Today
             </span>
             <h2 id="cta-heading" className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">
               Your Trusted{' '}
-              <span style={{ color: '#FF8A00' }}>Solar Engineering Partner</span>
+              <span className="text-primary-light">Solar Engineering Partner</span>
             </h2>
             <p className="text-slate-400 text-lg leading-relaxed mb-8">
               One project or your full design team — we work as an extension of your business.
@@ -66,7 +66,7 @@ export function CTASection() {
                   href={telHref(SITE_CONFIG.phone)}
                   className="inline-flex items-center gap-2 text-white bg-white/10 hover:bg-white/20 border border-white/20 font-semibold px-5 py-3 rounded-xl transition-all text-sm"
                 >
-                  <Phone className="w-4 h-4 text-primary" />
+                  <Phone className="w-4 h-4 text-primary-light" />
                   {formatPhone(SITE_CONFIG.phone)}
                 </a>
               )}
@@ -75,7 +75,7 @@ export function CTASection() {
                   href={`mailto:${SITE_CONFIG.email}`}
                   className="inline-flex items-center gap-2 text-white bg-white/10 hover:bg-white/20 border border-white/20 font-semibold px-5 py-3 rounded-xl transition-all text-sm"
                 >
-                  <Mail className="w-4 h-4 text-primary" />
+                  <Mail className="w-4 h-4 text-primary-light" />
                   {SITE_CONFIG.email}
                 </a>
               )}

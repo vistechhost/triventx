@@ -43,8 +43,7 @@ export function SampleDeliverables() {
       <div className="container-xl">
         <div className="text-center mb-14">
           <span
-            className="inline-flex items-center gap-2 text-sm font-semibold text-primary rounded-full px-4 py-1.5 mb-4"
-            style={{ backgroundColor: 'rgba(255, 138, 0, 0.1)' }}
+            className="inline-flex items-center gap-2 text-sm font-semibold text-primary rounded-full px-4 py-1.5 mb-4 bg-primary/10"
           >
             Sample Deliverables
           </span>

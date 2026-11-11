@@ -52,8 +52,25 @@ export type Lead = {
   failedAttachments?: string[]
   /** Page the form was submitted from, e.g. /us. */
   source?: string
+  /** Short code shown to the visitor on the thank-you page, e.g. TX-4F9K2A. */
+  reference?: string
+  /** Where the visitor came from when they first landed on the site. */
+  attribution?: LeadAttribution
   status: 'new' | 'contacted' | 'qualified' | 'closed'
+  /** Internal follow-up notes, visible only in the admin. */
+  notes?: string
+  /** Next follow-up date as YYYY-MM-DD. */
+  nextFollowUp?: string
+  lastContactedAt?: Timestamp
   createdAt: Timestamp
+}
+
+export type LeadAttribution = {
+  landingPage?: string
+  referrer?: string
+  utmSource?: string
+  utmMedium?: string
+  utmCampaign?: string
 }
 
 export type SiteSettings = {
@@ -127,7 +144,9 @@ export type VerifiedTestimonial = {
   /** When the client gave the quote, e.g. "March 2026". */
   givenOn: string
   /** Where the quote or the person can be checked: review page, LinkedIn, client site. */
-  source: EvidenceLink
+  source?: EvidenceLink
+  /** 1–5, shown as stars when set. */
+  rating?: number
 }
 
 export type VerifiedCaseStudy = {

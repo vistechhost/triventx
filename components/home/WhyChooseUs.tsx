@@ -29,22 +29,22 @@ const pillars = [
     icon: Users,
     title: 'Dedicated Engineering Teams',
     description: 'Engineers who learn your standards.',
-    color: 'text-purple-600',
-    bg: 'bg-purple-50',
+    color: 'text-primary',
+    bg: 'bg-primary/10',
   },
   {
     icon: Building2,
     title: 'Residential & Commercial Expertise',
     description: 'Rooftop, ground mount, carport, and storage.',
-    color: 'text-rose-600',
-    bg: 'bg-rose-50',
+    color: 'text-secondary',
+    bg: 'bg-secondary/10',
   },
   {
     icon: Target,
     title: 'Consistent Quality & Technical Accuracy',
     description: 'Structured QC and expert review on every set.',
-    color: 'text-teal-600',
-    bg: 'bg-teal-50',
+    color: 'text-accent',
+    bg: 'bg-accent/10',
   },
 ]
 
@@ -54,8 +54,7 @@ export function WhyChooseUs() {
       <div className="container-xl">
         <div className="text-center mb-14">
           <span
-            className="inline-flex items-center gap-2 text-sm font-semibold text-primary rounded-full px-4 py-1.5 mb-4"
-            style={{ backgroundColor: 'rgba(255, 138, 0, 0.1)' }}
+            className="inline-flex items-center gap-2 text-sm font-semibold text-primary rounded-full px-4 py-1.5 mb-4 bg-primary/10"
           >
             Why TriventX
           </span>

@@ -38,7 +38,7 @@ export function ProposalPreview() {
   return (
     <div ref={ref} className="bg-surface rounded-2xl border border-border shadow-xl overflow-hidden max-w-2xl mx-auto">
       {/* Header */}
-      <div className="bg-gradient-to-r from-[#0A0E1A] to-[#1A2335] p-6 flex items-center justify-between">
+      <div className="bg-gradient-to-r from-navy-950 to-navy-800 p-6 flex items-center justify-between">
         <div>
           <p className="text-white font-heading font-bold text-lg">Solar Investment Analysis</p>
           <p className="text-slate-400 text-sm">Sample proposal · Illustrative figures</p>
@@ -72,7 +72,7 @@ export function ProposalPreview() {
             <div key={i} className="flex-1 h-full flex flex-col items-center gap-1">
               <div className="w-full flex-1 flex items-end">
                 <div
-                  className="w-full rounded-t-lg bg-gradient-to-t from-primary to-amber-400 transition-all duration-700"
+                  className="w-full rounded-t-lg bg-gradient-to-t from-primary to-primary-light transition-all duration-700"
                   style={{
                     height: isInView ? `${(val / maxProd) * 100}%` : '0%',
                     transitionDelay: `${i * 60}ms`,

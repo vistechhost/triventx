@@ -1,9 +1,11 @@
 import { Suspense } from 'react'
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { ArrowRight, CheckCircle, ClipboardCheck, Mail, MessageSquare, Search } from 'lucide-react'
+import { ArrowRight, BookOpen, CheckCircle, ClipboardCheck, Mail, MessageSquare, Search } from 'lucide-react'
 import { ResponseTimes } from '@/components/contact/ResponseTimes'
+import { LinkedInFollow } from '@/components/layout/LinkedInFollow'
 import { FileUploadNotice } from './FileUploadNotice'
+import { RequestSummary } from './RequestSummary'
 
 export const metadata: Metadata = {
   title: 'Thank You',
@@ -50,6 +52,8 @@ export default function ThankYouPage() {
             <FileUploadNotice />
           </Suspense>
 
+          <RequestSummary />
+
           <ol className="grid md:grid-cols-3 gap-4 mb-12">
             {nextSteps.map((step, i) => (
               <li key={step.title} className="card-base p-6">
@@ -70,7 +74,26 @@ export default function ThankYouPage() {
           </h2>
           <ResponseTimes />
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-12">
+          <div className="grid md:grid-cols-2 gap-4 mt-12">
+            <LinkedInFollow variant="card" title="While you wait" text="Follow TriventX on LinkedIn for project news and tips." />
+            <Link
+              href="/blog"
+              className="flex items-center gap-4 rounded-2xl border border-border bg-surface p-6 hover:border-primary/40 transition-colors group"
+            >
+              <span className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
+                <BookOpen className="w-6 h-6 text-primary" aria-hidden="true" />
+              </span>
+              <span className="flex-1">
+                <span className="block font-heading font-bold text-text-primary group-hover:text-primary transition-colors">
+                  Read the blog
+                </span>
+                <span className="block text-sm text-text-secondary">Permitting, codes, and interconnection guides.</span>
+              </span>
+              <ArrowRight className="w-5 h-5 text-primary" aria-hidden="true" />
+            </Link>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10">
             <Link
               href="/services"
               className="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white font-bold px-8 py-4 rounded-xl transition-all duration-200 w-full sm:w-auto"

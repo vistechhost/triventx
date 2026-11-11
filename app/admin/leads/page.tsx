@@ -4,11 +4,12 @@ import { useState, useEffect, useTransition } from 'react'
 import { Users, Download, Search, Filter, Eye, FileText, AlertCircle } from 'lucide-react'
 import { Badge } from '@/components/ui/Badge'
 import { Modal } from '@/components/ui/Modal'
+import { LeadFollowUp, isFollowUpDue } from '@/components/admin/LeadFollowUp'
 import { useToast } from '@/components/ui/Toast'
 import { getLeadsAction, updateLeadStatus } from '@/lib/actions/leads'
 import { getLeadFileUrl } from '@/lib/firebase/storage'
 import { SERVICES_DATA, serviceLabel } from '@/lib/data/services'
-import { formatDateTime } from '@/lib/utils/format'
+import { formatDate, formatDateTime } from '@/lib/utils/format'
 import type { Lead } from '@/lib/types'
 
 const statusOptions: Lead['status'][] = ['new', 'contacted', 'qualified', 'closed']
@@ -25,12 +26,21 @@ function serviceName(slug: string): string {
   return service ? serviceLabel(service) : slug.replace(/-/g, ' ')
 }
 
+type StatusFilter = Lead['status'] | 'all' | 'due'
+
 function exportCSV(leads: Lead[]) {
-  const headers = ['Name', 'Company', 'Email', 'Phone', 'Service', 'Project Volume', 'Project Location', 'Message', 'Files', 'Source', 'Status', 'Date']
+  const headers = [
+    'Reference', 'Name', 'Company', 'Email', 'Phone', 'Service', 'Project Volume', 'Project Location', 'Message',
+    'Files', 'Submitted From', 'Landing Page', 'Referrer', 'UTM Source', 'UTM Medium', 'UTM Campaign',
+    'Status', 'Next Follow-up', 'Notes', 'Date',
+  ]
   const rows = leads.map((l) => [
-    l.name, l.company || '', l.email, l.phone,
+    l.reference || '', l.name, l.company || '', l.email, l.phone,
     serviceName(l.serviceInterest), l.projectVolume || l.projectSize || '', l.projectLocation || '',
-    l.message || '', (l.attachments ?? []).map((f) => f.name).join('; '), l.source || '', l.status,
+    l.message || '', (l.attachments ?? []).map((f) => f.name).join('; '), l.source || '',
+    l.attribution?.landingPage || '', l.attribution?.referrer || '', l.attribution?.utmSource || '',
+    l.attribution?.utmMedium || '', l.attribution?.utmCampaign || '',
+    l.status, l.nextFollowUp || '', l.notes || '',
     formatDateTime(l.createdAt),
   ])
   const csv = [headers, ...rows].map((r) => r.map((v) => `"${v.replace(/"/g, '""')}"`).join(',')).join('\n')
@@ -47,7 +57,7 @@ export default function AdminLeadsPage() {
   const [leads, setLeads] = useState<Lead[]>([])
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState('')
-  const [statusFilter, setStatusFilter] = useState<Lead['status'] | 'all'>('all')
+  const [statusFilter, setStatusFilter] = useState<StatusFilter>('all')
   const [selectedLead, setSelectedLead] = useState<Lead | null>(null)
   const [isPending, startTransition] = useTransition()
   const { showToast } = useToast()
@@ -59,14 +69,25 @@ export default function AdminLeadsPage() {
     }).catch(() => setLoading(false))
   }, [])
 
+  const dueCount = leads.filter(isFollowUpDue).length
+
   const filtered = leads.filter((l) => {
+    const term = search.toLowerCase()
     const matchSearch =
-      l.name.toLowerCase().includes(search.toLowerCase()) ||
-      l.email.toLowerCase().includes(search.toLowerCase()) ||
-      (l.company || '').toLowerCase().includes(search.toLowerCase())
-    const matchStatus = statusFilter === 'all' || l.status === statusFilter
+      l.name.toLowerCase().includes(term) ||
+      l.email.toLowerCase().includes(term) ||
+      (l.company || '').toLowerCase().includes(term) ||
+      (l.reference || '').toLowerCase().includes(term)
+    const matchStatus =
+      statusFilter === 'all' || (statusFilter === 'due' ? isFollowUpDue(l) : l.status === statusFilter)
     return matchSearch && matchStatus
   })
+
+  // Keeps the table and the open modal in step after a follow-up change.
+  const applyLeadChanges = (id: string, changes: Partial<Lead>) => {
+    setLeads((prev) => prev.map((l) => (l.id === id ? { ...l, ...changes } : l)))
+    setSelectedLead((prev) => (prev && prev.id === id ? { ...prev, ...changes } : prev))
+  }
 
   const handleStatusChange = (id: string, status: Lead['status']) => {
     startTransition(async () => {
@@ -90,7 +111,18 @@ export default function AdminLeadsPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="font-heading font-bold text-2xl text-text-primary">Leads</h1>
-          <p className="text-sm text-text-secondary mt-1">{leads.length} total submissions</p>
+          <p className="text-sm text-text-secondary mt-1">
+            {leads.length} total submissions
+            {dueCount > 0 && (
+              <button
+                type="button"
+                onClick={() => setStatusFilter('due')}
+                className="ml-2 font-semibold text-red-600 hover:underline"
+              >
+                · {dueCount} follow-up{dueCount === 1 ? '' : 's'} due
+              </button>
+            )}
+          </p>
         </div>
         <button
           onClick={() => exportCSV(leads)}
@@ -107,7 +139,7 @@ export default function AdminLeadsPage() {
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-text-secondary" />
           <input
             type="search"
-            placeholder="Search leads..."
+            placeholder="Search name, email, company, or reference..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="w-full pl-10 pr-4 py-2.5 bg-white border border-border rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50"
@@ -118,11 +150,12 @@ export default function AdminLeadsPage() {
           <Filter className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-text-secondary" />
           <select
             value={statusFilter}
-            onChange={(e) => setStatusFilter(e.target.value as Lead['status'] | 'all')}
+            onChange={(e) => setStatusFilter(e.target.value as StatusFilter)}
             className="pl-10 pr-8 py-2.5 bg-white border border-border rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary cursor-pointer appearance-none"
             aria-label="Filter by status"
           >
             <option value="all">All Statuses</option>
+            <option value="due">Follow-up due</option>
             {statusOptions.map((s) => (
               <option key={s} value={s}>{s.charAt(0).toUpperCase() + s.slice(1)}</option>
             ))}
@@ -147,7 +180,7 @@ export default function AdminLeadsPage() {
             <table className="w-full" aria-label="Leads table">
               <thead className="border-b border-border">
                 <tr>
-                  {['Name', 'Email', 'Service', 'Location', 'Files', 'Status', 'Date', 'Actions'].map((h) => (
+                  {['Name', 'Email', 'Service', 'Location', 'Files', 'Status', 'Follow-up', 'Date', 'Actions'].map((h) => (
                     <th key={h} className="text-left text-xs font-semibold text-text-secondary uppercase tracking-wide px-5 py-3">
                       {h}
                     </th>
@@ -160,6 +193,7 @@ export default function AdminLeadsPage() {
                     <td className="px-5 py-4">
                       <p className="font-semibold text-sm text-text-primary">{lead.name}</p>
                       {lead.company && <p className="text-xs text-text-secondary">{lead.company}</p>}
+                      {lead.reference && <p className="text-[11px] font-mono text-text-secondary">{lead.reference}</p>}
                     </td>
                     <td className="px-5 py-4 text-sm text-text-secondary">{lead.email}</td>
                     <td className="px-5 py-4 text-sm text-text-secondary">
@@ -179,6 +213,16 @@ export default function AdminLeadsPage() {
                           <option key={s} value={s}>{s.charAt(0).toUpperCase() + s.slice(1)}</option>
                         ))}
                       </select>
+                    </td>
+                    <td className="px-5 py-4 text-xs whitespace-nowrap">
+                      {lead.nextFollowUp ? (
+                        <span className={isFollowUpDue(lead) ? 'font-bold text-red-600' : 'text-text-secondary'}>
+                          {isFollowUpDue(lead) && 'Due · '}
+                          {formatDate(`${lead.nextFollowUp}T00:00:00`)}
+                        </span>
+                      ) : (
+                        <span className="text-text-secondary">—</span>
+                      )}
                     </td>
                     <td className="px-5 py-4 text-xs text-text-secondary">{formatDateTime(lead.createdAt)}</td>
                     <td className="px-5 py-4">
@@ -202,7 +246,7 @@ export default function AdminLeadsPage() {
       <Modal
         open={!!selectedLead}
         onClose={() => setSelectedLead(null)}
-        title="Lead Details"
+        title={selectedLead?.reference ? `Lead ${selectedLead.reference}` : 'Lead Details'}
         size="md"
       >
         {selectedLead && (
@@ -217,6 +261,18 @@ export default function AdminLeadsPage() {
                 { label: 'Project Volume', value: (selectedLead.projectVolume || selectedLead.projectSize || '—').replace(/-/g, ' ') },
                 { label: 'Project Location', value: selectedLead.projectLocation || '—' },
                 { label: 'Submitted From', value: selectedLead.source || '—' },
+                {
+                  label: 'Came From',
+                  value:
+                    [
+                      selectedLead.attribution?.utmSource &&
+                        `${selectedLead.attribution.utmSource}${selectedLead.attribution.utmMedium ? ` / ${selectedLead.attribution.utmMedium}` : ''}${selectedLead.attribution.utmCampaign ? ` (${selectedLead.attribution.utmCampaign})` : ''}`,
+                      selectedLead.attribution?.referrer,
+                    ]
+                      .filter(Boolean)
+                      .join(' · ') || 'Direct / unknown',
+                },
+                { label: 'Landing Page', value: selectedLead.attribution?.landingPage || '—' },
               ].map(({ label, value }) => (
                 <div key={label}>
                   <p className="text-xs font-semibold text-text-secondary uppercase tracking-wide">{label}</p>
@@ -256,6 +312,12 @@ export default function AdminLeadsPage() {
                 <span>Failed to upload, ask the client to resend: {selectedLead.failedAttachments?.join(', ')}</span>
               </p>
             )}
+            <LeadFollowUp
+              key={selectedLead.id}
+              lead={selectedLead}
+              serviceName={serviceName(selectedLead.serviceInterest)}
+              onUpdate={(changes) => applyLeadChanges(selectedLead.id, changes)}
+            />
             <div className="flex items-center justify-between pt-2">
               <Badge variant={statusVariant[selectedLead.status]} dot>
                 {selectedLead.status.charAt(0).toUpperCase() + selectedLead.status.slice(1)}

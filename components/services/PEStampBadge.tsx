@@ -4,9 +4,9 @@ import { motion } from 'framer-motion'
 import { ShieldCheck } from 'lucide-react'
 
 const complianceLogos = [
-  { name: 'NEC 2023', sub: 'National Electrical Code', color: '#FF8A00' },
-  { name: 'NESC', sub: 'Safety Code for Electric Supply', color: '#0066FF' },
-  { name: 'NFPA 70E', sub: 'Arc Flash Safety Standard', color: '#00C896' },
+  { name: 'NEC 2023', sub: 'National Electrical Code', color: '#028182' },
+  { name: 'NESC', sub: 'Safety Code for Electric Supply', color: '#1D3F8F' },
+  { name: 'NFPA 70E', sub: 'Arc Flash Safety Standard', color: '#0F9D74' },
   { name: 'IEEE 1547', sub: 'Distributed Energy Resources', color: '#8B5CF6' },
   { name: 'ANSI C2', sub: 'Safety Code Standard', color: '#EC4899' },
   { name: 'NEMA 3R', sub: 'Weatherproof Enclosures', color: '#F59E0B' },

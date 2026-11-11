@@ -36,7 +36,7 @@ const steps = [
     title: 'Quality Assurance',
     description: 'Senior engineer checks every sheet.',
     time: 'Included',
-    color: 'bg-purple-500',
+    color: 'bg-navy-700',
   },
   {
     step: 5,
@@ -45,7 +45,7 @@ const steps = [
     description: 'Permit-ready set delivered. Free AHJ revisions until approval.',
     link: { href: '/terms#revisions', label: 'Revision policy' },
     time: 'On Time',
-    color: 'bg-rose-500',
+    color: 'bg-primary-dark',
   },
 ]
 
@@ -58,8 +58,7 @@ export function ProcessTimeline() {
       <div className="container-xl">
         <div className="text-center mb-14">
           <span
-            className="inline-flex items-center gap-2 text-sm font-semibold text-primary rounded-full px-4 py-1.5 mb-4"
-            style={{ backgroundColor: 'rgba(255, 138, 0, 0.1)' }}
+            className="inline-flex items-center gap-2 text-sm font-semibold text-primary rounded-full px-4 py-1.5 mb-4 bg-primary/10"
           >
             Our Process
           </span>
@@ -114,8 +113,7 @@ export function ProcessTimeline() {
                     )}
                   </p>
                   <span
-                    className="inline-block text-xs font-bold text-primary px-3 py-1 rounded-full"
-                    style={{ backgroundColor: 'rgba(255, 138, 0, 0.1)' }}
+                    className="inline-block text-xs font-bold text-primary px-3 py-1 rounded-full bg-primary/10"
                   >
                     {step.time}
                   </span>

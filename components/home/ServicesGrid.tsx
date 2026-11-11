@@ -36,13 +36,13 @@ const otherServiceImages: Record<string, string> = {
 }
 
 const styleMap: Record<string, { bg: string; iconColor: string; highlight?: string }> = {
-  'solar-sales-proposals': { bg: 'bg-blue-50', iconColor: 'text-blue-500', highlight: 'Fastest TAT' },
-  'site-surveys-remote-assessments': { bg: 'bg-yellow-50', iconColor: 'text-yellow-600' },
-  'solar-permit-design': { bg: 'bg-orange-50', iconColor: 'text-orange-500', highlight: 'Most Popular' },
-  'engineering-stamps': { bg: 'bg-purple-50', iconColor: 'text-purple-500' },
-  'interconnection-services': { bg: 'bg-emerald-50', iconColor: 'text-emerald-600' },
-  'as-built-drawings': { bg: 'bg-teal-50', iconColor: 'text-teal-500' },
-  'pto-support': { bg: 'bg-rose-50', iconColor: 'text-rose-500' },
+  'solar-sales-proposals': { bg: 'bg-primary/10', iconColor: 'text-primary', highlight: 'Fastest TAT' },
+  'site-surveys-remote-assessments': { bg: 'bg-secondary/10', iconColor: 'text-secondary' },
+  'solar-permit-design': { bg: 'bg-primary/10', iconColor: 'text-primary', highlight: 'Most Popular' },
+  'engineering-stamps': { bg: 'bg-secondary/10', iconColor: 'text-secondary' },
+  'interconnection-services': { bg: 'bg-primary/10', iconColor: 'text-primary' },
+  'as-built-drawings': { bg: 'bg-secondary/10', iconColor: 'text-secondary' },
+  'pto-support': { bg: 'bg-primary/10', iconColor: 'text-primary' },
 }
 
 export function ServicesGrid() {
@@ -51,8 +51,7 @@ export function ServicesGrid() {
       <div className="container-xl">
         <div className="text-center mb-14">
           <span
-            className="inline-flex items-center gap-2 text-sm font-semibold text-primary rounded-full px-4 py-1.5 mb-4"
-            style={{ backgroundColor: 'rgba(255, 138, 0, 0.1)' }}
+            className="inline-flex items-center gap-2 text-sm font-semibold text-primary rounded-full px-4 py-1.5 mb-4 bg-primary/10"
           >
             What We Do
           </span>
@@ -67,7 +66,7 @@ export function ServicesGrid() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {SOLAR_SERVICES.map((svc, i) => {
             const Icon = iconMap[svc.iconName] ?? FileText
-            const style = styleMap[svc.slug] ?? { bg: 'bg-orange-50', iconColor: 'text-orange-500' }
+            const style = styleMap[svc.slug] ?? { bg: 'bg-primary/10', iconColor: 'text-primary' }
             return (
               <motion.div
                 key={svc.slug}
@@ -88,8 +87,7 @@ export function ServicesGrid() {
                     <div className="flex flex-col items-end gap-1.5">
                       {style.highlight && (
                         <span
-                          className="text-xs font-bold text-primary px-2.5 py-1 rounded-full"
-                          style={{ backgroundColor: 'rgba(255, 138, 0, 0.1)' }}
+                          className="text-xs font-bold text-primary px-2.5 py-1 rounded-full bg-primary/10"
                         >
                           {style.highlight}
                         </span>
@@ -155,7 +153,7 @@ export function ServicesGrid() {
                     sizes="(min-width: 768px) 50vw, 100vw"
                     className="-z-20 object-cover transition-transform duration-500 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 -z-10 bg-gradient-to-t from-[#0A0E1A]/95 via-[#0A0E1A]/60 to-[#0A0E1A]/20" aria-hidden="true" />
+                  <div className="absolute inset-0 -z-10 bg-gradient-to-t from-navy-950/95 via-navy-950/60 to-navy-950/20" aria-hidden="true" />
                   <Icon className="w-8 h-8 text-primary-light mb-3" aria-hidden="true" />
                   <h4 className="font-heading font-bold text-2xl text-white mb-2">{svc.title}</h4>
                   <p className="text-sm text-white/85 leading-relaxed mb-4">{svc.shortDescription}</p>

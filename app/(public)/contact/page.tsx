@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { LeadForm } from '@/components/forms/LeadForm'
 import { ResponseTimes } from '@/components/contact/ResponseTimes'
-import { Phone, Mail, MapPin, Clock, MessageCircle } from 'lucide-react'
+import { Phone, Mail, MapPin, Clock, MessageCircle, Linkedin } from 'lucide-react'
 import { SITE_CONFIG } from '@/lib/data/site-config'
 import { addressLines, formatPhone, telHref, whatsappHref } from '@/lib/utils/contact'
 
@@ -15,7 +15,7 @@ const iconBox = 'w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-ce
 const detailLabel = 'text-xs font-semibold text-text-secondary uppercase tracking-wide'
 
 export default function ContactPage() {
-  const { phone, email, whatsapp, address, hours } = SITE_CONFIG
+  const { phone, email, whatsapp, address, hours, social } = SITE_CONFIG
 
   return (
     <div className="pt-24 md:pt-28">
@@ -23,8 +23,7 @@ export default function ContactPage() {
       <section className="py-14 px-4 sm:px-6 lg:px-8 bg-background">
         <div className="max-w-5xl mx-auto text-center">
           <span
-            className="inline-flex items-center gap-2 text-sm font-semibold text-primary rounded-full px-4 py-1.5 mb-4"
-            style={{ backgroundColor: 'rgba(255, 138, 0, 0.1)' }}
+            className="inline-flex items-center gap-2 text-sm font-semibold text-primary rounded-full px-4 py-1.5 mb-4 bg-primary/10"
           >
             Get in Touch
           </span>
@@ -97,6 +96,19 @@ export default function ContactPage() {
                         <p className={detailLabel}>WhatsApp</p>
                         <p className="font-semibold text-text-primary group-hover:text-primary transition-colors text-sm">
                           Chat with our sales team
+                        </p>
+                      </div>
+                    </a>
+                  )}
+                  {social.linkedin && (
+                    <a href={social.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-start gap-4 group">
+                      <div className={iconBox}>
+                        <Linkedin className="w-5 h-5 text-primary" aria-hidden="true" />
+                      </div>
+                      <div>
+                        <p className={detailLabel}>LinkedIn</p>
+                        <p className="font-semibold text-text-primary group-hover:text-primary transition-colors text-sm">
+                          Follow TriventX Energy
                         </p>
                       </div>
                     </a>

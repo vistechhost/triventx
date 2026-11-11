@@ -54,7 +54,7 @@ export function Sidebar() {
           collapsed && "justify-center",
         )}
       >
-        <Logo iconOnly={collapsed} variant="white" className="gap-2" />
+        <Logo iconOnly={collapsed} variant="white" className="h-10 md:h-10" />
       </div>
 
       {/* Nav items */}

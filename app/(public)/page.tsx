@@ -12,8 +12,11 @@ import { SampleDeliverables } from '@/components/home/SampleDeliverables'
 import { CaseStudies } from '@/components/home/CaseStudies'
 import { TestimonialsCarousel } from '@/components/home/TestimonialsCarousel'
 import { FAQSection } from '@/components/home/FAQSection'
+import { BlogPreview } from '@/components/home/BlogPreview'
+import { LearningVideos } from '@/components/home/LearningVideos'
 import { CTASection } from '@/components/home/CTASection'
 import { SITE_CONFIG } from '@/lib/data/site-config'
+import { FAQS } from '@/lib/data/faqs'
 
 export const metadata: Metadata = {
   title: { absolute: 'Solar Engineering Services | TriventX Energy LLP' },
@@ -38,6 +41,8 @@ export default function HomePage() {
             name: SITE_CONFIG.name,
             description: 'Solar PV design and engineering services including sales proposals, permit plan sets, PE review & stamping, interconnection, PTO support, and as-built drawings, plus wind energy and telecom engineering.',
             url: SITE_CONFIG.url,
+            logo: `${SITE_CONFIG.url}/brand/triventx-logo-large.png`,
+            image: `${SITE_CONFIG.url}/brand/triventx-logo-large.png`,
             ...(SITE_CONFIG.phone && { telephone: SITE_CONFIG.phone }),
             ...(SITE_CONFIG.email && { email: SITE_CONFIG.email }),
             ...(SITE_CONFIG.address && {
@@ -50,16 +55,16 @@ export default function HomePage() {
                 addressCountry: SITE_CONFIG.address.country,
               },
             }),
-            sameAs: [SITE_CONFIG.social.linkedin, SITE_CONFIG.social.twitter],
+            sameAs: Object.values(SITE_CONFIG.social).filter(Boolean),
             openingHours: SITE_CONFIG.openingHours,
             priceRange: '$$',
           }),
         }}
       />
       <Hero />
+      <StatsCounter />
       <TrustBar />
       <WhoWeAre />
-      <StatsCounter />
       <ServicesGrid />
       <WhyChooseUs />
       <ProcessTimeline />
@@ -68,7 +73,9 @@ export default function HomePage() {
       <SampleDeliverables />
       <CaseStudies />
       <TestimonialsCarousel />
-      <FAQSection />
+      <LearningVideos />
+      <BlogPreview />
+      <FAQSection items={FAQS.slice(0, 6)} showAllLink />
       <CTASection />
     </>
   )

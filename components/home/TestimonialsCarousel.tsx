@@ -2,10 +2,10 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ChevronLeft, ChevronRight, ExternalLink, Quote } from 'lucide-react'
+import { ChevronLeft, ChevronRight, ExternalLink, Quote, Star } from 'lucide-react'
 import { TESTIMONIALS } from '@/lib/data/site-config'
 
-// Hidden until there is a testimonial with a source a visitor can check (see lib/data/site-config.ts).
+// Hidden until a real client review is added to TESTIMONIALS in lib/data/site-config.ts.
 export function TestimonialsCarousel() {
   const [current, setCurrent] = useState(0)
 
@@ -21,16 +21,15 @@ export function TestimonialsCarousel() {
       <div className="container-xl">
         <div className="text-center mb-14">
           <span
-            className="inline-flex items-center gap-2 text-sm font-semibold text-primary rounded-full px-4 py-1.5 mb-4"
-            style={{ backgroundColor: 'rgba(255, 138, 0, 0.1)' }}
+            className="inline-flex items-center gap-2 text-sm font-semibold text-primary rounded-full px-4 py-1.5 mb-4 bg-primary/10"
           >
-            Client Stories
+            Client Reviews
           </span>
           <h2 id="testimonials-heading" className="font-heading text-3xl md:text-4xl font-bold text-text-primary mb-4">
-            Trusted by Solar Professionals
+            What Our Clients Say
           </h2>
           <p className="text-text-secondary max-w-2xl mx-auto text-lg">
-            Don&apos;t take our word for it — here&apos;s what our clients say about working with TriventX.
+            Installers, EPCs, and contractors on working with TriventX.
           </p>
         </div>
 
@@ -45,7 +44,20 @@ export function TestimonialsCarousel() {
                 transition={{ duration: 0.35 }}
                 className="card-base p-8 md:p-10"
               >
-                <Quote className="w-10 h-10 text-primary/20 mb-6" aria-hidden="true" />
+                <div className="flex items-center justify-between mb-6">
+                  <Quote className="w-10 h-10 text-primary/20" aria-hidden="true" />
+                  {t.rating && (
+                    <p className="flex gap-0.5" role="img" aria-label={`Rated ${t.rating} out of 5`}>
+                      {Array.from({ length: 5 }, (_, i) => (
+                        <Star
+                          key={i}
+                          className={`w-5 h-5 ${i < (t.rating ?? 0) ? 'fill-primary text-primary' : 'text-border'}`}
+                          aria-hidden="true"
+                        />
+                      ))}
+                    </p>
+                  )}
+                </div>
 
                 <blockquote className="text-text-primary text-lg leading-relaxed mb-8 font-medium">
                   &ldquo;{t.content}&rdquo;
@@ -57,15 +69,17 @@ export function TestimonialsCarousel() {
                 </p>
                 <p className="text-sm text-text-secondary mt-2 flex flex-wrap items-center gap-x-3">
                   <span>{t.givenOn}</span>
-                  <a
-                    href={t.source.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 font-semibold text-primary hover:underline"
-                  >
-                    {t.source.label}
-                    <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
-                  </a>
+                  {t.source && (
+                    <a
+                      href={t.source.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 font-semibold text-primary hover:underline"
+                    >
+                      {t.source.label}
+                      <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
+                    </a>
+                  )}
                 </p>
               </motion.div>
             </AnimatePresence>

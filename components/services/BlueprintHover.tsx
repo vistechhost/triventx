@@ -88,10 +88,10 @@ export function BlueprintHover() {
             <line x1="112" y1="75" x2="112" y2="91" stroke="#2A3A5A" strokeWidth="0.8" />
             <line x1="139" y1="68" x2="139" y2="84" stroke="#2A3A5A" strokeWidth="0.8" />
             {/* Labels */}
-            <rect x="88" y="190" width="60" height="6" rx="2" fill="#FF8A00" opacity="0.5" />
-            <rect x="155" y="190" width="40" height="6" rx="2" fill="#0066FF" opacity="0.4" />
+            <rect x="88" y="190" width="60" height="6" rx="2" fill="#028182" opacity="0.5" />
+            <rect x="155" y="190" width="40" height="6" rx="2" fill="#1D3F8F" opacity="0.4" />
             {/* Shading arrows */}
-            <path d="M270,75 L290,75 M283,68 L290,75 L283,82" stroke="#FF8A00" strokeWidth="1.5" fill="none" opacity="0.8" />
+            <path d="M270,75 L290,75 M283,68 L290,75 L283,82" stroke="#028182" strokeWidth="1.5" fill="none" opacity="0.8" />
           </svg>
           <div className="absolute bottom-4 left-4 text-xs font-semibold text-primary">
             PERMIT-READY DESIGN

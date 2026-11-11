@@ -28,11 +28,12 @@ type SiteConfig = {
   hours: { days: string; time: string }[]
   /** schema.org openingHours, kept in step with `hours`. */
   openingHours: string[]
+  /** Profile URLs. Leave null until the account is confirmed; null links are hidden. */
   social: {
-    linkedin: string
-    facebook: string
-    instagram: string
-    twitter: string
+    linkedin: string | null
+    facebook: string | null
+    instagram: string | null
+    twitter: string | null
   }
 }
 
@@ -44,18 +45,29 @@ export const SITE_CONFIG: SiteConfig = {
   whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || null,
   address: null,
   hours: [
-    { days: 'Monday – Friday', time: '8am – 10pm CT' },
-    { days: 'Saturday', time: '9am – 5pm CT' },
+    { days: 'Monday - Friday', time: '8am - 10pm CT' },
+    { days: 'Saturday', time: '9am - 5pm CT' },
     { days: 'Sunday', time: 'Emergency support only' },
   ],
   openingHours: ['Mo-Fr 08:00-22:00', 'Sa 09:00-17:00'],
   social: {
-    linkedin: 'https://linkedin.com/company/triventxenergy',
-    facebook: 'https://facebook.com/triventxenergy',
-    instagram: 'https://instagram.com/triventxenergy',
-    twitter: 'https://twitter.com/triventxenergy',
+    linkedin: 'https://www.linkedin.com/company/triventx-energy',
+    // Not confirmed yet. The old handles were guesses (the LinkedIn one was wrong).
+    facebook: null,
+    instagram: null,
+    twitter: null,
   },
 }
+
+/** Social profiles that are set, in display order. */
+export const SOCIAL_PROFILES = (
+  [
+    { key: 'linkedin', label: 'LinkedIn', href: SITE_CONFIG.social.linkedin },
+    { key: 'facebook', label: 'Facebook', href: SITE_CONFIG.social.facebook },
+    { key: 'instagram', label: 'Instagram', href: SITE_CONFIG.social.instagram },
+    { key: 'twitter', label: 'Twitter', href: SITE_CONFIG.social.twitter },
+  ] as const
+).flatMap((profile) => (profile.href ? [{ ...profile, href: profile.href }] : []))
 
 /** What a visitor can expect after contacting us. Shown on the contact and thank-you pages. */
 export const RESPONSE_TIMES = [
@@ -86,8 +98,21 @@ export const CERTIFICATIONS: Certification[] = []
 export const OFFICES: Office[] = []
 
 /**
- * Case studies and testimonials appear only with supporting evidence and the
- * client's permission. Each section stays hidden while its list is empty.
+ * Case studies need supporting evidence. Reviews need the reviewer's
+ * permission; a `source` link (LinkedIn recommendation, Google review) is
+ * optional but adds credibility. Each section stays hidden while its list is
+ * empty. Example review:
+ *
+ *   { id: 'acme-1', name: 'Jane Smith', title: 'Operations Manager',
+ *     company: 'Acme Solar', location: 'Austin, TX', rating: 5,
+ *     content: 'Permit sets came back in hours and passed first time.',
+ *     givenOn: 'November 2026' }
  */
 export const CASE_STUDIES: VerifiedCaseStudy[] = []
 export const TESTIMONIALS: VerifiedTestimonial[] = []
+
+/**
+ * Learning videos shown on the home page and the blog. Hidden while empty.
+ * `youtubeId` is the part after `v=` in a YouTube link, e.g. 'dQw4w9WgXcQ'.
+ */
+export const LEARNING_VIDEOS: { title: string; youtubeId: string; description?: string }[] = []

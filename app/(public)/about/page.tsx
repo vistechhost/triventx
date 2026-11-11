@@ -16,6 +16,7 @@ import {
   Zap,
 } from 'lucide-react'
 import { CTASection } from '@/components/home/CTASection'
+import { LinkedInFollow } from '@/components/layout/LinkedInFollow'
 import { CERTIFICATIONS, LEADERSHIP, OFFICES } from '@/lib/data/site-config'
 import { addressLines } from '@/lib/utils/contact'
 
@@ -51,8 +52,8 @@ const values = [
     icon: Handshake,
     title: 'Partnership',
     description: 'Your embedded engineering department.',
-    color: 'text-purple-600',
-    bg: 'bg-purple-50',
+    color: 'text-primary-dark',
+    bg: 'bg-primary/10',
   },
 ]
 
@@ -61,25 +62,31 @@ const teams = [
     icon: PenTool,
     title: 'Design Engineers',
     description: 'Layouts, site plans, SLDs, 3LDs, and as-builts.',
+    points: ['Residential & commercial PV', 'Battery storage', 'AutoCAD, Aurora & OpenSolar'],
   },
   {
     icon: Stamp,
     title: 'Engineering Reviewers',
     description: 'Structural and electrical checks, plus PE stamp coordination.',
+    points: ['Structured QC on every set', 'Structural & electrical review', 'PE stamp coordination'],
   },
   {
     icon: ClipboardCheck,
     title: 'Permitting & Utility Coordinators',
     description: 'Permits, SolarAPP+, interconnection, and PTO.',
+    points: ['AHJ submittals', 'Utility applications', 'Revisions through approval'],
   },
   {
     icon: Headset,
     title: 'Project & Account Managers',
     description: 'One point of contact for every project.',
+    points: ['Dedicated account manager', 'Status updates', 'Volume onboarding'],
   },
 ]
 
 const highlights = [
+  '50,000+ projects completed, 900 MW designed',
+  '100+ in-house engineers',
   'Clients across the United States, Canada, and Europe',
   'Built to AHJ, NEC, building, fire, and utility rules',
   'Deep residential solar PV expertise',
@@ -107,8 +114,7 @@ export default function AboutPage() {
         <div className="container-xl relative z-10">
           <div className="max-w-4xl">
             <span
-              className="inline-flex items-center gap-2 text-sm font-semibold text-primary rounded-full px-4 py-1.5 mb-4"
-              style={{ backgroundColor: 'rgba(255, 138, 0, 0.1)' }}
+              className="inline-flex items-center gap-2 text-sm font-semibold text-primary rounded-full px-4 py-1.5 mb-4 bg-primary/10"
             >
               About TriventX
             </span>
@@ -116,7 +122,7 @@ export default function AboutPage() {
               Built by Engineers,{' '}
               <span
                 style={{
-                  background: 'linear-gradient(135deg, #FF8A00, var(--color-secondary))',
+                  background: 'linear-gradient(135deg, var(--color-primary), var(--color-secondary))',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text',
@@ -185,8 +191,7 @@ export default function AboutPage() {
         <div className="container-xl">
           <div className="text-center mb-14">
             <span
-              className="inline-flex items-center gap-2 text-sm font-semibold text-primary rounded-full px-4 py-1.5 mb-4"
-              style={{ backgroundColor: 'rgba(255, 138, 0, 0.1)' }}
+              className="inline-flex items-center gap-2 text-sm font-semibold text-primary rounded-full px-4 py-1.5 mb-4 bg-primary/10"
             >
               What We Stand For
             </span>
@@ -213,16 +218,16 @@ export default function AboutPage() {
         <div className="container-xl">
           <div className="text-center mb-14">
             <span
-              className="inline-flex items-center gap-2 text-sm font-semibold text-primary rounded-full px-4 py-1.5 mb-4"
-              style={{ backgroundColor: 'rgba(255, 138, 0, 0.1)' }}
+              className="inline-flex items-center gap-2 text-sm font-semibold text-primary rounded-full px-4 py-1.5 mb-4 bg-primary/10"
             >
               Our Team
             </span>
             <h2 id="team-heading" className="font-heading text-3xl md:text-4xl font-bold text-text-primary mb-4">
-              The Team Behind TriventX
+              Meet the Team Behind TriventX
             </h2>
             <p className="text-text-secondary max-w-3xl mx-auto text-lg">
-              Solar design, review, permitting, and project management — under one roof.
+              <strong className="text-text-primary">100+ in-house engineers</strong> across design, review,
+              permitting, and project management — one team, under one roof.
             </p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -232,7 +237,15 @@ export default function AboutPage() {
                   <team.icon className="w-6 h-6 text-primary" aria-hidden="true" />
                 </div>
                 <h3 className="font-heading font-bold text-lg text-text-primary mb-2">{team.title}</h3>
-                <p className="text-sm text-text-secondary leading-relaxed">{team.description}</p>
+                <p className="text-sm text-text-secondary leading-relaxed mb-4">{team.description}</p>
+                <ul className="space-y-1.5 border-t border-border pt-4">
+                  {team.points.map((point) => (
+                    <li key={point} className="flex items-center gap-2 text-xs font-medium text-text-primary">
+                      <CheckCircle className="w-3.5 h-3.5 text-accent shrink-0" aria-hidden="true" />
+                      {point}
+                    </li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>
@@ -272,6 +285,13 @@ export default function AboutPage() {
               </div>
             </div>
           )}
+
+          <LinkedInFollow
+            variant="card"
+            className="mt-12 max-w-3xl mx-auto"
+            title="Meet our team on LinkedIn"
+            text="See who we are, what we're working on, and new openings."
+          />
         </div>
       </section>
 

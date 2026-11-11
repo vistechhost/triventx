@@ -80,8 +80,7 @@ export default function ServicesPage() {
         <div className="absolute inset-0 bg-hero-mesh pointer-events-none" aria-hidden="true" />
         <div className="container-xl relative z-10 text-center">
           <span
-            className="inline-flex items-center gap-2 text-sm font-semibold text-primary rounded-full px-4 py-1.5 mb-4"
-            style={{ backgroundColor: 'rgba(255, 138, 0, 0.1)' }}
+            className="inline-flex items-center gap-2 text-sm font-semibold text-primary rounded-full px-4 py-1.5 mb-4 bg-primary/10"
           >
             Our Services
           </span>

@@ -22,6 +22,8 @@ const navLinks = [
   { label: "Services", href: "/services", hasDropdown: true },
   { label: "US Customers", href: "/us" },
   { label: "About", href: "/about" },
+  { label: "Blog", href: "/blog" },
+  { label: "FAQ", href: "/faq" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -56,17 +58,17 @@ export function Navbar() {
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            <Logo />
+            <Logo priority />
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-1">
+          <div className="hidden lg:flex items-center gap-0.5 xl:gap-1">
             {navLinks.map((link) =>
               link.hasDropdown ? (
                 <div key={link.href} className="relative">
                   <button
                     className={cn(
-                      "flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-semibold transition-colors",
+                      "flex items-center gap-1 px-3 xl:px-4 py-2 rounded-lg text-sm font-semibold transition-colors",
                       "hover:text-primary hover:bg-primary/5",
                       pathname.startsWith("/services")
                         ? "text-primary"
@@ -132,9 +134,9 @@ export function Navbar() {
                   key={link.href}
                   href={link.href}
                   className={cn(
-                    "px-4 py-2 rounded-lg text-sm font-semibold transition-colors",
+                    "px-3 xl:px-4 py-2 rounded-lg text-sm font-semibold transition-colors",
                     "hover:text-primary hover:bg-primary/5",
-                    pathname === link.href
+                    (link.href === "/" ? pathname === "/" : pathname.startsWith(link.href))
                       ? "text-primary"
                       : "text-text-secondary",
                   )}
@@ -146,7 +148,7 @@ export function Navbar() {
           </div>
 
           {/* Desktop CTA */}
-          <div className="hidden md:flex items-center gap-3">
+          <div className="hidden lg:flex items-center gap-3">
             <ThemeToggle />
             {SITE_CONFIG.phone && (
               <a
@@ -167,7 +169,7 @@ export function Navbar() {
           </div>
 
           {/* Mobile Controls */}
-          <div className="md:hidden flex items-center gap-1">
+          <div className="lg:hidden flex items-center gap-1">
             <ThemeToggle />
             <button
               className="p-2 rounded-lg text-text-secondary hover:text-text-primary hover:bg-background-subtle transition-colors"
@@ -193,7 +195,7 @@ export function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden bg-surface border-t border-border overflow-hidden max-h-[calc(100vh-4rem)] overflow-y-auto"
+            className="lg:hidden bg-surface border-t border-border overflow-hidden max-h-[calc(100vh-4rem)] overflow-y-auto"
           >
             <div className="px-4 py-6 space-y-1">
               <Link
@@ -216,24 +218,17 @@ export function Navbar() {
                   </Link>
                 ))}
               </div>
-              <Link
-                href="/us"
-                className="block px-4 py-3 rounded-xl text-sm font-semibold text-text-primary hover:bg-primary/5 hover:text-primary transition-colors"
-              >
-                US Customers
-              </Link>
-              <Link
-                href="/about"
-                className="block px-4 py-3 rounded-xl text-sm font-semibold text-text-primary hover:bg-primary/5 hover:text-primary transition-colors"
-              >
-                About
-              </Link>
-              <Link
-                href="/contact"
-                className="block px-4 py-3 rounded-xl text-sm font-semibold text-text-primary hover:bg-primary/5 hover:text-primary transition-colors"
-              >
-                Contact
-              </Link>
+              {navLinks
+                .filter((link) => link.href !== "/" && !link.hasDropdown)
+                .map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="block px-4 py-3 rounded-xl text-sm font-semibold text-text-primary hover:bg-primary/5 hover:text-primary transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                ))}
               <div className="pt-4 border-t border-border">
                 <Link
                   href="/contact"

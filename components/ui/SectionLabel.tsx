@@ -9,7 +9,7 @@ export function SectionLabel({ children, className }: { children: ReactNode; cla
         'px-4 py-1.5',
         className
       )}
-      style={{ backgroundColor: 'rgba(255, 138, 0, 0.1)' }}
+      style={{ backgroundColor: 'rgba(2, 129, 130, 0.1)' }}
     >
       {children}
     </span>

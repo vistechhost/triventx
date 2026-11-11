@@ -9,20 +9,21 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // Not read by Tailwind v4; the live tokens are in app/globals.css. Kept in step for reference.
         primary: {
-          DEFAULT: "#FF8A00",
-          dark: "#E67300",
-          light: "#FFB347",
+          DEFAULT: "#028182",
+          dark: "#016667",
+          light: "#3EC4BC",
         },
         secondary: {
-          DEFAULT: "#0066FF",
-          dark: "#0052CC",
-          light: "#4D94FF",
+          DEFAULT: "#1D3F8F",
+          dark: "#03184A",
+          light: "#5B7FD1",
         },
         accent: {
-          DEFAULT: "#00C896",
-          dark: "#00A87D",
-          light: "#33D4AC",
+          DEFAULT: "#0F9D74",
+          dark: "#0B7D5C",
+          light: "#3CC79B",
         },
         background: {
           DEFAULT: "#FFFFFF",
@@ -30,7 +31,7 @@ const config: Config = {
           muted: "#F1F5F9",
         },
         surface: "#FFFFFF",
-        "text-primary": "#0A0E1A",
+        "text-primary": "#0B1838",
         "text-secondary": "#475569",
         border: "#E2E8F0",
       },
@@ -44,8 +45,8 @@ const config: Config = {
         "4xl": "2rem",
       },
       boxShadow: {
-        "glow-primary": "0 0 30px rgba(255, 138, 0, 0.25)",
-        "glow-secondary": "0 0 30px rgba(0, 102, 255, 0.25)",
+        "glow-primary": "0 8px 24px rgba(2, 129, 130, 0.28)",
+        "glow-secondary": "0 8px 24px rgba(29, 63, 143, 0.28)",
         "glow-accent": "0 0 30px rgba(0, 200, 150, 0.25)",
         card: "0 4px 24px rgba(10, 14, 26, 0.06)",
         "card-hover": "0 8px 48px rgba(10, 14, 26, 0.12)",
@@ -68,8 +69,8 @@ const config: Config = {
           "50%": { transform: "translateY(-12px)" },
         },
         pulseGlow: {
-          "0%, 100%": { boxShadow: "0 0 20px rgba(255, 138, 0, 0.4)" },
-          "50%": { boxShadow: "0 0 40px rgba(255, 138, 0, 0.8)" },
+          "0%, 100%": { boxShadow: "0 0 20px rgba(2, 129, 130, 0.35)" },
+          "50%": { boxShadow: "0 0 40px rgba(2, 129, 130, 0.7)" },
         },
         scan: {
           "0%": { transform: "translateY(-100%)" },

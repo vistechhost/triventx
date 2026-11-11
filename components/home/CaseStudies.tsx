@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import { MapPin, Zap, CheckCircle, Landmark, CalendarDays, ExternalLink } from 'lucide-react'
 import { CASE_STUDIES } from '@/lib/data/site-config'
 
-const gradients = ['from-orange-500 to-amber-400', 'from-blue-500 to-indigo-400', 'from-green-500 to-teal-400']
+const gradients = ['from-primary to-primary-light', 'from-navy-900 to-secondary', 'from-primary-dark to-accent']
 
 // Hidden until there is a case study with evidence a visitor can check (see lib/data/site-config.ts).
 export function CaseStudies() {
@@ -15,8 +15,7 @@ export function CaseStudies() {
       <div className="container-xl">
         <div className="text-center mb-14">
           <span
-            className="inline-flex items-center gap-2 text-sm font-semibold text-primary rounded-full px-4 py-1.5 mb-4"
-            style={{ backgroundColor: 'rgba(255, 138, 0, 0.1)' }}
+            className="inline-flex items-center gap-2 text-sm font-semibold text-primary rounded-full px-4 py-1.5 mb-4 bg-primary/10"
           >
             Case Studies
           </span>
@@ -43,8 +42,7 @@ export function CaseStudies() {
               <div className="p-6 flex flex-col flex-1">
                 <div className="flex items-center justify-between mb-4">
                   <span
-                    className="text-xs font-bold text-primary px-3 py-1 rounded-full"
-                    style={{ backgroundColor: 'rgba(255, 138, 0, 0.1)' }}
+                    className="text-xs font-bold text-primary px-3 py-1 rounded-full bg-primary/10"
                   >
                     {c.tag}
                   </span>

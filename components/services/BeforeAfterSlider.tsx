@@ -115,8 +115,8 @@ export function BeforeAfterSlider() {
               <text x="325" y="218" fontSize="6" fill="#94A3B8" fontFamily="monospace">REV: 2</text>
 
               {/* Roof outline */}
-              <polygon points="60,130 200,55 340,130" stroke="#0066FF" strokeWidth="1.5" fill="rgba(0,102,255,0.04)" />
-              <rect x="60" y="130" width="280" height="60" stroke="#0066FF" strokeWidth="1.5" fill="none" />
+              <polygon points="60,130 200,55 340,130" stroke="#1D3F8F" strokeWidth="1.5" fill="rgba(29,63,143,0.04)" />
+              <rect x="60" y="130" width="280" height="60" stroke="#1D3F8F" strokeWidth="1.5" fill="none" />
 
               {/* Panels CAD */}
               {[0, 1, 2, 3].map((col) =>
@@ -136,15 +136,15 @@ export function BeforeAfterSlider() {
               )}
 
               {/* Dimension lines */}
-              <line x1="60" y1="145" x2="340" y2="145" stroke="#FF8A00" strokeWidth="0.8" strokeDasharray="3 2" opacity="0.8" />
-              <text x="185" y="142" fontSize="7" fill="#FF8A00" fontFamily="monospace">280'-0"</text>
+              <line x1="60" y1="145" x2="340" y2="145" stroke="#028182" strokeWidth="0.8" strokeDasharray="3 2" opacity="0.8" />
+              <text x="185" y="142" fontSize="7" fill="#028182" fontFamily="monospace">280'-0"</text>
 
               {/* North arrow */}
-              <polygon points="370,30 374,45 370,42 366,45" fill="#0A0E1A" />
-              <text x="367" y="55" fontSize="7" fill="#0A0E1A" fontFamily="monospace" fontWeight="bold">N</text>
+              <polygon points="370,30 374,45 370,42 366,45" fill="#03184A" />
+              <text x="367" y="55" fontSize="7" fill="#03184A" fontFamily="monospace" fontWeight="bold">N</text>
             </svg>
           </div>
-          <div className="absolute bottom-3 left-3 bg-[#0066FF]/90 text-white text-xs font-semibold px-3 py-1.5 rounded-lg">
+          <div className="absolute bottom-3 left-3 bg-secondary/90 text-white text-xs font-semibold px-3 py-1.5 rounded-lg">
             📐 As-Built CAD Drawing
           </div>
         </div>
