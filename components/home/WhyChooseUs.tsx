@@ -50,7 +50,7 @@ const pillars = [
 
 export function WhyChooseUs() {
   return (
-    <section className="section-padding bg-background" aria-labelledby="why-heading">
+    <section className="section-padding bg-background-subtle" aria-labelledby="why-heading">
       <div className="container-xl">
         <div className="text-center mb-14">
           <span
@@ -74,7 +74,7 @@ export function WhyChooseUs() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-60px' }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="flex gap-5 p-6 rounded-2xl hover:bg-background-subtle transition-colors group"
+              className="flex gap-5 p-6 rounded-2xl hover:bg-surface hover:shadow-card transition-all group"
             >
               <div className={`w-12 h-12 ${pillar.bg} rounded-xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform`}>
                 <pillar.icon className={`w-6 h-6 ${pillar.color}`} />

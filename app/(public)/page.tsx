@@ -66,8 +66,8 @@ export default function HomePage() {
       <TrustBar />
       <WhoWeAre />
       <ServicesGrid />
-      <WhyChooseUs />
       <ProcessTimeline />
+      <WhyChooseUs />
       <TechStack />
       <IndustriesServed />
       <SampleDeliverables />

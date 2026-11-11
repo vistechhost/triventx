@@ -54,7 +54,7 @@ export function ProcessTimeline() {
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
   return (
-    <section className="section-padding bg-background-subtle" aria-labelledby="process-heading" ref={ref}>
+    <section className="section-padding bg-background" aria-labelledby="process-heading" ref={ref}>
       <div className="container-xl">
         <div className="text-center mb-14">
           <span

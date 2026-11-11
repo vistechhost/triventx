@@ -19,7 +19,7 @@ import type {
 type SiteConfig = {
   name: string
   url: string
-  /** International format, e.g. '+15125550123'. Displayed as +1 (512) 555-0123. */
+  /** International format, e.g. '+919286714828'. Displayed as +91 92867 14828. */
   phone: string | null
   email: string | null
   /** Digits with country code. Shows the WhatsApp button when set. */
@@ -40,10 +40,16 @@ type SiteConfig = {
 export const SITE_CONFIG: SiteConfig = {
   name: 'TriventX Energy LLP',
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://triventxenergy.com',
-  phone: null,
-  email: 'hello@triventxenergy.com',
+  phone: '+919286714828',
+  email: 'info@triventxenergy.com',
   whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || null,
-  address: null,
+  address: {
+    street: '3rd Floor, Dhaka Tower, GMS Road',
+    city: 'Dehradun',
+    region: 'Uttarakhand',
+    postalCode: '248171',
+    country: 'IN',
+  },
   hours: [
     { days: 'Monday - Friday', time: '8am - 10pm CT' },
     { days: 'Saturday', time: '9am - 5pm CT' },
